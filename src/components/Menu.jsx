@@ -9,7 +9,7 @@ const Menu = () => {
     <header className="header-main">
       <div className="container-logo">
         <img className="logo-menu" src="" alt="logo de la pagina" />
-        <h1 className="title-menu">Nombre que escoja</h1>
+        <h1 className="title-menu">Yalush</h1>
       </div>
       <div className="container-menu">
         <nav className="nav-menu">
