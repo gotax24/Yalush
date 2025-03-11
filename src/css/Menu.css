@@ -1,0 +1,70 @@
+.header-main {
+  position: fixed; /* Para que siempre esté arriba */
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background: transparent; /* Hace que el fondo sea transparente */
+  backdrop-filter: blur(5px); /* Efecto difuminado para mejorar visibilidad */
+  z-index: 1000; /* Para que quede sobre el resto del contenido */
+}
+
+/* Menú de texto a la izquierda */
+.nav-menu-text {
+  flex: 1;
+}
+
+.ul-menu-tex {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+  padding: 0;
+}
+
+.li-menu-text a {
+  text-decoration: none;
+  color: var(--text-color); /* Ajusta el color según tu diseño */
+  font-size: 16px;
+}
+
+/* Título al centro */
+.container-title {
+  flex: 3;
+  text-align: center;
+  align-items: center;
+}
+
+.title-menu {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--text-color); /* Ajusta según el diseño */
+  font-style: italic;
+}
+
+/* Íconos alineados a la derecha */
+.container-icons {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.nav-menu-icons {
+  display: flex;
+  list-style: none;
+  gap: 15px;
+  padding: 0;
+}
+
+.li-menu-icons img {
+  width: 24px; /* Ajusta el tamaño de los iconos */
+  height: 24px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.li-menu-icons img:hover {
+  opacity: 0.7;
+}

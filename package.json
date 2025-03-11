@@ -12,7 +12,9 @@
   "dependencies": {
     "@auth0/auth0-react": "^2.3.0",
     "@clerk/clerk-react": "^5.24.1",
+    "framer-motion": "^12.4.11",
     "normalize.css": "^8.0.1",
+    "prop-types": "^15.8.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router-dom": "^7.2.0",
