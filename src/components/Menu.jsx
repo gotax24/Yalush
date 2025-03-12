@@ -20,7 +20,7 @@ const Menu = () => {
               <NavLink to="/">Inicio</NavLink>
             </li>
             <li className="li-menu-text">
-              <NavLink to="/productos">Compra</NavLink>
+              <NavLink to="/compra">Compra</NavLink>
             </li>
             <li className="li-menu-text">
               <NavLink to="/contactos">Contacto</NavLink>

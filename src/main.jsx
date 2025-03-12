@@ -6,6 +6,7 @@ import App from "./components/App.jsx";
 import Page404 from "./components/Page404.jsx";
 import LoginClerk from "./components/LoginClerk.jsx";
 import LoginAuth0 from "./components/LoginAuth0.jsx";
+import Product from "./components/Product.jsx";
 import Home from "./Home.jsx";
 import "./index.css";
 
@@ -30,7 +31,7 @@ createRoot(document.getElementById("root")).render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Home />} />
-            <Route path="productos" element={""} />
+            <Route path="compra" element={<Product />} />
             <Route path="usuario" element={""} />
           </Route>
           <Route path="/loginAuth0" element={<LoginAuth0 />} />
