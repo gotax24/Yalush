@@ -6,9 +6,9 @@ import App from "./components/App.jsx";
 import Page404 from "./components/Page404.jsx";
 import LoginClerk from "./components/LoginClerk.jsx";
 import LoginAuth0 from "./components/LoginAuth0.jsx";
-import Product from "./components/Product.jsx";
 import Home from "./Home.jsx";
 import "./index.css";
+import Layout from "./components/Layout.jsx";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 const AUTH0_DOMAIN = import.meta.env.VITE_AUTH0_DOMAIN;
@@ -31,7 +31,7 @@ createRoot(document.getElementById("root")).render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Home />} />
-            <Route path="compra" element={<Product />} />
+            <Route path="compra" element={<Layout />} />
             <Route path="usuario" element={""} />
           </Route>
           <Route path="/loginAuth0" element={<LoginAuth0 />} />

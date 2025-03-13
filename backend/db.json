@@ -1,36 +1,154 @@
 {
-    "usuarios": [],
-    "productos": [
-        {
-            "id": 1,
-            "nombre": "Crochet 1",
-            "precio": 1
-        },
-        {
-            "id": 2,
-            "nombre": "Crochet 2",
-            "precio": 10
-        },
-        {
-            "id": 3,
-            "nombre": "Crochet 3",
-            "precio": 100
-        },
-        {
-            "id": 4,
-            "nombre": "Crochet 1",
-            "precio": 1
-        },
-        {
-            "id": 5,
-            "nombre": "Crochet 2",
-            "precio": 10
-        },
-        {
-            "id": 6,
-            "nombre": "Crochet 3",
-            "precio": 100
-        }
-    ],
-    "carrito" : []
+  "usuarios": [
+    {
+      "id": 1,
+      "email": "ariza.yaldriani@gmail.com",
+      "password": "root",
+      "admin": true
+    },
+    {
+      "id": 2,
+      "email": "ernestobracho70@gmail.com",
+      "password": "root",
+      "admin": true
+    }
+  ],
+  "productos": [
+    {
+      "id": 1,
+      "nombre": "Spiderman Crochet",
+      "precio": 15
+    },
+    {
+      "id": 2,
+      "nombre": "Crochet 2",
+      "precio": 10
+    },
+    {
+      "id": 3,
+      "nombre": "Crochet 3",
+      "precio": 15
+    },
+    {
+      "id": 4,
+      "nombre": "Crochet 4",
+      "precio": 12
+    },
+    {
+      "id": 5,
+      "nombre": "Crochet 5",
+      "precio": 10
+    },
+    {
+      "id": 6,
+      "nombre": "Crochet 6",
+      "precio": 100
+    },
+    {
+      "id": 7,
+      "nombre": "Spiderman Crochet 7",
+      "precio": 15
+    },
+    {
+      "id": 8,
+      "nombre": "Crochet 8",
+      "precio": 10
+    },
+    {
+      "id": 9,
+      "nombre": "Crochet 9",
+      "precio": 100
+    },
+    {
+      "id": 10,
+      "nombre": "Crochet 10",
+      "precio": 1
+    },
+    {
+      "id": 11,
+      "nombre": "Crochet 11",
+      "precio": 10
+    },
+    {
+      "id": 12,
+      "nombre": "Crochet 12",
+      "precio": 100
+    },
+    {
+      "id": 13,
+      "nombre": "Spiderman Crochet 13",
+      "precio": 15
+    },
+    {
+      "id": 14,
+      "nombre": "Crochet 14",
+      "precio": 10
+    },
+    {
+      "id": 15,
+      "nombre": "Crochet 15",
+      "precio": 100
+    },
+    {
+      "id": 16,
+      "nombre": "Crochet 16",
+      "precio": 1
+    },
+    {
+      "id": 17,
+      "nombre": "Crochet 17",
+      "precio": 10
+    },
+    {
+      "id": 18,
+      "nombre": "Crochet 18",
+      "precio": 100
+    },
+    {
+      "id": 19,
+      "nombre": "Crochet 19",
+      "precio": 1
+    },
+    {
+      "id": 20,
+      "nombre": "Crochet 20",
+      "precio": 10
+    },
+    {
+      "id": 21,
+      "nombre": "Crochet 21",
+      "precio": 100
+    },
+    {
+      "id": 22,
+      "nombre": "Spiderman Crochet 22",
+      "precio": 15
+    },
+    {
+      "id": 23,
+      "nombre": "Crochet 23",
+      "precio": 10
+    },
+    {
+      "id": 24,
+      "nombre": "Crochet 24",
+      "precio": 15
+    },
+    {
+      "id": 25,
+      "nombre": "Crochet 25",
+      "precio": 12
+    },
+    {
+      "id": 26,
+      "nombre": "Crochet 26",
+      "precio": 10
+    },
+    {
+      "id": 27,
+      "nombre": "Crochet 27",
+      "precio": 100
+    }
+  ],
+  "carrito": []
 }

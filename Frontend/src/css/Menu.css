@@ -1,5 +1,5 @@
 .header-main {
-  position: relative; /* Para que siempre esté arriba */
+  position: fixed; /* Para que siempre esté arriba */
   top: 0;
   left: 0;
   width: 100%;
