@@ -1,5 +1,5 @@
 .header-main {
-  position: fixed; /* Para que siempre esté arriba */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -7,64 +7,89 @@
   align-items: center;
   justify-content: space-between;
   padding: 15px 30px;
-  background: transparent; /* Hace que el fondo sea transparente */
-  backdrop-filter: blur(5px); /* Efecto difuminado para mejorar visibilidad */
-  z-index: 1000; /* Para que quede sobre el resto del contenido */
+  background: transparent;
+  backdrop-filter: blur(10px);
+  z-index: 1000;
 }
 
-/* Menú de texto a la izquierda */
-.nav-menu-text {
-  flex: 1;
-}
-
-.ul-menu-tex {
+.nav-menu-text .ul-menu-tex {
   display: flex;
   list-style: none;
   gap: 20px;
   padding: 0;
+  margin: 0;
 }
 
 .li-menu-text a {
   text-decoration: none;
-  color: var(--text-color); /* Ajusta el color según tu diseño */
-  font-size: 16px;
+  color: var(--text-color);
+  font-weight: 500;
+  transition: color 0.3s ease;
 }
 
-/* Título al centro */
-.container-title {
-  flex: 3;
-  text-align: center;
-  align-items: center;
+.li-menu-text a:hover {
+  color: var(--button-colo);
 }
 
-.title-menu {
-  font-size: 32px;
+.container-title .title-menu {
+  margin: 0;
+  font-size: 24px;
   font-weight: bold;
-  color: var(--text-color); /* Ajusta según el diseño */
-  font-style: italic;
+  color: var(--text-color);
 }
 
-/* Íconos alineados a la derecha */
-.container-icons {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.nav-menu-icons {
+.container-icons .nav-menu-icons {
   display: flex;
   list-style: none;
   gap: 15px;
   padding: 0;
+  margin: 0;
+  align-items: center;
+}
+
+.li-menu-icons {
+  position: relative;
+  cursor: pointer;
 }
 
 .li-menu-icons img {
-  width: 24px; /* Ajusta el tamaño de los iconos */
+  width: 24px;
   height: 24px;
-  cursor: pointer;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s ease;
 }
 
 .li-menu-icons img:hover {
   opacity: 0.7;
+}
+
+.user-icon .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 200px;
+  padding: 10px;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dropdown-button {
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+}
+
+.dropdown-button:hover {
+  background-color: #f0f0f0;
 }

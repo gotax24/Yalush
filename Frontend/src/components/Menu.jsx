@@ -1,4 +1,6 @@
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import { SignInButton, SignUpButton, useClerk } from "@clerk/clerk-react";
 import bag from "../assets/bag.svg";
 import fav from "../assets/fav.svg";
 import logoutIcon from "../assets/logout.svg";
@@ -7,8 +9,20 @@ import user from "../assets/user.svg";
 import "../css/Menu.css";
 
 const Menu = () => {
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const { signOut } = useClerk();
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  const closeDropdown = () => {
+    setShowDropdown(false);
+  };
+
   const logOut = () => {
-    console.log("Cerrar sesion gg");
+    signOut({ redirectUrl: "/" });
   };
 
   return (
@@ -33,8 +47,27 @@ const Menu = () => {
       </div>
       <div className="container-icons">
         <nav className="nav-menu-icons">
-          <li className="li-menu-icons">
+          <li
+            className="li-menu-icons"
+            onMouseEnter={toggleDropdown}
+            onMouseLeave={closeDropdown}
+          >
             <img src={user} alt="icono de usuario" />
+            {showDropdown && (
+              <div className="dropdown-menu">
+                {/*Aqui se verifica si esta logeado o no si esta logeado se
+                ingresa a otra pagina se redirige a la pagina de perfil si no
+                muestra el login o el signup*/}
+                <>
+                  <SignUpButton mode="modal" redirectUrl="/">
+                    <button className="dropdown-button">Registrarse</button>
+                  </SignUpButton>
+                  <SignInButton mode="modal" redirectUrl="/">
+                    <button className="dropdown-button">Iniciar sesion</button>
+                  </SignInButton>
+                </>
+              </div>
+            )}
           </li>
           <li className="li-menu-icons">
             <img src={search} alt="icono de buscar" />

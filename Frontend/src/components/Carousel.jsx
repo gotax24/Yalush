@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { AnimatePresence, motion} from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import "../css/Carousel.css";
 
 const Carousel = ({ images }) => {
@@ -28,6 +28,11 @@ const Carousel = ({ images }) => {
           exit={{ opacity: 0, x: -50 }}
           transition={{ duration: 0.5 }}
         >
+          <div className="carousel-overlay">
+            <h2>Jackets for the Modern Man</h2>
+            <p>Urban Edge</p>
+            <button className="carousel-button">Discover Now</button>
+          </div>
           <img
             src={images[currentIndex].src}
             alt={`Imagen ${currentIndex + 1}`}
