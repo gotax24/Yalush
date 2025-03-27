@@ -1,6 +1,7 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useState } from "react";
 import { SignInButton, SignUpButton, useClerk } from "@clerk/clerk-react";
+import { useUserContext } from "../context/UserProvider";
 import bag from "../assets/bag.svg";
 import fav from "../assets/fav.svg";
 import logoutIcon from "../assets/logout.svg";
@@ -10,7 +11,7 @@ import "../css/Menu.css";
 
 const Menu = () => {
   const [showDropdown, setShowDropdown] = useState(false);
-
+  const { isAuthenticated, userInfo } = useUserContext();
   const { signOut } = useClerk();
 
   const toggleDropdown = () => {
@@ -48,24 +49,29 @@ const Menu = () => {
       <div className="container-icons">
         <nav className="nav-menu-icons">
           <li
-            className="li-menu-icons"
-            onMouseEnter={toggleDropdown}
-            onMouseLeave={closeDropdown}
+            className="li-menu-icons user-icon"
+            onClick={toggleDropdown}
+            onDoubleClick={closeDropdown}
           >
-            <img src={user} alt="icono de usuario" />
-            {showDropdown && (
-              <div className="dropdown-menu">
-                {/*Aqui se verifica si esta logeado o no si esta logeado se
-                ingresa a otra pagina se redirige a la pagina de perfil si no
-                muestra el login o el signup*/}
-                <>
-                  <SignUpButton mode="modal" redirectUrl="/">
-                    <button className="dropdown-button">Registrarse</button>
-                  </SignUpButton>
-                  <SignInButton mode="modal" redirectUrl="/">
-                    <button className="dropdown-button">Iniciar sesion</button>
-                  </SignInButton>
-                </>
+            {isAuthenticated ? (
+              <Link to="/profile">
+                <img src={userInfo.profileImageUrl} alt="icono de usuario" />{" "}
+              </Link>
+            ) : (
+              <div className="dropdown-container">
+                <img src={user} alt="icono de usuario" />
+                {showDropdown && (
+                  <div className="dropdown-menu">
+                    <SignUpButton mode="modal" redirectUrl="/">
+                      <button className="dropdown-button">Registrarse</button>
+                    </SignUpButton>
+                    <SignInButton mode="modal" redirectUrl="/">
+                      <button className="dropdown-button">
+                        Iniciar sesión
+                      </button>
+                    </SignInButton>
+                  </div>
+                )}
               </div>
             )}
           </li>

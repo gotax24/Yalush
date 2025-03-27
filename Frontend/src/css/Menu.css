@@ -62,22 +62,25 @@
   opacity: 0.7;
 }
 
-.user-icon .dropdown-menu {
-  position: absolute;
-  top: 100%;
-  right: 0;
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute; /* Posiciona el dropdown fuera del flujo del documento */
+  top: calc(100% + 5px); /* Justo debajo del ícono, con un pequeño margen */
+  right: 0; /* Alineado al lado derecho del ícono */
   background: white;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   min-width: 200px;
   padding: 10px;
-  z-index: 1100;
+  z-index: 1100; /* Asegúrate de que esté por encima del resto del contenido */
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-
 .dropdown-button {
   background: none;
   border: none;
