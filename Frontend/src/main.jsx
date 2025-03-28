@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ClerkProvider } from "@clerk/clerk-react";
-import UserProvider from "./context/UserProvider.jsx";
+import { UserContextProvider } from "./context/UserContext.jsx";
 import App from "./components/App.jsx";
 import Page404 from "./components/Page404.jsx";
 import Home from "./Home.jsx";
@@ -13,7 +13,7 @@ const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 createRoot(document.getElementById("root")).render(
   <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
-    <UserProvider>
+    <UserContextProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<App />}>
@@ -24,6 +24,6 @@ createRoot(document.getElementById("root")).render(
           <Route path="*" element={<Page404 />} />
         </Routes>
       </BrowserRouter>
-    </UserProvider>
+    </UserContextProvider>
   </ClerkProvider>
 );

@@ -1,9 +1,9 @@
-import { createContext, useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import { useUser } from "@clerk/clerk-react";
 
 const UserContext = createContext();
 
-const UserProvider = ({ children }) => {
+ const UserContextProvider = ({ children }) => {
   const { isSignedIn, user } = useUser();
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userInfo, setUserInfo] = useState(null);
@@ -22,9 +22,7 @@ const UserProvider = ({ children }) => {
       setIsAuthenticated(false);
       setUserInfo(null);
     }
-
-    return { isAuthenticated, userInfo };
-  }, [isSignedIn, user, userInfo, isAuthenticated]);
+  }, [isSignedIn, user]);
 
   return (
     <UserContext.Provider value={{ isAuthenticated, userInfo }}>
@@ -33,4 +31,4 @@ const UserProvider = ({ children }) => {
   );
 };
 
-export default UserProvider;
+export { UserContextProvider, UserContext };  

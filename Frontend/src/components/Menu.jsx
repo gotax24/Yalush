@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { SignInButton, SignUpButton, useClerk } from "@clerk/clerk-react";
-import { useUserContext } from "../context/UserProvider";
+import { UserContext } from "../context/UserContext";
 import bag from "../assets/bag.svg";
 import fav from "../assets/fav.svg";
 import logoutIcon from "../assets/logout.svg";
@@ -10,8 +10,10 @@ import user from "../assets/user.svg";
 import "../css/Menu.css";
 
 const Menu = () => {
+  const logeado = useContext(UserContext);
+  console.log(logeado);
   const [showDropdown, setShowDropdown] = useState(false);
-  const { isAuthenticated, userInfo } = useUserContext();
+  const { isAuthenticated, userInfo } = useContext(UserContext);
   const { signOut } = useClerk();
 
   const toggleDropdown = () => {
