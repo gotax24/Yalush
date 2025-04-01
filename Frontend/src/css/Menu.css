@@ -12,6 +12,13 @@
   z-index: 1000;
 }
 
+.imgae-perfil-menu {
+  width: 150px; /* Ajusta el tamaño de la imagen */
+  height: 150px;
+  border-radius: 50%; /* Hace que la imagen sea circular */
+  object-fit: cover; /* Asegura que la imagen se recorte correctamente */
+}
+
 .nav-menu-text .ul-menu-tex {
   display: flex;
   list-style: none;

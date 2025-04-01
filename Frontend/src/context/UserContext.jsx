@@ -12,11 +12,11 @@ const UserContext = createContext();
     if (isSignedIn) {
       setIsAuthenticated(true);
       setUserInfo({
-        id: user.id,
+        clerkId: user.id,
         email: user.emailAddresses[0].emailAddress,
         firstName: user.firstName,
         lastName: user.lastName,
-        profileImageUrl: user.profileImageUrl,
+        imageUrl: user.imageUrl,
       });
     } else {
       setIsAuthenticated(false);

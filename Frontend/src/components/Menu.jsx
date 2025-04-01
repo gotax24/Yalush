@@ -6,7 +6,7 @@ import bag from "../assets/bag.svg";
 import fav from "../assets/fav.svg";
 import logoutIcon from "../assets/logout.svg";
 import search from "../assets/search.svg";
-import user from "../assets/user.svg";
+import userSvg from "../assets/user.svg";
 import "../css/Menu.css";
 
 const Menu = () => {
@@ -57,11 +57,11 @@ const Menu = () => {
           >
             {isAuthenticated ? (
               <Link to="/profile">
-                <img src={userInfo.profileImageUrl} alt="icono de usuario" />{" "}
+                <img className="imgae-perfil-menu" src={userInfo.imageUrl} alt="icono de usuario" />{" "}
               </Link>
             ) : (
               <div className="dropdown-container">
-                <img src={user} alt="icono de usuario" />
+                <img src={userSvg} alt="icono de usuario" />
                 {showDropdown && (
                   <div className="dropdown-menu">
                     <SignUpButton mode="modal" redirectUrl="/">
