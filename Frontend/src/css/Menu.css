@@ -13,8 +13,6 @@
 }
 
 .imgae-perfil-menu {
-  width: 150px; /* Ajusta el tamaño de la imagen */
-  height: 150px;
   border-radius: 50%; /* Hace que la imagen sea circular */
   object-fit: cover; /* Asegura que la imagen se recorte correctamente */
 }
@@ -102,4 +100,33 @@
 
 .dropdown-button:hover {
   background-color: #f0f0f0;
+}
+
+.button-logout {
+  background: var(--text-color-btn);
+  color: var(--text-color);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-right: 15px;
+}
+
+.button-logout:hover {
+  background: var(--color4);
+  color: white;
+}
+
+.confirm:hover {
+  background-color: rgb(114, 18, 18);
+  color: white;
+}
+
+.img-logout {
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin: 0 auto;
 }

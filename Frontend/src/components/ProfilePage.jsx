@@ -53,7 +53,6 @@ const ProfilePage = () => {
     saveUserToDatabase();
   }, [user, SERVER]);
 
-  if (!user) return <div>Inicia sesión para ver tu perfil</div>;
   if (loading) return <Loading />;
 
   return (
@@ -68,6 +67,7 @@ const ProfilePage = () => {
           Email: {user.emailAddresses[0].emailAddress}
         </p>
       </div>
+      <div>{/**Aqui se pone la lista de favortios */}</div>
     </>
   );
 };

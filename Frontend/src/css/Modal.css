@@ -1,0 +1,91 @@
+/* General Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--bg-color);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 90%;
+  position: relative;
+  font-family: var(--font-title);
+  color: var(--text-color);
+  text-align: center;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.modal-close:hover {
+  transform: scale(1.2);
+}
+
+.modal-content {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Media Queries */
+
+/* Tablets and Medium Screens */
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 20px; /* Reduce el padding para pantallas medianas */
+    max-width: 90%; /* Más ancho relativo */
+    font-size: 0.95rem; /* Texto más pequeño para evitar desbordes */
+  }
+
+  .modal-close {
+    font-size: 18px; /* Botón de cierre ligeramente más pequeño */
+    top: 10px;
+    right: 10px;
+  }
+}
+
+/* Small Phones */
+@media (max-width: 480px) {
+  .modal-content {
+    padding: 15px; /* Aún menos padding para pantallas pequeñas */
+    font-size: 0.9rem; /* Reduce ligeramente el tamaño del texto */
+    border-radius: 10px; /* Bordes más pequeños */
+  }
+
+  .modal-close {
+    font-size: 16px; /* Botón de cierre más pequeño */
+  }
+
+  .modal-overlay {
+    padding: 10px; /* Asegura que no quede pegado a los bordes */
+  }
+}

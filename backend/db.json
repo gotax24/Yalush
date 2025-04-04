@@ -7,6 +7,7 @@
       "lastName": "Ragno",
       "profileImageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZmFjZWJvb2svaW1nXzJ1eTdvdm5HTVJXc3FBSTdVRzZhaHBkNTVvSSJ9",
       "admin": false,
+      "favorite": [],
       "id": 1
     },
     {
@@ -16,6 +17,7 @@
       "lastName": "Bracho",
       "profileImageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ydjZXVURSWXdpeXhjT21JcjdqRjZKbEJvWU4ifQ",
       "admin": false,
+      "favorite": [],
       "id": 2
     },
     {
@@ -25,6 +27,7 @@
       "lastName": "Bracho R",
       "profileImageUrl": "https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18ydTBBcTFOcGU4OU9pVFdLODFCdTRLRkd4RU8iLCJyaWQiOiJ1c2VyXzJ2NlhaTEdKQUl1RFNFbEpWMEZHSnZzTFBwciIsImluaXRpYWxzIjoiRUIifQ",
       "admin": true,
+      "favorite": [],
       "id": 3
     },
     {
@@ -34,6 +37,7 @@
       "lastName": "Ariza",
       "profileImageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ydjZYZEJHVXpxWkJuUTBsNmZXUVZRcW50MkIifQ",
       "admin": false,
+      "favorite": [],
       "id": 4
     }
   ],
