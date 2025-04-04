@@ -20,6 +20,7 @@ const ProfilePage = () => {
         lastName: user.lastName,
         profileImageUrl: user.imageUrl,
         admin: false,
+        favotites: [],
       };
 
       try {

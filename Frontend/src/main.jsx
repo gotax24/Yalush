@@ -18,7 +18,7 @@ createRoot(document.getElementById("root")).render(
         <Routes>
           <Route path="/" element={<App />}>
             <Route index element={<Home />} />
-            <Route path="compra" element={<Layout />} />
+            <Route path="products" element={<Layout />} />
             <Route path="profile" element={<ProfilePage />} />
           </Route>
           <Route path="*" element={<Page404 />} />

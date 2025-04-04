@@ -1,0 +1,52 @@
+/* Contenedor principal centrado */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+    background-color: var(--bg-color); /* Fondo claro */
+    color: #7A1CAC; /* Color principal */
+  }
+  
+  /* Estilos para el título principal */
+  .title-404 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  /* Estilos para el subtítulo */
+  .sub-title-404 {
+    font-size: 26px;
+    font-weight: normal;
+    margin-bottom: 20px;
+  }
+  
+  /* Imagen centrada y con un estilo sutil */
+  .img-404 {
+    width: 200px;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  /* Contenedor del footer */
+  .container-footer {
+    margin-top: 20px;
+  }
+  
+  /* Estilos del enlace */
+  .container-footer a {
+    font-size: 20px;
+    text-decoration: none;
+    color: #7A1CAC;
+    font-weight: bold;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .container-footer a:hover {
+    color: var(--text-color);
+  }
+  

@@ -29,9 +29,9 @@ const Carousel = ({ images }) => {
           transition={{ duration: 0.5 }}
         >
           <div className="carousel-overlay">
-            <h2>Jackets for the Modern Man</h2>
-            <p>Urban Edge</p>
-            <button className="carousel-button">Discover Now</button>
+            <h2>On look! it's crochet <br /> O'clock</h2>
+        
+            <button className="carousel-button">Descubre mas</button>
           </div>
           <img
             src={images[currentIndex].src}

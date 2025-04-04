@@ -29,12 +29,12 @@
   text-decoration: none;
   color: var(--text-color);
   font-weight: 500;
-  transition: color 0.3s ease;
 }
 
 .li-menu-text a:hover {
-  color: var(--button-colo);
-}
+  color: var(--color4);
+  transition: color 0.3s ease;
+} 
 
 .container-title .title-menu {
   margin: 0;
@@ -64,7 +64,8 @@
 }
 
 .li-menu-icons img:hover {
-  opacity: 0.7;
+  transform: scale(1.2);
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .dropdown-container {

@@ -42,7 +42,7 @@ const Menu = () => {
                 <NavLink to="/">Inicio</NavLink>
               </li>
               <li className="li-menu-text">
-                <NavLink to="/compra">Compra</NavLink>
+                <NavLink to="/products">Productos</NavLink>
               </li>
               <li className="li-menu-text">
                 <NavLink to="/contactos">Contacto</NavLink>
@@ -90,7 +90,7 @@ const Menu = () => {
               <img src={search} alt="icono de buscar" />
             </li>
             <li className="li-menu-icons">
-              <img src={fav} alt="icono de favorito" />
+              <img src={fav} alt="icono de favorito" className="heart"/>
             </li>
             <li className="li-menu-icons">
               <img src={bag} alt="icono de bolsa" />
