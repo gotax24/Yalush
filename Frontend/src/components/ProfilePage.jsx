@@ -21,6 +21,7 @@ const ProfilePage = () => {
         profileImageUrl: user.imageUrl,
         admin: false,
         favotites: [],
+        cart: [],
       };
 
       try {

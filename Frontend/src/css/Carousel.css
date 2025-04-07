@@ -20,16 +20,11 @@
 
 .carousel-overlay h2 {
   font-size: 2.5rem;
-  margin: 0;
   font-weight: bold;
+  margin-bottom: 20px;
 }
 
-.carousel-overlay p {
-  font-size: 1.2rem;
-  margin: 10px 0;
-}
-
-.carousel-button {
+.carousel-link {
   padding: 10px 20px;
   background-color: var(--bg-color);
   color: white;
@@ -38,9 +33,10 @@
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease;
+  text-decoration: none;
 }
 
-.carousel-button:hover {
+.carousel-link:hover {
   background-color: var(--text-color-btn);
 }
 

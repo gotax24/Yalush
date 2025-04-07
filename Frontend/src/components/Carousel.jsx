@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import "../css/Carousel.css";
 
 const Carousel = ({ images }) => {
@@ -29,9 +30,9 @@ const Carousel = ({ images }) => {
           transition={{ duration: 0.5 }}
         >
           <div className="carousel-overlay">
-            <h2>On look! it's crochet <br /> O'clock</h2>
+            <h2 >On look! it's crochet <br /> O'clock</h2>
         
-            <button className="carousel-button">Descubre mas</button>
+            <Link to="/products" className="carousel-link">Descubre mas</Link>
           </div>
           <img
             src={images[currentIndex].src}

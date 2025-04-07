@@ -8,6 +8,7 @@
       "profileImageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZmFjZWJvb2svaW1nXzJ1eTdvdm5HTVJXc3FBSTdVRzZhaHBkNTVvSSJ9",
       "admin": false,
       "favorite": [],
+      "cart": [],
       "id": 1
     },
     {
@@ -18,6 +19,7 @@
       "profileImageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ydjZXVURSWXdpeXhjT21JcjdqRjZKbEJvWU4ifQ",
       "admin": false,
       "favorite": [],
+      "cart": [],
       "id": 2
     },
     {
@@ -28,6 +30,7 @@
       "profileImageUrl": "https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18ydTBBcTFOcGU4OU9pVFdLODFCdTRLRkd4RU8iLCJyaWQiOiJ1c2VyXzJ2NlhaTEdKQUl1RFNFbEpWMEZHSnZzTFBwciIsImluaXRpYWxzIjoiRUIifQ",
       "admin": true,
       "favorite": [],
+      "cart": [],
       "id": 3
     },
     {
@@ -36,8 +39,9 @@
       "firstName": "Yaldriani",
       "lastName": "Ariza",
       "profileImageUrl": "https://img.clerk.com/eyJ0eXBlIjoicHJveHkiLCJzcmMiOiJodHRwczovL2ltYWdlcy5jbGVyay5kZXYvb2F1dGhfZ29vZ2xlL2ltZ18ydjZYZEJHVXpxWkJuUTBsNmZXUVZRcW50MkIifQ",
-      "admin": false,
+      "admin": true,
       "favorite": [],
+      "cart": [],
       "id": 4
     }
   ],
@@ -45,138 +49,320 @@
     {
       "id": 1,
       "name": "Spiderman Crochet",
-      "price": 15
+      "price": 4,
+      "image": "https://scontent-mia3-2.xx.fbcdn.net/v/t45.5328-4/469245105_917156783851446_8537379685069509309_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=105&ccb=1-7&_nc_sid=247b10&_nc_ohc=mBgmR7mWn7cQ7kNvwE3FCzi&_nc_oc=AdnClO_RY3YbEtXIP7cwrOXGoeKn-ON9BObzh5t58c2NBIvZEuJrfe8nJoQSITbFw3SIYQu3lEEPEY7J78xTr-Pm&_nc_zt=23&_nc_ht=scontent-mia3-2.xx&_nc_gid=EZCjEPHr0FeOQe9EXahsUg&oh=00_AYE300QrPFqu-1SyzebxcpPUZIgyuG6bMUaX1c2qblpQ7Q&oe=67F6559D",
+      "description": "Bonito Spiderman Crochet hecho a mano con hilo de algodón, ideal para regalar a los niños o decorar la habitación.",
+      "category": "Llaveros",
+      "stock": 10,
+      "rating": [
+        {
+          "userId": 1,
+          "rating": 5,
+          "comment": "Me encanta este Spiderman Crochet, es muy bonito y de buena calidad."
+        },
+        {
+          "userId": 2,
+          "rating": 4,
+          "comment": "El Spiderman Crochet es muy lindo, pero el precio es un poco alto."
+        }
+      ],
+      "reviews": [
+        {
+          "userId": 1,
+          "review": "Me encanta este Spiderman Crochet, es muy bonito y de buena calidad."
+        },
+        {
+          "userId": 2,
+          "review": "El Spiderman Crochet es muy lindo, pero el precio es un poco alto."
+        }
+      ]
     },
+
     {
       "id": 2,
-      "name": "Crochet 2",
-      "price": 10
+      "name": "Ojo Turco crochet",
+      "price": 1,
+      "image": "https://scontent-mia3-2.xx.fbcdn.net/v/t45.5328-4/469272743_924155089815678_1944637517800938007_n.jpg?stp=dst-jpg_p720x720_tt6&_nc_cat=107&ccb=1-7&_nc_sid=247b10&_nc_ohc=MqlpB2ljWC8Q7kNvwEIxxE_&_nc_oc=Adnow7r2tO8SGB7u8C194DdNzXUi5Y7ESnkZxCMvKGqVUb1rzFYk64FvF5fty8-g_XHKcq9GoTG2HSJD0D7wYYD-&_nc_zt=23&_nc_ht=scontent-mia3-2.xx&_nc_gid=x4IhvsX8eXQSSMxSqOOmeQ&oh=00_AYHZLHY-DEGkWOLZ74yFbRHR6_HxqsQtNCxFWoNgqoKhbw&oe=67F635C3",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "Llaveros",
+      "stock": 10,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 3,
-      "name": "Crochet 3",
-      "price": 15
+      "name": "Virgen maria crochet",
+      "price": 3,
+      "image": "https://scontent-mia3-2.xx.fbcdn.net/v/t45.5328-4/469365620_1271746597396136_5040509475891146315_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=103&ccb=1-7&_nc_sid=247b10&_nc_ohc=TK19d_sagJAQ7kNvwFHjgSC&_nc_oc=Adm4p-x17l7zMeJpvDHgO4kWRNZRrtThRPU3L72wkfRwW1HiFk9oqkVsppxMYj7Rk0QMrfxnbzpa-qgQfpXrq8MM&_nc_zt=23&_nc_ht=scontent-mia3-2.xx&_nc_gid=NprGEUFiGUJMx-7ucY0QnQ&oh=00_AYFSTwSp84uYxvSinVDur8ElZQ3UOKpZF2tVrXWM3mjRVQ&oe=67F65869",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "Llaveros",
+      "stock": 10,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 4,
       "name": "Crochet 4",
-      "price": 12
+      "price": 12,
+      "image": "https://e7.pngegg.com/pngimages/372/149/png-clipart-crochet-animals-knitting-and-crochet-amigurumi-delicious-cake-food-pin-thumbnail.png",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 5,
       "name": "Crochet 5",
-      "price": 10
+      "price": 10,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 6,
       "name": "Crochet 6",
-      "price": 100
+      "price": 100,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 7,
       "name": "Spiderman Crochet 7",
-      "price": 15
+      "price": 15,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 8,
       "name": "Crochet 8",
-      "price": 10
+      "price": 10,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 9,
       "name": "Crochet 9",
-      "price": 100
+      "price": 100,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 10,
       "name": "Crochet 10",
-      "price": 1
+      "price": 1,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 11,
       "name": "Crochet 11",
-      "price": 10
+      "price": 10,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 12,
       "name": "Crochet 12",
-      "price": 100
+      "price": 100,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 13,
       "name": "Spiderman Crochet 13",
-      "price": 15
+      "price": 15,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 14,
       "name": "Crochet 14",
-      "price": 10
+      "price": 10,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 15,
       "name": "Crochet 15",
-      "price": 100
+      "price": 100,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 16,
       "name": "Crochet 16",
-      "price": 1
+      "price": 1,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 17,
       "name": "Crochet 17",
-      "price": 10
+      "price": 10,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 18,
       "name": "Crochet 18",
-      "price": 100
+      "price": 100,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 19,
       "name": "Crochet 19",
-      "price": 1
+      "price": 1,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 20,
       "name": "Crochet 20",
-      "price": 10
+      "price": 10,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 21,
       "name": "Crochet 21",
-      "price": 100
+      "price": 100,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 22,
       "name": "Spiderman Crochet 22",
-      "price": 15
+      "price": 15,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 23,
       "name": "Crochet 23",
-      "price": 10
+      "price": 10,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 24,
       "name": "Crochet 24",
-      "price": 15
+      "price": 15,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 25,
       "name": "Crochet 25",
-      "price": 12
+      "price": 12,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 26,
       "name": "Crochet 26",
-      "price": 10
+      "price": 10,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     },
     {
       "id": 27,
       "name": "Crochet 27",
-      "price": 100
+      "price": 100,
+      "image": "",
+      "description": "Producto artesanal hecho a mano.",
+      "category": "crochet",
+      "stock": 0,
+      "rating": [],
+      "reviews": []
     }
-  ],
-  "cart": []
+  ]
 }
