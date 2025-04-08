@@ -21,7 +21,6 @@ createRoot(document.getElementById("root")).render(
             <Route path="/products" element={<App />}>
               <Route index element={<Layout />} />
               <Route path="item/:id" element={"ProductPage"} />
-              <Route path="category/:category" element={""} />
               <Route path="cart" element={""} />
               <Route path="checkout" element={""} />
             </Route>

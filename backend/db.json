@@ -52,7 +52,7 @@
       "price": 4,
       "image": "https://scontent-mia3-2.xx.fbcdn.net/v/t45.5328-4/469245105_917156783851446_8537379685069509309_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=105&ccb=1-7&_nc_sid=247b10&_nc_ohc=mBgmR7mWn7cQ7kNvwE3FCzi&_nc_oc=AdnClO_RY3YbEtXIP7cwrOXGoeKn-ON9BObzh5t58c2NBIvZEuJrfe8nJoQSITbFw3SIYQu3lEEPEY7J78xTr-Pm&_nc_zt=23&_nc_ht=scontent-mia3-2.xx&_nc_gid=EZCjEPHr0FeOQe9EXahsUg&oh=00_AYE300QrPFqu-1SyzebxcpPUZIgyuG6bMUaX1c2qblpQ7Q&oe=67F6559D",
       "description": "Bonito Spiderman Crochet hecho a mano con hilo de algodón, ideal para regalar a los niños o decorar la habitación.",
-      "category": "Llaveros",
+      "category": "keychains",
       "stock": 10,
       "rating": [
         {
@@ -84,7 +84,7 @@
       "price": 1,
       "image": "https://scontent-mia3-2.xx.fbcdn.net/v/t45.5328-4/469272743_924155089815678_1944637517800938007_n.jpg?stp=dst-jpg_p720x720_tt6&_nc_cat=107&ccb=1-7&_nc_sid=247b10&_nc_ohc=MqlpB2ljWC8Q7kNvwEIxxE_&_nc_oc=Adnow7r2tO8SGB7u8C194DdNzXUi5Y7ESnkZxCMvKGqVUb1rzFYk64FvF5fty8-g_XHKcq9GoTG2HSJD0D7wYYD-&_nc_zt=23&_nc_ht=scontent-mia3-2.xx&_nc_gid=x4IhvsX8eXQSSMxSqOOmeQ&oh=00_AYHZLHY-DEGkWOLZ74yFbRHR6_HxqsQtNCxFWoNgqoKhbw&oe=67F635C3",
       "description": "Producto artesanal hecho a mano.",
-      "category": "Llaveros",
+      "category": "keychains",
       "stock": 10,
       "rating": [],
       "reviews": []
@@ -95,7 +95,7 @@
       "price": 3,
       "image": "https://scontent-mia3-2.xx.fbcdn.net/v/t45.5328-4/469365620_1271746597396136_5040509475891146315_n.jpg?stp=dst-jpg_s960x960_tt6&_nc_cat=103&ccb=1-7&_nc_sid=247b10&_nc_ohc=TK19d_sagJAQ7kNvwFHjgSC&_nc_oc=Adm4p-x17l7zMeJpvDHgO4kWRNZRrtThRPU3L72wkfRwW1HiFk9oqkVsppxMYj7Rk0QMrfxnbzpa-qgQfpXrq8MM&_nc_zt=23&_nc_ht=scontent-mia3-2.xx&_nc_gid=NprGEUFiGUJMx-7ucY0QnQ&oh=00_AYFSTwSp84uYxvSinVDur8ElZQ3UOKpZF2tVrXWM3mjRVQ&oe=67F65869",
       "description": "Producto artesanal hecho a mano.",
-      "category": "Llaveros",
+      "category": "keychains",
       "stock": 10,
       "rating": [],
       "reviews": []
@@ -106,7 +106,7 @@
       "price": 12,
       "image": "https://e7.pngegg.com/pngimages/372/149/png-clipart-crochet-animals-knitting-and-crochet-amigurumi-delicious-cake-food-pin-thumbnail.png",
       "description": "Producto artesanal hecho a mano.",
-      "category": "crochet",
+      "category": "pillows",
       "stock": 0,
       "rating": [],
       "reviews": []
@@ -117,7 +117,7 @@
       "price": 10,
       "image": "",
       "description": "Producto artesanal hecho a mano.",
-      "category": "crochet",
+      "category": "bags",
       "stock": 0,
       "rating": [],
       "reviews": []
@@ -128,7 +128,7 @@
       "price": 100,
       "image": "",
       "description": "Producto artesanal hecho a mano.",
-      "category": "crochet",
+      "category": "swimwear",
       "stock": 0,
       "rating": [],
       "reviews": []
@@ -139,7 +139,7 @@
       "price": 15,
       "image": "",
       "description": "Producto artesanal hecho a mano.",
-      "category": "crochet",
+      "category": "dress",
       "stock": 0,
       "rating": [],
       "reviews": []
@@ -150,7 +150,7 @@
       "price": 10,
       "image": "",
       "description": "Producto artesanal hecho a mano.",
-      "category": "crochet",
+      "category": "other",
       "stock": 0,
       "rating": [],
       "reviews": []

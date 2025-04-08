@@ -17,7 +17,7 @@ const Product = ({ id, name, image, price, category }) => {
             </div>
             <div className="info-card">
               <h1 className="title-product">{name}</h1>
-              <p className="price-product">Precio: {price}</p>
+              <p className="price-product">Precio: {price}$</p>
               <p className="category-product">Categoria: {category}</p>
             </div>
           </div>

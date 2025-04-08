@@ -2,11 +2,16 @@
 
 :root {
   --bg-color: #ffde95;
-  --text-color-btn: #add899;
+  --color-btn: #add899;
   --text-color: #bc5a94;
   --color4: #f075aa;
   --font-title: "Roboto Mono", monospace;
   --font-sub-title: "Triodion", system-ui;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 html {
