@@ -24,6 +24,7 @@ createRoot(document.getElementById("root")).render(
               <Route path="cart" element={""} />
               <Route path="checkout" element={""} />
             </Route>
+            <Route path="admin" element={"admin"} />
             <Route path="profile" element={<ProfilePage />} />
           </Route>
           <Route path="*" element={<Page404 />} />

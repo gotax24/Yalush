@@ -15,7 +15,7 @@
   color: #fff;
 }
 
-.container-search input::placeholder{
+.container-search input::placeholder {
   text-align: center;
   color: #fff;
   border: none;
@@ -33,23 +33,23 @@
 /* División de contenido: categorías + productos */
 .container-main {
   display: flex;
-  gap: 20px;
+  gap: 10px;
 }
 
 /* Categorías a la izquierda */
 .container-category {
-  flex: 1;
-  border-right: 5px solid var(--text-color);
+  flex: 0.5;
+  border-right: 2px solid var(--text-color);
   color: var(--text-color);
 }
 
 /* Productos a la derecha */
 .container-products {
   flex: 3;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  display: grid; /* Usamos grid en vez de flex-wrap */
+  grid-template-columns: repeat(3, 1fr); /* 3 columnas de igual ancho */
+  gap: 20px; /* espacio entre productos */
+  justify-items: center; /* centramos cada producto dentro de su celda */
 }
 
 /* Estilo de las categorías */
@@ -85,6 +85,52 @@
   background-color: var(--color4);
 }
 
+.pagination {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.pagination button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: var(--color4);
+  cursor: pointer;
+}
+.pagination button.active-page {
+  background-color: #7a1cac;
+  color: white;
+}
+
+.container-categories-horizontal {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.container-categories-horizontal input[type="radio"] {
+  display: none;
+}
+
+.container-categories-horizontal label {
+  cursor: pointer;
+  color: var(--text-color);
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+  padding-bottom: 4px;
+}
+
+.container-categories-horizontal input[type="radio"]:checked + label,
+.container-categories-horizontal label:hover {
+  color: var(--color4);
+  border-bottom: 2px solid var(--color4);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .container-main {
@@ -100,5 +146,19 @@
 
   .container-search input {
     width: 90%;
+  }
+}
+@media (max-width: 1024px) {
+  .container-products {
+    grid-template-columns: repeat(
+      2,
+      1fr
+    ); /* 2 productos por fila en pantallas medianas */
+  }
+}
+
+@media (max-width: 600px) {
+  .container-products {
+    grid-template-columns: 1fr; /* 1 producto por fila en móviles */
   }
 }

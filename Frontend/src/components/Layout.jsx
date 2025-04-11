@@ -5,142 +5,138 @@ import Product from "./Product";
 import "../css/Layout.css";
 
 const Layout = () => {
+  // URL del servidor (usamos variable de entorno)
   const SERVER = import.meta.env.VITE_SERVER_URL;
+
+  // Estados principales
   const [products, setProducts] = useState([]);
   const [category, setCategory] = useState(false);
-  //const [search, setSearch] = useState("");
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // Estados para paginación
+  const [currentPage, setCurrentPage] = useState(1); // página actual
+  const itemsPerPage = 9; // cantidad de productos por página
+
+  // useEffect para cargar productos (cuando cambia la categoría)
   useEffect(() => {
     setLoading(true);
 
-    if (category) {
-      axios
-        .get(`${SERVER}/products?category=${category}`)
-        .then((response) => {
-          setLoading(false);
-          setProducts(response.data);
-        })
-        .catch((e) => {
-          console.error(e);
-          setError(e);
-          setLoading(false);
-        });
-    } else {
-      axios
-        .get(`${SERVER}/products`)
-        .then((response) => {
-          setLoading(false);
-          setProducts(response.data);
-        })
-        .catch((e) => {
-          console.error(e);
-          setError(e);
-          setLoading(false);
-        });
-    }
+    // Si hay una categoría seleccionada, filtramos por categoría
+    const url = category
+      ? `${SERVER}/products?category=${category}`
+      : `${SERVER}/products`;
+
+    axios
+      .get(url)
+      .then((response) => {
+        setProducts(response.data);
+        setLoading(false);
+      })
+      .catch((e) => {
+        console.error(e);
+        setError(e);
+        setLoading(false);
+      });
   }, [SERVER, category]);
 
+  // Siempre que cambien los filtros (categoría o búsqueda), reinicia a página 1
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [category, search]);
+
+  // Filtrar productos según búsqueda
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  // Lógica de paginación: cortamos el array filtrado en "páginas"
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+
+  const currentProducts = filteredProducts.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
+
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage); // cuántas páginas hay
+
+  // Mostrar cargando si es necesario
   if (loading) return <Loading />;
 
   return (
     <>
       <div className="container-layout">
+        {/* Input de búsqueda */}
         <div className="container-search">
-          <input type="search" name="" placeholder="Busca tu producto aqui" />
+          <input
+            type="search"
+            placeholder="Busca tu producto aqui"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </div>
 
-        <div className="container-main">
-          <div className="container-category">
-            <h2 className="title-category">Categorias: </h2>
-            <fieldset className="container-labels">
-              <label className="category-item">
+        <div className="container-categories-horizontal">
+          <label>
+            <input
+              type="radio"
+              name="category"
+              onChange={() => setCategory(false)}
+              checked={category === ""}
+            />
+            Todos
+          </label>
+          {["pillows", "bags", "keychains", "swimwear", "dress", "other"].map(
+            (categoryName) => (
+              <label key={categoryName}>
                 <input
                   type="radio"
                   name="category"
-                  id="pillows"
-                  onChange={() => setCategory("pillows")}
-                  checked={category === "pillows"}
+                  onChange={() => setCategory(categoryName)}
+                  checked={category === categoryName}
                 />
-                Almohadas
+                {categoryName === "pillows" && "Almohadas"}
+                {categoryName === "bags" && "Bolsos"}
+                {categoryName === "keychains" && "Llaveros"}
+                {categoryName === "swimwear" && "Traje de baños"}
+                {categoryName === "dress" && "Vestidos"}
+                {categoryName === "other" && "Más cosas"}
               </label>
-              <label className="category-item">
-                <input
-                  type="radio"
-                  name="category"
-                  id="bags"
-                  onChange={() => setCategory("bags")}
-                  checked={category === "bags"}
-                />
-                Bolsos
-              </label>
-              <label className="category-item">
-                <input
-                  type="radio"
-                  name="category"
-                  id="keychains"
-                  onChange={() => setCategory("keychains")}
-                  checked={category === "keychains"}
-                />
-                Llaveros
-              </label>
-              <label className="category-item">
-                <input
-                  type="radio"
-                  name="category"
-                  id="swimwear"
-                  onChange={() => setCategory("swimwear")}
-                  checked={category === "swimwear"}
-                />
-                Traje de baños
-              </label>
-              <label className="category-item">
-                <input
-                  type="radio"
-                  name="category"
-                  id="dress"
-                  onChange={() => setCategory("dress")}
-                  checked={category === "dress"}
-                />
-                Vestidos
-              </label>
-              <label className="category-item">
-                <input
-                  type="radio"
-                  name="category"
-                  id="other"
-                  onChange={() => setCategory("other")}
-                  checked={category === "other"}
-                />
-                Mas cosas
-              </label>
-            </fieldset>
+            )
+          )}
+        </div>
+
+        <section className="container-products">
+          {currentProducts.map(({ id, name, image, price, category }) => (
+            <Product
+              key={id}
+              id={id}
+              name={name}
+              image={image}
+              price={price}
+              category={category}
+            />
+          ))}
+
+          {error && <p>{error.message || "Ocurrió un problema"}</p>}
+        </section>
+      </div>
+
+      {/* Paginación */}
+      <div className="pagination">
+        {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+          (pageNumber) => (
             <button
-              className="button-category"
-              onClick={() => setCategory(false)}
+              key={pageNumber}
+              onClick={() => setCurrentPage(pageNumber)}
+              className={currentPage === pageNumber ? "active-page" : ""}
             >
-              Quitar filtros
+              {pageNumber}
             </button>
-          </div>
-          <div className="container-products">
-            {products &&
-              products.map(({ id, name, image, price, category }) => {
-                return (
-                  <Product
-                    key={id}
-                    id={id}
-                    name={name}
-                    image={image}
-                    price={price}
-                    category={category}
-                  />
-                );
-              })}
-
-            {error && <p>{error}</p>}
-          </div>
-        </div>
+          )
+        )}
       </div>
     </>
   );
