@@ -19,7 +19,6 @@ const ProfilePage = () => {
         firstName: user.firstName,
         lastName: user.lastName,
         profileImageUrl: user.imageUrl,
-        admin: false,
         favotites: [],
         cart: [],
       };

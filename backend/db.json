@@ -28,7 +28,7 @@
       "firstName": "Ernesto",
       "lastName": "Bracho R",
       "profileImageUrl": "https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18ydTBBcTFOcGU4OU9pVFdLODFCdTRLRkd4RU8iLCJyaWQiOiJ1c2VyXzJ2NlhaTEdKQUl1RFNFbEpWMEZHSnZzTFBwciIsImluaXRpYWxzIjoiRUIifQ",
-      "admin": false,
+      "admin": true,
       "favorite": [],
       "cart": [],
       "id": 3,

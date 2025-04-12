@@ -1,12 +1,13 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import capitalizeFirstLetter from "../helper/FirstLetterUpper";
+import FirstLetterUpper from "../helper/FirstLetterUpper.js";
+import  Translator  from "../helper/Translator.js";
 import "../css/Product.css";
 
 const Product = ({ id, name, image, price, category }) => {
   return (
     <>
-      <Link to={`products/item/${id}`}>
+      <Link to={`${id}`}>
         <div className="card">
           <div className="card2">
             <div className="container-image-producto">
@@ -17,10 +18,10 @@ const Product = ({ id, name, image, price, category }) => {
               />
             </div>
             <div className="info-card">
-              <h1 className="title-product">{capitalizeFirstLetter(name)}</h1>
+              <h1 className="title-product">{FirstLetterUpper(name)}</h1>
               <p className="price-product">Precio: {price}$</p>
               <p className="category-product">
-                Categoria: {capitalizeFirstLetter(category)}
+                Categoria: {FirstLetterUpper(Translator(category))}
               </p>
             </div>
           </div>

@@ -2,10 +2,11 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ClerkProvider } from "@clerk/clerk-react";
 import { UserContextProvider } from "./context/UserContext.jsx";
+import Home from "./Home.jsx";
 import App from "./components/App.jsx";
 import Page404 from "./components/Page404.jsx";
-import Home from "./Home.jsx";
 import Layout from "./components/Layout.jsx";
+import ProductPage from "./components/ProductPage.jsx";
 import ProfilePage from "./components/ProfilePage.jsx";
 import "./index.css";
 
@@ -20,7 +21,7 @@ createRoot(document.getElementById("root")).render(
             <Route index element={<Home />} />
             <Route path="/products" element={<App />}>
               <Route index element={<Layout />} />
-              <Route path="item/:id" element={"ProductPage"} />
+              <Route path=":id" element={<ProductPage />} />
               <Route path="cart" element={""} />
               <Route path="checkout" element={""} />
             </Route>
