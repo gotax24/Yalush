@@ -43,7 +43,8 @@
       "admin": true,
       "favorite": [],
       "cart": [],
-      "id": 4
+      "id": 4,
+      "favotites": []
     }
   ],
   "products": [
@@ -55,26 +56,21 @@
       "description": "Bonito Spiderman Crochet hecho a mano con hilo de algodón, ideal para regalar a los niños o decorar la habitación.",
       "category": "keychains",
       "stock": 10,
-      "rating": [
+      "review": [
         {
-          "userId": 1,
+          "userId": 4,
           "rating": 5,
-          "comment": "Me encanta este Spiderman Crochet, es muy bonito y de buena calidad."
+          "comment": "Wao es muy lindo se lo regale a mi novio"
         },
         {
-          "userId": 2,
+          "userId": 3,
           "rating": 4,
-          "comment": "El Spiderman Crochet es muy lindo, pero el precio es un poco alto."
-        }
-      ],
-      "reviews": [
-        {
-          "userId": 1,
-          "review": "Me encanta este Spiderman Crochet, es muy bonito y de buena calidad."
+          "comment": "Me encanta esta muy original"
         },
         {
           "userId": 2,
-          "review": "El Spiderman Crochet es muy lindo, pero el precio es un poco alto."
+          "rating": 5,
+          "comment": "Me gusta ojala mi novia me regale uno de venom"
         }
       ]
     },
@@ -86,8 +82,7 @@
       "description": "Atrae buenas vibras y aleja la negatividad",
       "category": "keychains",
       "stock": 10,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 3,
@@ -97,8 +92,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "keychains",
       "stock": 10,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 4,
@@ -108,8 +102,7 @@
       "description": "Bolso crochet hecho a mano.",
       "category": "bags",
       "stock": 10,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 5,
@@ -119,8 +112,7 @@
       "description": "Comparte con tu favorita el otro llavero",
       "category": "keychains",
       "stock": 10,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 6,
@@ -130,8 +122,7 @@
       "description": "Variedad de llaveros para que elijas tu favorito",
       "category": "keychains",
       "stock": 10,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 7,
@@ -141,8 +132,7 @@
       "description": "Regala estas lindas cerezas que combina con todo",
       "category": "keychains",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 8,
@@ -152,8 +142,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "other",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 9,
@@ -163,8 +152,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "dress",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 10,
@@ -174,8 +162,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "pillows",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 11,
@@ -185,8 +172,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "dress",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 12,
@@ -196,8 +182,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "swimwear",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 13,
@@ -207,8 +192,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 14,
@@ -218,8 +202,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 15,
@@ -229,8 +212,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 16,
@@ -240,8 +222,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 17,
@@ -251,8 +232,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 18,
@@ -262,8 +242,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 19,
@@ -273,8 +252,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 20,
@@ -284,8 +262,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 21,
@@ -295,8 +272,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 22,
@@ -306,8 +282,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 23,
@@ -317,8 +292,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 24,
@@ -328,8 +302,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 25,
@@ -339,8 +312,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 26,
@@ -350,8 +322,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     },
     {
       "id": 27,
@@ -361,8 +332,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "rating": [],
-      "reviews": []
+      "review": []
     }
   ]
 }

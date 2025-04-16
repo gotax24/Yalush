@@ -1,0 +1,143 @@
+/* Layout principal: imagen a la izquierda, info a la derecha */
+.container-product {
+  margin-top: 80px; /* o ajusta según el alto del menú */
+}
+
+.product-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5rem;
+  margin-left: 10rem;
+  margin-right: 10rem;
+  justify-content: center;
+  background-color: var(--color4);
+  border-radius: 12px;
+}
+
+.product-image {
+  flex: 1 1 300px;
+  max-width: 400px;
+}
+
+.img-product {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Info del producto */
+.product-info {
+  flex: 1 1 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 500px;
+}
+
+.product-title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #000;
+}
+
+.product-raiting {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #000;
+}
+
+.info-product {
+  font-size: 1rem;
+  color: #000;
+}
+
+/* Botón */
+.button-add {
+  margin-top: 1rem;
+  padding: 0.8rem 0.5rem;
+  margin-right: 1rem;
+  background-color: #7a1cac;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.button-add:hover {
+  background-color: #480b69;
+}
+
+.message-no-login {
+  color: crimson;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+/* Comentarios */
+.comments-section {
+  margin: 2rem;
+  padding-top: 1rem;
+  border-top: 5px solid var(--text-color);
+}
+
+.comments-title {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  color: #000;
+}
+
+.comments-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.comments-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.img-perfil {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.info-user {
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.comment-user {
+  font-weight: bold;
+}
+
+/* Botón de comentarios */
+.comments-button {
+  background-color: #ad49e1;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.comments-button:hover{
+  background-color: #5f227f;
+}
+
+.error-product {
+  text-align: center;
+  color: red;
+  margin-top: 2rem;
+}
+
+.img-perfil-product {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}

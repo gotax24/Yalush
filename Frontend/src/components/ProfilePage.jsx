@@ -54,7 +54,7 @@ const ProfilePage = () => {
     saveUserToDatabase();
   }, [user, SERVER]);
 
-  if (loading) return <Loading />;
+  if (loading || !user) return <Loading />;
 
   return (
     <>

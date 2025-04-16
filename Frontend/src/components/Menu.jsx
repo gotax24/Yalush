@@ -1,12 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { SignInButton, SignUpButton, useClerk } from "@clerk/clerk-react";
-import { UserContext } from "../context/UserContext";
 import Modal from "./Modal";
 import bag from "../assets/bag.svg";
 import fav from "../assets/fav.svg";
 import logoutIcon from "../assets/logout.svg";
-import search from "../assets/search.svg";
 import userSvg from "../assets/user.svg";
 import sadPerson from "../assets/sadPerson.svg";
 import "../css/Menu.css";
@@ -14,8 +12,7 @@ import "../css/Menu.css";
 const Menu = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { isAuthenticated, userInfo } = useContext(UserContext);
-  const { signOut } = useClerk();
+  const { signOut, user, isSignedIn } = useClerk();
 
   const openModal = () => {
     setIsOpen(true);
@@ -60,11 +57,11 @@ const Menu = () => {
               onClick={toggleDropdown}
               onDoubleClick={closeDropdown}
             >
-              {isAuthenticated ? (
+              {isSignedIn ? (
                 <Link to="/profile">
                   <img
                     className="imgae-perfil-menu"
-                    src={userInfo.imageUrl}
+                    src={user.imageUrl}
                     alt="icono de usuario"
                   />{" "}
                 </Link>
@@ -87,10 +84,7 @@ const Menu = () => {
               )}
             </li>
             <li className="li-menu-icons">
-              <img src={search} alt="icono de buscar" />
-            </li>
-            <li className="li-menu-icons">
-              <img src={fav} alt="icono de favorito" className="heart"/>
+              <img src={fav} alt="icono de favorito" className="heart" />
             </li>
             <li className="li-menu-icons">
               <img src={bag} alt="icono de bolsa" />
@@ -106,7 +100,7 @@ const Menu = () => {
           </nav>
         </div>
       </header>
-      {isAuthenticated && (
+      {isSignedIn && (
         <Modal isOpen={isOpen} closeModal={closeModal}>
           <h2>¿Estás seguro de que quieres cerrar sesión?</h2>
           <img src={sadPerson} alt="Persona triste" className="img-logout" />
