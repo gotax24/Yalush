@@ -31,8 +31,7 @@
       "admin": true,
       "favorite": [],
       "cart": [],
-      "id": 3,
-      "favotites": []
+      "id": 3 
     },
     {
       "clerkId": "user_2v6XdA1oElIDhFiDcpIYmJ5hK7Y",
@@ -43,8 +42,7 @@
       "admin": true,
       "favorite": [],
       "cart": [],
-      "id": 4,
-      "favotites": []
+      "id": 4 
     }
   ],
   "products": [
@@ -82,7 +80,13 @@
       "description": "Atrae buenas vibras y aleja la negatividad",
       "category": "keychains",
       "stock": 10,
-      "review": []
+      "review": [
+        {
+          "userId": 2,
+          "rating": 5,
+          "comment": "Bellisimo llavero ademas lo compre y conseguí trabajo"
+        }
+      ]
     },
     {
       "id": 3,

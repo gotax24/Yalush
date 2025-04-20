@@ -9,6 +9,8 @@ import Comments from "./Comments.jsx";
 import AddFormComments from "./AddFormComments.jsx";
 import Modal from "./Modal.jsx";
 import "../css/ProductPage.css";
+import ButtonAddCart from "./ButtonAddCart.jsx";
+import HandleInputChange from "../helper/HandleInputChange.js";
 
 const ProductPage = () => {
   const params = useParams();
@@ -18,7 +20,8 @@ const ProductPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [userId, setUserId] = useState(null);
+  const [userPage, setUserPage] = useState(null);
+  //const [quantity, setQuantity] = useState(0)
 
   const { isSignedIn, user } = useClerk();
 
@@ -35,7 +38,7 @@ const ProductPage = () => {
     axios
       .get(`${SERVER}/users?email=${userEmail}`)
       .then((response) => {
-        setUserId(response.data[0]?.id);
+        setUserPage(response.data[0]);
         setLoading(false);
         setError(null);
       })
@@ -68,7 +71,7 @@ const ProductPage = () => {
   };
 
   const calculateAverageRating = (reviews) => {
-    if (!reviews || reviews.length === 0) return 0;
+    if (!reviews || reviews.length === 0) return "Sin calificacion";
 
     const sum = reviews.reduce(
       (total, review) => total + Number(review.rating),
@@ -76,6 +79,8 @@ const ProductPage = () => {
     );
     return (sum / reviews.length).toFixed(1); // Redondea a 1 decimal
   };
+
+  const numberOfRatings = product.review?.length ? product.review.length : 0;
 
   return (
     <>
@@ -93,8 +98,8 @@ const ProductPage = () => {
             <h1 className="product-title">{FirstLetterUpper(product.name)}</h1>
 
             <div className="product-raiting">
-              <strong>Puntuacion: </strong>{" "}
-              {calculateAverageRating(product.review)}
+              <strong>Puntuacion: </strong>
+              {calculateAverageRating(product.review)} {`(${numberOfRatings})`}
             </div>
 
             <p className="info-product">
@@ -113,7 +118,10 @@ const ProductPage = () => {
             </p>
 
             {isSignedIn ? (
-              <button className="button-add">Agregar al carrito</button>
+              <>
+                <input type="number" placeholder="Cantidad de productos" onChange={HandleInputChange("quantity")}/>
+                <ButtonAddCart />
+              </>
             ) : (
               <p className="message-no-login">
                 Primero debes iniciar sesión para agregar al carrito
@@ -146,7 +154,7 @@ const ProductPage = () => {
 
       <Modal isOpen={isOpen} closeModal={closeModal}>
         <AddFormComments
-          userId={userId}
+          userId={userPage.id}
           closeModal={closeModal}
           productId={product.id}
           currentReviews={product.review}

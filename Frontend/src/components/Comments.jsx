@@ -28,33 +28,33 @@ const Comments = ({ info, product }) => {
     product.review.forEach((information) => {
       getUser(information.userId);
     });
-
   }, [product.review, SERVER, users]);
 
   const userInfo = users[info.userId];
-  
+
   return (
     <>
-      <ul className="comments-list" key={info.userId}>
-        <li className="comments-item">
-          {userInfo && (
-            <>
-              <img
-                src={
-                  userInfo?.profileImageUrl || "../img-products/no-image.webp"
-                }
-                alt="imagen del usuario"
-                className="img-perfil-product"
-              />
+      <li className="comments-item">
+        {userInfo && (
+          <>
+            <img
+              src={userInfo?.profileImageUrl || "../img-products/no-image.webp"}
+              alt="imagen del usuario"
+              className="img-perfil-product"
+            />
+            <div className="comment-right">
               <p className="info-user">
-                {userInfo.firstName} {userInfo.lastName}:{" "}
-                <span className="user-score">Puntuacion: {info.rating} </span>
-                <span className="comment-user">{info.comment}</span>
+                <span className="comment-user">
+                  {userInfo.firstName} {userInfo.lastName}:
+                </span>{" "}
+                {info.comment}
               </p>
-            </>
-          )}
-        </li>
-      </ul>
+              <p className="comment-rating">Puntuación: {info.rating}</p>
+            </div>
+          </>
+        )}
+      </li>
+      <hr className="comment-divider" />
       {error && <p>{error}</p>}
     </>
   );
