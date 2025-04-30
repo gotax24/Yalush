@@ -25,19 +25,24 @@ const ProductPage = () => {
   const [cartUser, setCartUser] = useState([]);
 
   const { isSignedIn, user } = useClerk();
-
+  
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
+  //Busca el correo del usuario logueado
   const userEmail = user?.emailAddresses[0]?.emailAddress;
 
   useEffect(() => {
     setLoading(true);
+    setError(null);
 
+    //Hace la peticion al servidor para obtener el producto
     const fetchProduct = axios.get(`${SERVER}/products/${params.id}`);
-
+    
     if (userEmail) {
+      // Verifica si el usuario está logueado y obtiene su información
       const fetchUser = axios.get(`${SERVER}/users?email=${userEmail}`);
+      // Si el usuario está logueado, obtiene su información y el producto
       Promise.all([fetchUser, fetchProduct])
         .then(([userResponse, productResponse]) => {
           const user = userResponse.data[0];
@@ -53,6 +58,7 @@ const ProductPage = () => {
           setLoading(false);
         });
     } else {
+      // Si el usuario no está logueado, solo obtiene el producto
       fetchProduct
         .then((productResponse) => {
           setProduct(productResponse.data);
@@ -136,6 +142,7 @@ const ProductPage = () => {
                     className="input-quantity"
                   />
                 </label>
+                // Agregar al carrito
                 <ButtonAddCart
                   quantity={quantity}
                   productPage={product}

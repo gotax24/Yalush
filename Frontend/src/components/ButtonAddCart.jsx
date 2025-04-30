@@ -38,10 +38,6 @@ const ButtonAddCart = ({
     const existingProductIndex = cart.findIndex(
       (item) => Number(item.productId) === productPage.id
     );
-
-    console.log("Existing product index:", existingProductIndex);
-    console.log("Current cart:", cart);
-
     // Create a deep copy of the cart to avoid reference issues
     let updatedCart = [...cart];
 
