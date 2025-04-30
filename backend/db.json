@@ -30,8 +30,11 @@
       "profileImageUrl": "https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18ydTBBcTFOcGU4OU9pVFdLODFCdTRLRkd4RU8iLCJyaWQiOiJ1c2VyXzJ2NlhaTEdKQUl1RFNFbEpWMEZHSnZzTFBwciIsImluaXRpYWxzIjoiRUIifQ",
       "admin": true,
       "favorite": [],
-      "cart": [],
-      "id": 3 
+      "cart": [
+        
+      ],
+      "id": 3,
+      "favotites": []
     },
     {
       "clerkId": "user_2v6XdA1oElIDhFiDcpIYmJ5hK7Y",
@@ -42,7 +45,7 @@
       "admin": true,
       "favorite": [],
       "cart": [],
-      "id": 4 
+      "id": 4
     }
   ],
   "products": [

@@ -21,7 +21,8 @@ const ProductPage = () => {
   const [error, setError] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [userPage, setUserPage] = useState(null);
-  //const [quantity, setQuantity] = useState(0)
+  const [quantity, setQuantity] = useState(0);
+  const [cartUser, setCartUser] = useState([]);
 
   const { isSignedIn, user } = useClerk();
 
@@ -33,32 +34,38 @@ const ProductPage = () => {
   useEffect(() => {
     setLoading(true);
 
-    if (!userEmail) return;
+    const fetchProduct = axios.get(`${SERVER}/products/${params.id}`);
 
-    axios
-      .get(`${SERVER}/users?email=${userEmail}`)
-      .then((response) => {
-        setUserPage(response.data[0]);
-        setLoading(false);
-        setError(null);
-      })
-      .catch((e) => {
-        console.error(e);
-        setError(e);
-        setLoading(false);
-      });
-
-    axios
-      .get(`${SERVER}/products/${params.id}`)
-      .then((response) => {
-        setProduct(response.data);
-        setLoading(false);
-      })
-      .catch((e) => {
-        console.error(e);
-        setError(e);
-        setLoading(false);
-      });
+    if (userEmail) {
+      const fetchUser = axios.get(`${SERVER}/users?email=${userEmail}`);
+      Promise.all([fetchUser, fetchProduct])
+        .then(([userResponse, productResponse]) => {
+          const user = userResponse.data[0];
+          setUserPage(user);
+          setProduct(productResponse.data);
+          setError(null);
+        })
+        .catch((e) => {
+          console.error(e);
+          setError(e);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    } else {
+      fetchProduct
+        .then((productResponse) => {
+          setProduct(productResponse.data);
+          setError(null);
+        })
+        .catch((e) => {
+          console.error(e);
+          setError(e);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
   }, [SERVER, params.id, userEmail]);
 
   if (loading) return <Loading />;
@@ -117,10 +124,31 @@ const ProductPage = () => {
               <strong>Precio:</strong> {product.price}$
             </p>
 
-            {isSignedIn ? (
+            {product && isSignedIn && userPage ? (
               <>
-                <input type="number" placeholder="Cantidad de productos" onChange={HandleInputChange("quantity")}/>
-                <ButtonAddCart />
+                <label className="label-quantity">
+                  Cantidad:
+                  <input
+                    type="number"
+                    min={1}
+                    max={product.stock}
+                    onChange={(e) => setQuantity(e.target.value)}
+                    className="input-quantity"
+                  />
+                </label>
+                <ButtonAddCart
+                  quantity={quantity}
+                  productPage={product}
+                  idUser={userPage.id}
+                  cart={cartUser}
+                  setCart={setCartUser}
+                  updatedStock={(newStock) =>
+                    setProduct((prev) => ({
+                      ...prev,
+                      stock: newStock,
+                    }))
+                  }
+                />
               </>
             ) : (
               <p className="message-no-login">
@@ -150,17 +178,19 @@ const ProductPage = () => {
         )}
       </div>
 
-      <div className="error-product">{error && <p>{error}</p>}</div>
+      <div className="error-product">{error && <p>{error.message}</p>}</div>
 
-      <Modal isOpen={isOpen} closeModal={closeModal}>
-        <AddFormComments
-          userId={userPage.id}
-          closeModal={closeModal}
-          productId={product.id}
-          currentReviews={product.review}
-          updateProductReviews={updateProductReviews}
-        />
-      </Modal>
+      {isOpen && userPage && product && (
+        <Modal isOpen={isOpen} closeModal={closeModal}>
+          <AddFormComments
+            userId={userPage.id}
+            closeModal={closeModal}
+            productId={product.id}
+            currentReviews={product.review}
+            updateProductReviews={updateProductReviews}
+          />
+        </Modal>
+      )}
     </>
   );
 };

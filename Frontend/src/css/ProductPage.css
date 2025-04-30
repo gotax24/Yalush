@@ -143,3 +143,24 @@
   object-fit: cover;
   border-radius: 50%;
 }
+
+.input-quantity{
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin-right: 10px;
+  background-color: #f9f9f9;
+}
+
+.input-quantity:focus{
+  outline: none;
+}
+
+.label-quantity{
+  font-size: 1rem;
+  color: #000;
+  font-weight: bold;
+  margin-right: 10px;
+}

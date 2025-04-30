@@ -3,55 +3,100 @@ import { useState } from "react";
 
 const ButtonAddCart = ({
   quantity,
-  idProduct,
-  name,
-  price,
-  image,
+  productPage,
   idUser,
-  cart = [],
+  cart,
+  updatedStock,
+  setCart,
 }) => {
   const SERVER = import.meta.env.VITE_SERVER_URL;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const product = {
-    productId: idProduct,
-    nameProduct: name,
-    price: price,
-    quantity: quantity,
-    image: image,
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError(null); // Clear previous errors
     setLoading(true);
 
-    // Verificar si el producto ya está en el carrito
-    const existingProduct = cart.find((item) => item.productId === idProduct);
-    let updatedCart;
+    const quantityNumber = Number(quantity);
 
-    if (existingProduct) {
-      // Si ya existe, actualizamos la cantidad
-      updatedCart = cart.map((item) =>
-        item.productId === idProduct
-          ? { ...item, quantity: item.quantity + quantity }
-          : item
-      );
-    } else {
-      // Si no está, lo agregamos
-      updatedCart = [...cart, product];
+    // Validate quantity
+    const isValidQuantity =
+      quantityNumber > 0 &&
+      Number.isInteger(quantityNumber) &&
+      quantityNumber <= productPage.stock;
+
+    if (!isValidQuantity) {
+      setError("Cantidad inválida o mayor al stock disponible.");
+      setLoading(false);
+      return;
     }
 
+    const newStock = productPage.stock - quantityNumber;
+
+    // Check if product already exists in cart
+    const existingProductIndex = cart.findIndex(
+      (item) => Number(item.productId) === productPage.id
+    );
+
+    console.log("Existing product index:", existingProductIndex);
+    console.log("Current cart:", cart);
+
+    // Create a deep copy of the cart to avoid reference issues
+    let updatedCart = [...cart];
+
+    // If product exists, update quantity; otherwise add new product
+    if (existingProductIndex !== -1) {
+      // Calculate new quantity
+      const currentQuantity = updatedCart[existingProductIndex].quantity;
+      const newQuantity = currentQuantity + quantityNumber;
+
+      // Make sure new quantity doesn't exceed stock
+      const finalQuantity = Math.min(newQuantity, productPage.stock);
+
+      // Create a new object to ensure React detects the change
+      updatedCart[existingProductIndex] = {
+        ...updatedCart[existingProductIndex],
+        quantity: finalQuantity,
+      };
+
+      console.log("Updating existing product:", {
+        currentQuantity,
+        addedQuantity: quantityNumber,
+        newQuantity: finalQuantity,
+      });
+    } else {
+      // Add new product to cart
+      const newProduct = {
+        productId: productPage.id,
+        nameProduct: productPage.name,
+        price: productPage.price,
+        image: productPage.image,
+        quantity: quantityNumber,
+      };
+
+      updatedCart.push(newProduct);
+      console.log("Adding new product:", newProduct);
+    }
+
+    // Update cart in server
     axios
       .patch(`${SERVER}/users/${idUser}`, { cart: updatedCart })
       .then((response) => {
+        setCart(updatedCart);
         console.log("Carrito actualizado:", response.data);
-        setError(null);
-        setLoading(false);
+        return axios.patch(`${SERVER}/products/${productPage.id}`, {
+          stock: newStock,
+        });
+      })
+      .then(() => {
+        updatedStock(newStock);
       })
       .catch((e) => {
-        console.error(e);
-        setError("Error al agregar al carrito");
+        console.error("Error updating cart:", e);
+        setError("Error al agregar al carrito.");
+      })
+      .finally(() => {
         setLoading(false);
       });
   };
