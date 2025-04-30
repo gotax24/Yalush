@@ -142,7 +142,7 @@ const ProductPage = () => {
                     className="input-quantity"
                   />
                 </label>
-                // Agregar al carrito
+               
                 <ButtonAddCart
                   quantity={quantity}
                   productPage={product}
