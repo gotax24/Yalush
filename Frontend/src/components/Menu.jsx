@@ -86,9 +86,11 @@ const Menu = () => {
             <li className="li-menu-icons">
               <img src={fav} alt="icono de favorito" className="heart" />
             </li>
-            <li className="li-menu-icons">
-              <img src={bag} alt="icono de bolsa" />
-            </li>
+            <Link to={"/cart"}>
+              <li className="li-menu-icons">
+                <img src={bag} alt="icono de bolsa" />
+              </li>
+            </Link>
             <li className="li-menu-icons">
               {" "}
               <img

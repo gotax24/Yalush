@@ -7,27 +7,31 @@ import Page404 from "./components/Page404.jsx";
 import Layout from "./components/Layout.jsx";
 import ProductPage from "./components/ProductPage.jsx";
 import ProfilePage from "./components/ProfilePage.jsx";
+import { UserProvider } from "./context/UserContext.jsx";
+import Cart from "./components/Cart.jsx";
 import "./index.css";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
 createRoot(document.getElementById("root")).render(
   <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<Home />} />
-          <Route path="/products" element={<App />}>
-            <Route index element={<Layout />} />
-            <Route path=":id" element={<ProductPage />} />
-            <Route path="cart" element={""} />
-            <Route path="checkout" element={""} />
+    <UserProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<App />}>
+            <Route index element={<Home />} />
+            <Route path="/products" element={<App />}>
+              <Route index element={<Layout />} />
+              <Route path=":id" element={<ProductPage />} />
+              <Route path="checkout" element={""} />
+            </Route>
+            <Route path="cart" element={<Cart />} />
+            <Route path="admin" element={"admin"} />
+            <Route path="profile" element={<ProfilePage />} />
           </Route>
-          <Route path="admin" element={"admin"} />
-          <Route path="profile" element={<ProfilePage />} />
-        </Route>
-        <Route path="*" element={<Page404 />} />
-      </Routes>
-    </BrowserRouter>
+          <Route path="*" element={<Page404 />} />
+        </Routes>
+      </BrowserRouter>
+    </UserProvider>
   </ClerkProvider>
 );

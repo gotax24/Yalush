@@ -10,7 +10,6 @@ import AddFormComments from "./AddFormComments.jsx";
 import Modal from "./Modal.jsx";
 import "../css/ProductPage.css";
 import ButtonAddCart from "./ButtonAddCart.jsx";
-import HandleInputChange from "../helper/HandleInputChange.js";
 
 const ProductPage = () => {
   const params = useParams();
