@@ -31,7 +31,20 @@
       "admin": true,
       "favorite": [],
       "cart": [
-        
+        {
+          "productId": 1,
+          "nameProduct": "spiderman Crochet",
+          "price": 4,
+          "image": "img-products/spiderman.webp",
+          "quantity": 1
+        },
+        {
+          "productId": 2,
+          "nameProduct": "ojo turco crochet",
+          "price": 1,
+          "image": "img-products/ojo.webp",
+          "quantity": 2
+        }
       ],
       "id": 3,
       "favotites": []
@@ -56,7 +69,7 @@
       "image": "img-products/spiderman.webp",
       "description": "Bonito Spiderman Crochet hecho a mano con hilo de algodón, ideal para regalar a los niños o decorar la habitación.",
       "category": "keychains",
-      "stock": 10,
+      "stock": 6,
       "review": [
         {
           "userId": 4,
@@ -82,7 +95,7 @@
       "image": "img-products/ojo.webp",
       "description": "Atrae buenas vibras y aleja la negatividad",
       "category": "keychains",
-      "stock": 10,
+      "stock": 4,
       "review": [
         {
           "userId": 2,

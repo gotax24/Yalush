@@ -1,0 +1,140 @@
+/* Cart.css */
+
+.header-cart {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 5rem;
+  color: var(--text-color);
+  font-family: var(--font-title);
+}
+
+.img-cart {
+  width: 40px;
+}
+
+.title-cart {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.container-car {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.container-products-cart {
+  border-radius: 12px;
+  padding: 2rem;
+  color: var(--text-color);
+  font-family: var(--font-title);
+}
+
+.title-products-cart {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: var(--color4);
+}
+
+.container-product-cart {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.img-product-cart {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid var(--color4);
+}
+
+.product-info-cart {
+  flex: 1;
+  margin-left: 1.5rem;
+}
+
+.product-title-cart {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+}
+
+.info-product-cart {
+  margin: 0.2rem 0;
+  font-size: 0.95rem;
+  color: var(--text-color);
+}
+
+.container-button-cart {
+  margin-left: auto;
+  padding-left: 1rem;
+}
+
+.button-delete-cart {
+  background-color: var(--color4);
+  border: none;
+  padding: 0.5rem 1rem;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-family: var(--font-sub-title);
+}
+
+.button-delete-cart:hover {
+  background-color: #e45b97;
+}
+
+.container-total-cart {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  color: var(--text-color);
+  text-align: right;
+}
+
+.total-product-cart,
+.total-cart {
+  font-weight: bold;
+  color: #000;
+  font-size: 1.5rem;
+}
+
+.title-total-cart {
+  font-size: 1.2rem;
+  margin-top: 1rem;
+  color: var(--text-color);
+}
+
+.container-empty-cart {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-color);
+}
+
+.title-empty-cart {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.text-empty-cart {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: var(--text-color);
+}
+
+.error-cart {
+  color: red;
+  text-align: center;
+  margin-top: 1rem;
+}

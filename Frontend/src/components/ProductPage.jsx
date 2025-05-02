@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { Context } from "../context/UserContext.jsx";
 import { useParams } from "react-router-dom";
-import { useClerk } from "@clerk/clerk-react";
 import Loading from "./Loading.jsx";
 import axios from "axios";
 import FirstLetterUpper from "../helper/FirstLetterUpper.js";
@@ -10,26 +10,33 @@ import AddFormComments from "./AddFormComments.jsx";
 import Modal from "./Modal.jsx";
 import "../css/ProductPage.css";
 import ButtonAddCart from "./ButtonAddCart.jsx";
+import { useClerk } from "@clerk/clerk-react";
 
 const ProductPage = () => {
   const params = useParams();
   const SERVER = import.meta.env.VITE_SERVER_URL;
 
-  const [product, setProduct] = useState({});
+  const { userContext, errorContext, loadingContext } = useContext(Context);
+  const { isSignedIn } = useClerk();
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
+
+  const [product, setProduct] = useState({});
   const [userPage, setUserPage] = useState(null);
   const [quantity, setQuantity] = useState(0);
-  const [cartUser, setCartUser] = useState([]);
 
-  const { isSignedIn, user } = useClerk();
-  
+  const [cartUser, setCartUser] = useState([]);
+  const [favorite, setFavorite] = useState([]);
+
+  const [isOpen, setIsOpen] = useState(false);
+
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
   //Busca el correo del usuario logueado
-  const userEmail = user?.emailAddresses[0]?.emailAddress;
+  const userId = userContext.id;
+  console.log(userContext.id);
 
   useEffect(() => {
     setLoading(true);
@@ -37,17 +44,19 @@ const ProductPage = () => {
 
     //Hace la peticion al servidor para obtener el producto
     const fetchProduct = axios.get(`${SERVER}/products/${params.id}`);
-    
-    if (userEmail) {
+
+    if (isSignedIn) {
       // Verifica si el usuario está logueado y obtiene su información
-      const fetchUser = axios.get(`${SERVER}/users?email=${userEmail}`);
+      const fetchUser = axios.get(`${SERVER}/users?email=${userId}`);
       // Si el usuario está logueado, obtiene su información y el producto
       Promise.all([fetchUser, fetchProduct])
         .then(([userResponse, productResponse]) => {
           const user = userResponse.data[0];
           setUserPage(user);
+          setCartUser(user.cart || []);
           setProduct(productResponse.data);
           setError(null);
+          setFavorite(user.favorite || []);
         })
         .catch((e) => {
           console.error(e);
@@ -71,7 +80,7 @@ const ProductPage = () => {
           setLoading(false);
         });
     }
-  }, [SERVER, params.id, userEmail]);
+  }, [SERVER, params.id, userId, isSignedIn]);
 
   if (loading) return <Loading />;
 
@@ -129,6 +138,12 @@ const ProductPage = () => {
               <strong>Precio:</strong> {product.price}$
             </p>
 
+            {favorite && (
+              <>
+                <h1>Esto es probando jajaja</h1>
+              </>
+            )}
+
             {product && isSignedIn && userPage ? (
               <>
                 <label className="label-quantity">
@@ -141,7 +156,7 @@ const ProductPage = () => {
                     className="input-quantity"
                   />
                 </label>
-               
+
                 <ButtonAddCart
                   quantity={quantity}
                   productPage={product}

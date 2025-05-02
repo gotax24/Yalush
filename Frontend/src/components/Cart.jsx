@@ -3,6 +3,7 @@ import { Context } from "../context/UserContext.jsx";
 import cart from "../assets/cart.svg";
 import sadPerson from "../assets/sadPerson.svg";
 import Loading from "./Loading.jsx";
+import "../css/Cart.css";
 
 const Cart = () => {
   const { userContext, error, loading } = useContext(Context);
@@ -17,9 +18,9 @@ const Cart = () => {
       <main className="container-car">
         <div className="container-products-cart">
           <h1 className="title-products-cart">Productos en el carrito</h1>
-          {userContext?.cart.length > 0 ? (
-            userContext.cart.map((product) => (
-              <div key={product.id} className="container-product-cart">
+          {userContext?.cart?.length > 0 ? (
+            userContext.cart.map((product, index) => (
+              <div key={index} className="container-product-cart">
                 <img
                   src={`../${product.image}`}
                   alt="Imagen del producto"
@@ -41,7 +42,7 @@ const Cart = () => {
                   <button className="button-delete-cart">Eliminar</button>
                 </div>
                 <div className="container-total-cart">
-                  <p className="total-cart">
+                  <p className="total-product-cart">
                     Total: ${product.price * product.quantity}
                   </p>
                 </div>
@@ -52,6 +53,19 @@ const Cart = () => {
               <h1 className="title-empty-cart">El carrito está vacío</h1>
               <img src={sadPerson} alt="Persona triste" />
               <p className="text-empty-cart">Agrega productos a tu carrito.</p>
+            </div>
+          )}
+
+          {userContext?.cart?.length > 0 && (
+            <div className="container-total-cart">
+              <h1>Total de productos: {userContext.cart.length}</h1>
+              <h2 className="title-total-cart">Total de la compra</h2>
+              <p className="total-cart">
+                $
+                {userContext.cart.reduce((acumulador, product) => {
+                  return acumulador + product.price * product.quantity;
+                }, 0)}
+              </p>
             </div>
           )}
         </div>
