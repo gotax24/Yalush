@@ -43,7 +43,21 @@
           "nameProduct": "ojo turco crochet",
           "price": 1,
           "image": "img-products/ojo.webp",
-          "quantity": 2
+          "quantity": 1
+        },
+        {
+          "productId": 3,
+          "nameProduct": "virgen maria crochet",
+          "price": 3,
+          "image": "img-products/virgen.webp",
+          "quantity": 1
+        },
+        {
+          "productId": 5,
+          "nameProduct": "Luna y estrella",
+          "price": 3,
+          "image": "img-products/noche.webp",
+          "quantity": 1
         }
       ],
       "id": 3,
@@ -69,7 +83,7 @@
       "image": "img-products/spiderman.webp",
       "description": "Bonito Spiderman Crochet hecho a mano con hilo de algodón, ideal para regalar a los niños o decorar la habitación.",
       "category": "keychains",
-      "stock": 6,
+      "stock": 4,
       "review": [
         {
           "userId": 4,
@@ -85,6 +99,11 @@
           "userId": 2,
           "rating": 5,
           "comment": "Me gusta ojala mi novia me regale uno de venom"
+        },
+        {
+          "userId": 3,
+          "rating": 5,
+          "comment": "Me encanta "
         }
       ]
     },
@@ -95,7 +114,7 @@
       "image": "img-products/ojo.webp",
       "description": "Atrae buenas vibras y aleja la negatividad",
       "category": "keychains",
-      "stock": 4,
+      "stock": 5,
       "review": [
         {
           "userId": 2,
@@ -111,7 +130,7 @@
       "image": "img-products/virgen.webp",
       "description": "Producto artesanal hecho a mano.",
       "category": "keychains",
-      "stock": 10,
+      "stock": 8,
       "review": []
     },
     {
@@ -131,7 +150,7 @@
       "image": "img-products/noche.webp",
       "description": "Comparte con tu favorita el otro llavero",
       "category": "keychains",
-      "stock": 10,
+      "stock": 9,
       "review": []
     },
     {
@@ -151,7 +170,7 @@
       "image": "img-products/cerezas.webp",
       "description": "Regala estas lindas cerezas que combina con todo",
       "category": "keychains",
-      "stock": 0,
+      "stock": 10,
       "review": []
     },
     {
@@ -161,7 +180,7 @@
       "image": "",
       "description": "Producto artesanal hecho a mano.",
       "category": "other",
-      "stock": 0,
+      "stock": 10,
       "review": []
     },
     {
@@ -171,7 +190,7 @@
       "image": "",
       "description": "Producto artesanal hecho a mano.",
       "category": "dress",
-      "stock": 0,
+      "stock": 10,
       "review": []
     },
     {
@@ -181,7 +200,7 @@
       "image": "",
       "description": "Producto artesanal hecho a mano.",
       "category": "pillows",
-      "stock": 0,
+      "stock": 10,
       "review": []
     },
     {
@@ -191,7 +210,7 @@
       "image": "",
       "description": "Producto artesanal hecho a mano.",
       "category": "dress",
-      "stock": 0,
+      "stock": 10,
       "review": []
     },
     {

@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { Context } from "../context/UserContext";
 
 const ButtonAddCart = ({
   quantity,
@@ -12,6 +13,7 @@ const ButtonAddCart = ({
   const SERVER = import.meta.env.VITE_SERVER_URL;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { setUserContext, userContext } = useContext(Context);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -80,6 +82,10 @@ const ButtonAddCart = ({
       .patch(`${SERVER}/users/${idUser}`, { cart: updatedCart })
       .then((response) => {
         setCart(updatedCart);
+        setUserContext({
+          ...userContext,
+          cart: updatedCart,
+        });
         console.log("Carrito actualizado:", response.data);
         return axios.patch(`${SERVER}/products/${productPage.id}`, {
           stock: newStock,

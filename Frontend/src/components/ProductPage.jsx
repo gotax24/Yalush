@@ -1,32 +1,28 @@
 import { useEffect, useState, useContext } from "react";
-import { Context } from "../context/UserContext.jsx";
 import { useParams } from "react-router-dom";
-import Loading from "./Loading.jsx";
+import { Context } from "../context/UserContext.jsx";
 import axios from "axios";
-import FirstLetterUpper from "../helper/FirstLetterUpper.js";
 import Translator from "../helper/Translator.js";
+import Loading from "./Loading.jsx";
+import FirstLetterUpper from "../helper/FirstLetterUpper.js";
 import Comments from "./Comments.jsx";
 import AddFormComments from "./AddFormComments.jsx";
 import Modal from "./Modal.jsx";
-import "../css/ProductPage.css";
 import ButtonAddCart from "./ButtonAddCart.jsx";
-import { useClerk } from "@clerk/clerk-react";
+import "../css/ProductPage.css";
 
 const ProductPage = () => {
   const params = useParams();
   const SERVER = import.meta.env.VITE_SERVER_URL;
 
   const { userContext, errorContext, loadingContext } = useContext(Context);
-  const { isSignedIn } = useClerk();
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
   const [product, setProduct] = useState({});
-  const [userPage, setUserPage] = useState(null);
-  const [quantity, setQuantity] = useState(0);
-
   const [cartUser, setCartUser] = useState([]);
+  const [quantity, setQuantity] = useState(0);
   const [favorite, setFavorite] = useState([]);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -35,8 +31,7 @@ const ProductPage = () => {
   const closeModal = () => setIsOpen(false);
 
   //Busca el correo del usuario logueado
-  const userId = userContext.id;
-  console.log(userContext.id);
+  const userId = userContext?.id;
 
   useEffect(() => {
     setLoading(true);
@@ -45,18 +40,14 @@ const ProductPage = () => {
     //Hace la peticion al servidor para obtener el producto
     const fetchProduct = axios.get(`${SERVER}/products/${params.id}`);
 
-    if (isSignedIn) {
-      // Verifica si el usuario está logueado y obtiene su información
-      const fetchUser = axios.get(`${SERVER}/users?email=${userId}`);
+    if (userId) {
       // Si el usuario está logueado, obtiene su información y el producto
-      Promise.all([fetchUser, fetchProduct])
-        .then(([userResponse, productResponse]) => {
-          const user = userResponse.data[0];
-          setUserPage(user);
-          setCartUser(user.cart || []);
+      fetchProduct
+        .then((productResponse) => {
+          setCartUser(userContext.cart || []);
           setProduct(productResponse.data);
           setError(null);
-          setFavorite(user.favorite || []);
+          setFavorite(userContext.favorite || []);
         })
         .catch((e) => {
           console.error(e);
@@ -80,9 +71,9 @@ const ProductPage = () => {
           setLoading(false);
         });
     }
-  }, [SERVER, params.id, userId, isSignedIn]);
+  }, [SERVER, params.id, userId, userContext]);
 
-  if (loading) return <Loading />;
+  if (loading || loadingContext) return <Loading />;
 
   const updateProductReviews = (updatedReviews) => {
     setProduct((prevProduct) => ({
@@ -138,13 +129,9 @@ const ProductPage = () => {
               <strong>Precio:</strong> {product.price}$
             </p>
 
-            {favorite && (
-              <>
-                <h1>Esto es probando jajaja</h1>
-              </>
-            )}
+            {favorite && <></>}
 
-            {product && isSignedIn && userPage ? (
+            {product && userId ? (
               <>
                 <label className="label-quantity">
                   Cantidad:
@@ -160,7 +147,7 @@ const ProductPage = () => {
                 <ButtonAddCart
                   quantity={quantity}
                   productPage={product}
-                  idUser={userPage.id}
+                  idUser={userId}
                   cart={cartUser}
                   setCart={setCartUser}
                   updatedStock={(newStock) =>
@@ -188,7 +175,7 @@ const ProductPage = () => {
             return <Comments key={index} info={info} product={product} />;
           })}
 
-        {isSignedIn ? (
+        {userId ? (
           <button className="comments-button" onClick={openModal}>
             Agregar comentario
           </button>
@@ -199,15 +186,18 @@ const ProductPage = () => {
         )}
       </div>
 
-      <div className="error-product">{error && <p>{error.message}</p>}</div>
+      <div className="error-product">
+        {error && <p>{error.message}</p>}
+        {errorContext && <p>{errorContext.message}</p>}
+      </div>
 
-      {isOpen && userPage && product && (
+      {isOpen && userId && product && (
         <Modal isOpen={isOpen} closeModal={closeModal}>
           <AddFormComments
-            userId={userPage.id}
+            userId={userId}
             closeModal={closeModal}
-            productId={product.id}
-            currentReviews={product.review}
+            productId={product?.id}
+            currentReviews={product?.review}
             updateProductReviews={updateProductReviews}
           />
         </Modal>

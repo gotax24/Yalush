@@ -1,25 +1,56 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "../context/UserContext.jsx";
-import cart from "../assets/cart.svg";
+import axios from "axios";
+import cartIcon from "../assets/cart.svg";
 import sadPerson from "../assets/sadPerson.svg";
 import Loading from "./Loading.jsx";
 import "../css/Cart.css";
+import FirstLetterUpper from "../helper/FirstLetterUpper.js";
 
 const Cart = () => {
   const { userContext, error, loading } = useContext(Context);
+  const [cart, setCart] = useState([]);
+  const [errorCart, setErrorCart] = useState(null);
+  const SERVER = import.meta.env.VITE_SERVER_URL;
+
+  useEffect(() => {
+    const { cart: userCart } = userContext || {};
+    if (Array.isArray(userCart)) {
+      setCart(userCart);
+    } else {
+      setCart([]);
+    }
+  }, [userContext]);
+  
+
+  const deleteProduct = (product) => {
+    const newCart = cart.filter((item) => item.productId !== product.productId);
+
+    axios
+      .patch(`${SERVER}/users/${userContext?.id}`, { cart: newCart })
+      .then((response) => {
+        setCart(newCart);
+        console.log("Carrito actualizado: ", response.data);
+      })
+      .catch((e) => {
+        console.error(e);
+        setErrorCart(e);
+      });
+  };
+
   if (loading) return <Loading />;
 
   return (
     <>
       <header className="header-cart">
-        <img src={cart} alt="Imagen de un carro" className="img-cart" />
+        <img src={cartIcon} alt="Imagen de un carro" className="img-cart" />
         <h1 className="title-cart">Tu carrito de compra</h1>
       </header>
       <main className="container-car">
         <div className="container-products-cart">
           <h1 className="title-products-cart">Productos en el carrito</h1>
-          {userContext?.cart?.length > 0 ? (
-            userContext.cart.map((product, index) => (
+          {cart?.length > 0 ? (
+            cart?.map((product, index) => (
               <div key={index} className="container-product-cart">
                 <img
                   src={`../${product.image}`}
@@ -27,10 +58,7 @@ const Cart = () => {
                   className="img-product-cart"
                 />
                 <div className="product-info-cart">
-                  <h1 className="product-title-cart">{product.name}</h1>
-                  <p className="info-product-cart">
-                    <strong>Descripción:</strong> {product.description}
-                  </p>
+                  <h1 className="product-title-cart">{FirstLetterUpper(product.nameProduct)}</h1>
                   <p className="info-product-cart">
                     <strong>Precio:</strong> ${product.price}
                   </p>
@@ -39,7 +67,12 @@ const Cart = () => {
                   </p>
                 </div>
                 <div className="container-button-cart">
-                  <button className="button-delete-cart">Eliminar</button>
+                  <button
+                    onClick={() => deleteProduct(product)}
+                    className="button-delete-cart"
+                  >
+                    Eliminar
+                  </button>
                 </div>
                 <div className="container-total-cart">
                   <p className="total-product-cart">
@@ -56,13 +89,13 @@ const Cart = () => {
             </div>
           )}
 
-          {userContext?.cart?.length > 0 && (
+          {cart?.length > 0 && (
             <div className="container-total-cart">
-              <h1>Total de productos: {userContext.cart.length}</h1>
+              <h1>Total de productos: {cart?.length}</h1>
               <h2 className="title-total-cart">Total de la compra</h2>
               <p className="total-cart">
                 $
-                {userContext.cart.reduce((acumulador, product) => {
+                {cart?.reduce((acumulador, product) => {
                   return acumulador + product.price * product.quantity;
                 }, 0)}
               </p>
@@ -70,6 +103,7 @@ const Cart = () => {
           )}
         </div>
       </main>
+      {errorCart && <p className="error-cart">{error.mesagge}</p>}
       {error && <p className="error-cart">{error.mesagge}</p>}
     </>
   );
