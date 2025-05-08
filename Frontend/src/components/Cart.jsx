@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../context/UserContext.jsx";
 import axios from "axios";
-import cartIcon from "../assets/cart.svg";
 import sadPerson from "../assets/sadPerson.svg";
 import Loading from "./Loading.jsx";
 import "../css/Cart.css";
@@ -42,10 +41,7 @@ const Cart = () => {
 
   return (
     <>
-      <header className="header-cart">
-        <img src={cartIcon} alt="Imagen de un carro" className="img-cart" />
-        <h1 className="title-cart">Tu carrito de compra</h1>
-      </header>
+      
       <main className="container-car">
         <div className="container-products-cart">
           <h1 className="title-products-cart">Productos en el carrito</h1>

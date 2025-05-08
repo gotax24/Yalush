@@ -129,7 +129,22 @@ const ProductPage = () => {
               <strong>Precio:</strong> {product.price}$
             </p>
 
-            {favorite && <></>}
+            {favorite &&  <ButtonAddCart
+                  quantity={quantity}
+                  productPage={product}
+                  idUser={userId}
+                  cart={cartUser}
+                  setCart={setCartUser}
+                  updatedStock={(newStock) =>
+                    setProduct((prev) => ({
+                      ...prev,
+                      stock: newStock,
+                    }))
+                  }
+                  isFavorite={true}
+                  favorite={favorite}
+                  setFavorite={setFavorite}
+                />}
 
             {product && userId ? (
               <>
@@ -156,6 +171,9 @@ const ProductPage = () => {
                       stock: newStock,
                     }))
                   }
+                  isFavorite={false}
+                  favorite={favorite}
+                  setFavorite={setFavorite}
                 />
               </>
             ) : (

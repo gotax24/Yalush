@@ -29,7 +29,22 @@
       "lastName": "Bracho R",
       "profileImageUrl": "https://img.clerk.com/eyJ0eXBlIjoiZGVmYXVsdCIsImlpZCI6Imluc18ydTBBcTFOcGU4OU9pVFdLODFCdTRLRkd4RU8iLCJyaWQiOiJ1c2VyXzJ2NlhaTEdKQUl1RFNFbEpWMEZHSnZzTFBwciIsImluaXRpYWxzIjoiRUIifQ",
       "admin": true,
-      "favorite": [],
+      "favorite": [
+        {
+          "productId": 1,
+          "nameProduct": "spiderman Crochet",
+          "description": "Bonito Spiderman Crochet hecho a mano con hilo de algodón, ideal para regalar a los niños o decorar la habitación.",
+          "price": 4,
+          "image": "img-products/spiderman.webp"
+        },
+        {
+          "productId": 2,
+          "nameProduct": "ojo turco crochet",
+          "description": "Atrae buenas vibras y aleja la negatividad",
+          "price": 1,
+          "image": "img-products/ojo.webp"
+        }
+      ],
       "cart": [
         {
           "productId": 1,
@@ -44,24 +59,9 @@
           "price": 1,
           "image": "img-products/ojo.webp",
           "quantity": 1
-        },
-        {
-          "productId": 3,
-          "nameProduct": "virgen maria crochet",
-          "price": 3,
-          "image": "img-products/virgen.webp",
-          "quantity": 1
-        },
-        {
-          "productId": 5,
-          "nameProduct": "Luna y estrella",
-          "price": 3,
-          "image": "img-products/noche.webp",
-          "quantity": 1
         }
       ],
-      "id": 3,
-      "favotites": []
+      "id": 3
     },
     {
       "clerkId": "user_2v6XdA1oElIDhFiDcpIYmJ5hK7Y",

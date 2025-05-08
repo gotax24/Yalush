@@ -9,106 +9,151 @@ const ButtonAddCart = ({
   cart,
   updatedStock,
   setCart,
+  isFavorite,
+  favorite,
+  setFavorite,
 }) => {
   const SERVER = import.meta.env.VITE_SERVER_URL;
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const { setUserContext, userContext } = useContext(Context);
+  const isFavoriteText = isFavorite
+    ? "Agregar a favoritos"
+    : "Agregar al carrito";
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError(null); // Clear previous errors
+    setError(null); // Limpiamos el estado del error
     setLoading(true);
 
-    const quantityNumber = Number(quantity);
+    if (isFavorite) {
+      const existingProductIndexFav = favorite.findIndex(
+        (item) => Number(item.productId) === productPage.id
+      );
+      
+      if (existingProductIndexFav !== -1) {
+        setError("Ya el producto existe en tus favoritos ;)");
+        setLoading(false);
+        return;
+      }
 
-    // Validate quantity
-    const isValidQuantity =
-      quantityNumber > 0 &&
-      Number.isInteger(quantityNumber) &&
-      quantityNumber <= productPage.stock;
-
-    if (!isValidQuantity) {
-      setError("Cantidad inválida o mayor al stock disponible.");
-      setLoading(false);
-      return;
-    }
-
-    const newStock = productPage.stock - quantityNumber;
-
-    // Check if product already exists in cart
-    const existingProductIndex = cart.findIndex(
-      (item) => Number(item.productId) === productPage.id
-    );
-    // Create a deep copy of the cart to avoid reference issues
-    let updatedCart = [...cart];
-
-    // If product exists, update quantity; otherwise add new product
-    if (existingProductIndex !== -1) {
-      // Calculate new quantity
-      const currentQuantity = updatedCart[existingProductIndex].quantity;
-      const newQuantity = currentQuantity + quantityNumber;
-
-      // Make sure new quantity doesn't exceed stock
-      const finalQuantity = Math.min(newQuantity, productPage.stock);
-
-      // Create a new object to ensure React detects the change
-      updatedCart[existingProductIndex] = {
-        ...updatedCart[existingProductIndex],
-        quantity: finalQuantity,
-      };
-
-      console.log("Updating existing product:", {
-        currentQuantity,
-        addedQuantity: quantityNumber,
-        newQuantity: finalQuantity,
-      });
-    } else {
-      // Add new product to cart
-      const newProduct = {
+      const newFavorite = {
         productId: productPage.id,
         nameProduct: productPage.name,
+        description: productPage.description,
         price: productPage.price,
         image: productPage.image,
-        quantity: quantityNumber,
       };
+      
+      let updateFavorite = [...favorite, newFavorite];
+      console.log("Agregado nuevo producto fav: ", newFavorite);
 
-      updatedCart.push(newProduct);
-      console.log("Adding new product:", newProduct);
-    }
+      axios
+        .patch(`${SERVER}/users/${idUser}`, { favorite: updateFavorite })
+        .then((response) => {
+          setUserContext({
+            ...userContext,
+            favorite: updateFavorite,
+          });
+          setFavorite(response.data);
+          setLoading(false);
+          setError(null);
+        })
+        .catch((e) => {
+          console.error(e);
+          setError(e);
+        });
+    } else {
+      const quantityNumber = Number(quantity);
 
-    // Update cart in server
-    axios
-      .patch(`${SERVER}/users/${idUser}`, { cart: updatedCart })
-      .then((response) => {
-        setCart(updatedCart);
-        setUserContext({
-          ...userContext,
-          cart: updatedCart,
-        });
-        console.log("Carrito actualizado:", response.data);
-        return axios.patch(`${SERVER}/products/${productPage.id}`, {
-          stock: newStock,
-        });
-      })
-      .then(() => {
-        updatedStock(newStock);
-      })
-      .catch((e) => {
-        console.error("Error updating cart:", e);
-        setError("Error al agregar al carrito.");
-      })
-      .finally(() => {
+      // Validamos cantidad
+      const isValidQuantity =
+        quantityNumber > 0 &&
+        Number.isInteger(quantityNumber) &&
+        quantityNumber <= productPage.stock;
+
+      if (!isValidQuantity) {
+        setError("Cantidad inválida o mayor al stock disponible.");
         setLoading(false);
-      });
+        return;
+      }
+
+      const newStock = productPage.stock - quantityNumber;
+
+      // Verificamos si el producto existe en el cart
+      const existingProductIndexCart = cart.findIndex(
+        (item) => Number(item.productId) === productPage.id
+      );
+      // Creamos una copia del carrito
+      let updatedCart = [...cart];
+
+      // Si el producto existe actualizamos la cantidad
+      if (existingProductIndexCart !== -1) {
+        // Calculamos la nueva cantidad
+        const currentQuantity = updatedCart[existingProductIndexCart].quantity;
+        const newQuantity = currentQuantity + quantityNumber;
+
+        // Nos aseguramos que no sobrepase la cantidad disponible
+        const finalQuantity = Math.min(newQuantity, productPage.stock);
+
+        // Creamos un nuevo objeto para que react dectete el cambio
+        updatedCart[existingProductIndexCart] = {
+          ...updatedCart[existingProductIndexCart],
+          quantity: finalQuantity,
+        };
+
+        console.log("Actualizamos producto existente: ", {
+          currentQuantity,
+          addedQuantity: quantityNumber,
+          newQuantity: finalQuantity,
+        });
+      } else {
+        // Agregamos un nuevo producto si no existe
+        const newProduct = {
+          productId: productPage.id,
+          nameProduct: productPage.name,
+          price: productPage.price,
+          image: productPage.image,
+          quantity: quantityNumber,
+        };
+
+        updatedCart.push(newProduct);
+        console.log("Agregado nuevo producto:", newProduct);
+      }
+
+      // Actualizamos el carrito en el servidor
+      axios
+        .patch(`${SERVER}/users/${idUser}`, { cart: updatedCart })
+        .then((response) => {
+          setCart(updatedCart);
+          setUserContext({
+            ...userContext,
+            cart: updatedCart,
+          });
+          console.log("Carrito actualizado:", response.data);
+          return axios.patch(`${SERVER}/products/${productPage.id}`, {
+            stock: newStock,
+          });
+        })
+        .then(() => {
+          updatedStock(newStock);
+        })
+        .catch((e) => {
+          console.error("Error updating cart:", e);
+          setError("Error al agregar al carrito.");
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
   };
 
   return (
     <>
       <button onClick={handleSubmit} className="button-add" disabled={loading}>
-        {loading ? "Agregando..." : "Agregar al carrito"}
+        {loading ? "Agregando..." : isFavoriteText}
       </button>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p style={{ color: "white" }}>{error}</p>}
     </>
   );
 };
