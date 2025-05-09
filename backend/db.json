@@ -31,18 +31,18 @@
       "admin": true,
       "favorite": [
         {
-          "productId": 1,
-          "nameProduct": "spiderman Crochet",
-          "description": "Bonito Spiderman Crochet hecho a mano con hilo de algodón, ideal para regalar a los niños o decorar la habitación.",
-          "price": 4,
-          "image": "img-products/spiderman.webp"
-        },
-        {
           "productId": 2,
           "nameProduct": "ojo turco crochet",
           "description": "Atrae buenas vibras y aleja la negatividad",
           "price": 1,
           "image": "img-products/ojo.webp"
+        },
+        {
+          "productId": 1,
+          "nameProduct": "spiderman Crochet",
+          "description": "Bonito Spiderman Crochet hecho a mano con hilo de algodón, ideal para regalar a los niños o decorar la habitación.",
+          "price": 4,
+          "image": "img-products/spiderman.webp"
         }
       ],
       "cart": [
@@ -58,7 +58,14 @@
           "nameProduct": "ojo turco crochet",
           "price": 1,
           "image": "img-products/ojo.webp",
-          "quantity": 1
+          "quantity": 4
+        },
+        {
+          "productId": 3,
+          "nameProduct": "virgen maria crochet",
+          "price": 3,
+          "image": "img-products/virgen.webp",
+          "quantity": 2
         }
       ],
       "id": 3
@@ -114,7 +121,7 @@
       "image": "img-products/ojo.webp",
       "description": "Atrae buenas vibras y aleja la negatividad",
       "category": "keychains",
-      "stock": 5,
+      "stock": 1,
       "review": [
         {
           "userId": 2,
@@ -130,7 +137,7 @@
       "image": "img-products/virgen.webp",
       "description": "Producto artesanal hecho a mano.",
       "category": "keychains",
-      "stock": 8,
+      "stock": 6,
       "review": []
     },
     {

@@ -1,37 +1,39 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { Context } from "../context/UserContext.jsx";
-import axios from "axios";
-import Translator from "../helper/Translator.js";
+import { useClerk } from "@clerk/clerk-react";
+import { useContext } from "react";
+import { Context } from "../context/UserContext";
 import Loading from "./Loading.jsx";
+import axios from "axios";
 import FirstLetterUpper from "../helper/FirstLetterUpper.js";
+import Translator from "../helper/Translator.js";
 import Comments from "./Comments.jsx";
 import AddFormComments from "./AddFormComments.jsx";
 import Modal from "./Modal.jsx";
-import ButtonAddCart from "./ButtonAddCart.jsx";
 import "../css/ProductPage.css";
+import ButtonAdd from "./ButtonAdd.jsx";
 
 const ProductPage = () => {
   const params = useParams();
   const SERVER = import.meta.env.VITE_SERVER_URL;
 
-  const { userContext, errorContext, loadingContext } = useContext(Context);
-
+  const [product, setProduct] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  const [product, setProduct] = useState({});
-  const [cartUser, setCartUser] = useState([]);
-  const [quantity, setQuantity] = useState(0);
-  const [favorite, setFavorite] = useState([]);
-
   const [isOpen, setIsOpen] = useState(false);
+  const [userPage, setUserPage] = useState(null);
+  const [quantity, setQuantity] = useState(1); // Inicializado en 1 para mejor UX
+  const [cartUser, setCartUser] = useState([]);
+  const [favoriteUser, setFavoriteUser] = useState([]);
+
+  const { userContext } = useContext(Context);
+  const { isSignedIn, user } = useClerk();
 
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
 
   //Busca el correo del usuario logueado
-  const userId = userContext?.id;
+  const userEmail = user?.emailAddresses[0]?.emailAddress;
 
   useEffect(() => {
     setLoading(true);
@@ -40,14 +42,19 @@ const ProductPage = () => {
     //Hace la peticion al servidor para obtener el producto
     const fetchProduct = axios.get(`${SERVER}/products/${params.id}`);
 
-    if (userId) {
+    if (userEmail) {
+      // Verifica si el usuario está logueado y obtiene su información
+      const fetchUser = axios.get(`${SERVER}/users?email=${userEmail}`);
       // Si el usuario está logueado, obtiene su información y el producto
-      fetchProduct
-        .then((productResponse) => {
-          setCartUser(userContext.cart || []);
+      Promise.all([fetchUser, fetchProduct])
+        .then(([userResponse, productResponse]) => {
+          const user = userResponse.data[0];
+          setUserPage(user);
+          // Inicializar el carrito y favoritos con los datos del usuario
+          setCartUser(user.cart || []);
+          setFavoriteUser(user.favorite || []);
           setProduct(productResponse.data);
           setError(null);
-          setFavorite(userContext.favorite || []);
         })
         .catch((e) => {
           console.error(e);
@@ -71,9 +78,17 @@ const ProductPage = () => {
           setLoading(false);
         });
     }
-  }, [SERVER, params.id, userId, userContext]);
+  }, [SERVER, params.id, userEmail]);
 
-  if (loading || loadingContext) return <Loading />;
+  // Actualizar el carrito y favoritos cuando cambie userContext
+  useEffect(() => {
+    if (userContext) {
+      setCartUser(userContext.cart || []);
+      setFavoriteUser(userContext.favorite || []);
+    }
+  }, [userContext]);
+
+  if (loading) return <Loading />;
 
   const updateProductReviews = (updatedReviews) => {
     setProduct((prevProduct) => ({
@@ -129,24 +144,7 @@ const ProductPage = () => {
               <strong>Precio:</strong> {product.price}$
             </p>
 
-            {favorite &&  <ButtonAddCart
-                  quantity={quantity}
-                  productPage={product}
-                  idUser={userId}
-                  cart={cartUser}
-                  setCart={setCartUser}
-                  updatedStock={(newStock) =>
-                    setProduct((prev) => ({
-                      ...prev,
-                      stock: newStock,
-                    }))
-                  }
-                  isFavorite={true}
-                  favorite={favorite}
-                  setFavorite={setFavorite}
-                />}
-
-            {product && userId ? (
+            {product && isSignedIn && userPage ? (
               <>
                 <label className="label-quantity">
                   Cantidad:
@@ -154,26 +152,26 @@ const ProductPage = () => {
                     type="number"
                     min={1}
                     max={product.stock}
+                    value={quantity}
                     onChange={(e) => setQuantity(e.target.value)}
                     className="input-quantity"
                   />
                 </label>
 
-                <ButtonAddCart
+                <ButtonAdd
                   quantity={quantity}
                   productPage={product}
-                  idUser={userId}
+                  idUser={userPage.id}
                   cart={cartUser}
                   setCart={setCartUser}
+                  favorite={favoriteUser}
+                  setFavorite={setFavoriteUser}
                   updatedStock={(newStock) =>
                     setProduct((prev) => ({
                       ...prev,
                       stock: newStock,
                     }))
                   }
-                  isFavorite={false}
-                  favorite={favorite}
-                  setFavorite={setFavorite}
                 />
               </>
             ) : (
@@ -193,7 +191,7 @@ const ProductPage = () => {
             return <Comments key={index} info={info} product={product} />;
           })}
 
-        {userId ? (
+        {isSignedIn ? (
           <button className="comments-button" onClick={openModal}>
             Agregar comentario
           </button>
@@ -204,18 +202,15 @@ const ProductPage = () => {
         )}
       </div>
 
-      <div className="error-product">
-        {error && <p>{error.message}</p>}
-        {errorContext && <p>{errorContext.message}</p>}
-      </div>
+      <div className="error-product">{error && <p>{error.message}</p>}</div>
 
-      {isOpen && userId && product && (
+      {isOpen && userPage && product && (
         <Modal isOpen={isOpen} closeModal={closeModal}>
           <AddFormComments
-            userId={userId}
+            userId={userPage.id}
             closeModal={closeModal}
-            productId={product?.id}
-            currentReviews={product?.review}
+            productId={product.id}
+            currentReviews={product.review}
             updateProductReviews={updateProductReviews}
           />
         </Modal>

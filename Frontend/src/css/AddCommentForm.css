@@ -57,7 +57,7 @@
     line-height: 1.5; 
 }
 
-button {
+.button-comement {
   margin-top: 12px;
   background-color: #a294f9;
   color: #fff;
@@ -69,7 +69,7 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
+.button-comement:hover {
   background-color: #8b7ce6;
 }
 

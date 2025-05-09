@@ -121,7 +121,7 @@ const AddFormComments = ({
             </label>
           </form>
         </div>
-        <button onClick={handleSubmit}>
+        <button className="button-comment" onClick={handleSubmit}>
           {loading ? "Confirmando comentario..." : "Confirmar comentario"}
         </button>
       </div>

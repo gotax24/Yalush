@@ -10,6 +10,7 @@ import ProfilePage from "./components/ProfilePage.jsx";
 import { UserProvider } from "./context/UserContext.jsx";
 import Cart from "./components/Cart.jsx";
 import "./index.css";
+import FavPage from "./components/FavPage.jsx";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 
@@ -23,11 +24,11 @@ createRoot(document.getElementById("root")).render(
             <Route path="/products" element={<App />}>
               <Route index element={<Layout />} />
               <Route path=":id" element={<ProductPage />} />
-              <Route path="checkout" element={""} />
             </Route>
             <Route path="cart" element={<Cart />} />
             <Route path="admin" element={"admin"} />
             <Route path="profile" element={<ProfilePage />} />
+            <Route path="favorite" element={<FavPage />} />
           </Route>
           <Route path="*" element={<Page404 />} />
         </Routes>

@@ -144,7 +144,7 @@
   border-radius: 50%;
 }
 
-.input-quantity{
+.input-quantity {
   width: 100px;
   height: 30px;
   border-radius: 5px;
@@ -154,13 +154,63 @@
   background-color: #f9f9f9;
 }
 
-.input-quantity:focus{
+.input-quantity:focus {
   outline: none;
 }
 
-.label-quantity{
+.label-quantity {
   font-size: 1rem;
   color: #000;
   font-weight: bold;
   margin-right: 10px;
+}
+
+/* Añade estos estilos a tu archivo CSS de ProductPage */
+
+.product-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.button-favorite {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #e0e0e0;
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.button-favorite:hover {
+  transform: scale(1.1);
+  border-color: #ff6b6b;
+}
+
+.button-favorite:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.fav-yes,
+.fav-no {
+  font-size: 25px;
+  animation: pulse 0.3s ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
