@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../context/UserContext.jsx";
+import { Link } from "react-router-dom";
 import axios from "axios";
+import FirstLetterUpper from "../helper/FirstLetterUpper.js";
 import sadPerson from "../assets/sadPerson.svg";
 import Loading from "./Loading.jsx";
 import "../css/Cart.css";
-import FirstLetterUpper from "../helper/FirstLetterUpper.js";
 
 const Cart = () => {
   const { userContext, error, loading } = useContext(Context);
@@ -20,7 +21,6 @@ const Cart = () => {
       setCart([]);
     }
   }, [userContext]);
-  
 
   const deleteProduct = (product) => {
     const newCart = cart.filter((item) => item.productId !== product.productId);
@@ -41,7 +41,6 @@ const Cart = () => {
 
   return (
     <>
-      
       <main className="container-car">
         <div className="container-products-cart">
           <h1 className="title-products-cart">Productos en el carrito</h1>
@@ -54,7 +53,9 @@ const Cart = () => {
                   className="img-product-cart"
                 />
                 <div className="product-info-cart">
-                  <h1 className="product-title-cart">{FirstLetterUpper(product.nameProduct)}</h1>
+                  <h1 className="product-title-cart">
+                    {FirstLetterUpper(product.nameProduct)}
+                  </h1>
                   <p className="info-product-cart">
                     <strong>Precio:</strong> ${product.price}
                   </p>
@@ -64,7 +65,16 @@ const Cart = () => {
                 </div>
                 <div className="container-button-cart">
                   <button
-                    onClick={() => deleteProduct(product)}
+                    onClick={() =>
+                      deleteProduct(
+                        product,
+                        setCart,
+                        setErrorCart,
+                        cart,
+                        userContext,
+                        "cart"
+                      )
+                    }
                     className="button-delete-cart"
                   >
                     Eliminar
@@ -82,6 +92,7 @@ const Cart = () => {
               <h1 className="title-empty-cart">El carrito está vacío</h1>
               <img src={sadPerson} alt="Persona triste" />
               <p className="text-empty-cart">Agrega productos a tu carrito.</p>
+              <Link to="/products">Entra aqui para ver los productos</Link>
             </div>
           )}
 

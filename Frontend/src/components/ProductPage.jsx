@@ -11,7 +11,9 @@ import Comments from "./Comments.jsx";
 import AddFormComments from "./AddFormComments.jsx";
 import Modal from "./Modal.jsx";
 import "../css/ProductPage.css";
-import ButtonAdd from "./ButtonAdd.jsx";
+import FavButtonAddFavoriteFavorite from "./ButtonAddFavorite.jsx";
+import ButtonAddFavorite from "./ButtonAddFavorite.jsx";
+import ButtonAddCart from "./ButtonAddCart.jsx";
 
 const ProductPage = () => {
   const params = useParams();
@@ -158,14 +160,18 @@ const ProductPage = () => {
                   />
                 </label>
 
-                <ButtonAdd
+                <ButtonAddFavorite
+                  productPage={product}
+                  idUser={userPage.id}
+                  favorite={favoriteUser}
+                  setFavorite={setFavoriteUser}
+                />
+                <ButtonAddCart
                   quantity={quantity}
                   productPage={product}
                   idUser={userPage.id}
                   cart={cartUser}
                   setCart={setCartUser}
-                  favorite={favoriteUser}
-                  setFavorite={setFavoriteUser}
                   updatedStock={(newStock) =>
                     setProduct((prev) => ({
                       ...prev,

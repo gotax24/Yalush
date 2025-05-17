@@ -1,23 +1,102 @@
+import { useState, useEffect, useContext } from "react";
+import { Context } from "../context/UserContext";
+import { Link } from "react-router-dom";
+import FirstLetterUpper from "../helper/FirstLetterUpper.js";
+import sadPerson from "../assets/sadPerson.svg";
+import { motion, AnimatePresence } from "framer-motion";
+import Loading from "./Loading.jsx";
+import { deleteProduct } from "../helper/DeleteProduct.js";
+import "../css/Fav.css";
+import ButtonAddCart from "./ButtonAddCart.jsx";
+
 const FavPage = () => {
+  const { userContext, error, loading } = useContext(Context);
+  const [fav, setFav] = useState([]);
+  const [errorFav, setErrorFav] = useState();
+  const SERVER = import.meta.env.VITE_SERVER_URL;
 
+  useEffect(() => {
+    if (userContext?.favorite) {
+      setFav(userContext.favorite);
+    }
+  }, [userContext]);
 
-    return(
-        <>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <h1>hola</h1>
-        </>
-    )
-}
+  if (loading) return <Loading />;
+
+  return (
+    <main className="container-main">
+      <h1 className="fav-title">Tus favoritos</h1>
+
+      {fav?.length > 0 ? (
+        <article className="container-products-fav">
+          <AnimatePresence>
+            {fav.map((product, index) => (
+              <motion.section
+                key={product.productId || index}
+                className="product-card"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.3 }}
+              >
+                <img
+                  className="product-img"
+                  src={product.image}
+                  alt={product.nameProduct}
+                />
+                <div className="product-info">
+                  <p>
+                    <strong>Nombre:</strong>{" "}
+                    {FirstLetterUpper(product.nameProduct)}
+                  </p>
+                  <p>
+                    <strong>Descripción:</strong> {product.description}
+                  </p>
+                  <p>
+                    <strong>Precio:</strong> ${product.price}
+                  </p>
+                  <div className="product-buttons">
+                    <button
+                      onClick={() =>
+                        deleteProduct(
+                          product,
+                          setFav,
+                          setErrorFav,
+                          fav,
+                          userContext,
+                          "favorite"
+                        )
+                      }
+                    >
+                      ❌ Eliminar
+                    </button>
+
+                    <ButtonAddCart
+                      idUser={userContext?.id}
+                      cart={userContext?.cart}
+                      productPage={product.productId}
+                      quantity={1}
+                    />
+                  </div>
+                </div>
+              </motion.section>
+            ))}
+          </AnimatePresence>
+        </article>
+      ) : (
+        <div className="container-no">
+          <h2>No tienes ningún favorito</h2>
+          <img src={sadPerson} alt="Persona triste" />
+          <Link to="/products">Haz clic aquí para ver los productos</Link>
+        </div>
+      )}
+
+      <div className="container-error">
+        {error && <p>{error.message}</p>}
+        {errorFav && <p>{errorFav.message}</p>}
+      </div>
+    </main>
+  );
+};
 
 export default FavPage;
