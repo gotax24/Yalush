@@ -77,6 +77,13 @@
           "description": "Bonito Spiderman Crochet hecho a mano con hilo de algodón, ideal para regalar a los niños o decorar la habitación.",
           "price": 4,
           "image": "img-products/spiderman.webp"
+        },
+        {
+          "productId": 3,
+          "nameProduct": "virgen maria crochet",
+          "description": "Producto artesanal hecho a mano.",
+          "price": 3,
+          "image": "img-products/virgen.webp"
         }
       ],
       "cart": [
@@ -86,6 +93,20 @@
           "price": 4,
           "image": "img-products/spiderman.webp",
           "quantity": 1
+        },
+        {
+          "productId": 2,
+          "nameProduct": "ojo turco crochet",
+          "price": 1,
+          "image": "img-products/ojo.webp",
+          "quantity": 1
+        },
+        {
+          "productId": 3,
+          "nameProduct": "virgen maria crochet",
+          "price": 3,
+          "image": "img-products/virgen.webp",
+          "quantity": 3
         }
       ],
       "id": 4
@@ -99,7 +120,7 @@
       "image": "img-products/spiderman.webp",
       "description": "Bonito Spiderman Crochet hecho a mano con hilo de algodón, ideal para regalar a los niños o decorar la habitación.",
       "category": "keychains",
-      "stock": 3,
+      "stock": 2,
       "review": [
         {
           "userId": 4,
@@ -130,7 +151,7 @@
       "image": "img-products/ojo.webp",
       "description": "Atrae buenas vibras y aleja la negatividad",
       "category": "keychains",
-      "stock": 1,
+      "stock": 0,
       "review": [
         {
           "userId": 2,
@@ -146,8 +167,14 @@
       "image": "img-products/virgen.webp",
       "description": "Producto artesanal hecho a mano.",
       "category": "keychains",
-      "stock": 6,
-      "review": []
+      "stock": 3,
+      "review": [
+        {
+          "userId": 4,
+          "rating": 3,
+          "comment": "La imagen esta mal editada contraten a un diseñador ajajaj"
+        }
+      ]
     },
     {
       "id": 4,
@@ -388,6 +415,30 @@
       "category": "crochet",
       "stock": 0,
       "review": []
+    }
+  ],
+  "sales": [
+    {
+      "id": 1,
+      "userId": 3,
+      "products": [
+        {
+          "productId": 2,
+          "nameProduct": "ojo turco crochet",
+          "price": 1,
+          "quantity": 4
+        },
+        {
+          "productId": 3,
+          "nameProduct": "virgen maria crochet",
+          "price": 3,
+          "quantity": 2
+        }
+      ],
+      "total": 10,
+      "date": "2025-05-19T15:20:00Z",
+      "paymentStatus": "paid",
+      "email": "ernestobracho70@gmail.com"
     }
   ]
 }

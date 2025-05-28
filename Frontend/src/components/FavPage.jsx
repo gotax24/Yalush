@@ -7,7 +7,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import Loading from "./Loading.jsx";
 import { deleteProduct } from "../helper/DeleteProduct.js";
 import "../css/Fav.css";
-import ButtonAddCart from "./ButtonAddCart.jsx";
 
 const FavPage = () => {
   const { userContext, error, loading } = useContext(Context);
@@ -71,12 +70,9 @@ const FavPage = () => {
                       ❌ Eliminar
                     </button>
 
-                    <ButtonAddCart
-                      idUser={userContext?.id}
-                      cart={userContext?.cart}
-                      productPage={product.productId}
-                      quantity={1}
-                    />
+                    <Link to={`/products/${product.productId}`}>
+                      Ver el producto{" "}
+                    </Link>
                   </div>
                 </div>
               </motion.section>

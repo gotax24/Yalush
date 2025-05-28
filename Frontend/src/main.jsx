@@ -1,16 +1,16 @@
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { ClerkProvider } from "@clerk/clerk-react";
+import { UserProvider } from "./context/UserContext.jsx";
 import Home from "./Home.jsx";
 import App from "./components/App.jsx";
 import Page404 from "./components/Page404.jsx";
 import Layout from "./components/Layout.jsx";
 import ProductPage from "./components/ProductPage.jsx";
 import ProfilePage from "./components/ProfilePage.jsx";
-import { UserProvider } from "./context/UserContext.jsx";
+import FavPage from "./components/FavPage.jsx";
 import Cart from "./components/Cart.jsx";
 import "./index.css";
-import FavPage from "./components/FavPage.jsx";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 

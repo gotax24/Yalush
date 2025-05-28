@@ -6,12 +6,14 @@ import FirstLetterUpper from "../helper/FirstLetterUpper.js";
 import sadPerson from "../assets/sadPerson.svg";
 import Loading from "./Loading.jsx";
 import "../css/Cart.css";
+import Checkout from "./Checkout.jsx";
 
 const Cart = () => {
   const { userContext, error, loading } = useContext(Context);
   const [cart, setCart] = useState([]);
   const [errorCart, setErrorCart] = useState(null);
   const SERVER = import.meta.env.VITE_SERVER_URL;
+  let totalUsd = 0;
 
   useEffect(() => {
     const { cart: userCart } = userContext || {};
@@ -63,6 +65,11 @@ const Cart = () => {
                     <strong>Cantidad en el carrito:</strong> {product.quantity}
                   </p>
                 </div>
+                <div className="container-total-cart">
+                  <p className="total-product-cart">
+                    Total: ${product.price * product.quantity}
+                  </p>
+                </div>
                 <div className="container-button-cart">
                   <button
                     onClick={() =>
@@ -77,13 +84,8 @@ const Cart = () => {
                     }
                     className="button-delete-cart"
                   >
-                    Eliminar
+                    X
                   </button>
-                </div>
-                <div className="container-total-cart">
-                  <p className="total-product-cart">
-                    Total: ${product.price * product.quantity}
-                  </p>
                 </div>
               </div>
             ))
@@ -103,12 +105,15 @@ const Cart = () => {
               <p className="total-cart">
                 $
                 {cart?.reduce((acumulador, product) => {
-                  return acumulador + product.price * product.quantity;
+                  totalUsd = acumulador + product.price * product.quantity;
+                  return totalUsd;
                 }, 0)}
               </p>
             </div>
           )}
         </div>
+
+        <Checkout total={totalUsd} />
       </main>
       {errorCart && <p className="error-cart">{error.mesagge}</p>}
       {error && <p className="error-cart">{error.mesagge}</p>}
