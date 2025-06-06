@@ -31,13 +31,10 @@ const Checkout = ({ total }) => {
       });
   }, [total]);
 
-  if ( loadingPage) return <Loading />;
+  if (loadingPage) return <Loading />;
 
   return (
     <>
-      <header>
-        <h1>Galeria de pagos</h1>
-      </header>
       <main>
         <section>
           <button onClick={() => setMethod("creditCard")}>
@@ -48,7 +45,7 @@ const Checkout = ({ total }) => {
           <button onClick={() => setMethod("zelle")}>Zelle</button>
         </section>
         <section>
-          {method === "creditCard" && <CreditCardForm total={total}/>}
+          {method === "creditCard" && <CreditCardForm total={total} />}
 
           {method === "paypal" && (
             <>
@@ -120,13 +117,27 @@ const Checkout = ({ total }) => {
             </>
           )}
         </section>
-        <section>
-          <p>Subtotal($): {total}$</p>
-          <p>Subtotal(Bs): {total * ves}Bs</p>
-          <p>Envio: 0</p>
-          <p>
-            total: {total}$ | {(total * ves).toFixed(2)}BS
-          </p>
+        <section className="section-pay">
+          <ul className="payment-summary">
+            <li>
+              <span>Subtotal (USD):</span>
+              <span>{total}$</span>
+            </li>
+            <li>
+              <span>Subtotal (Bs):</span>
+              <span>{(total * ves).toFixed(2)} Bs</span>
+            </li>
+            <li>
+              <span>Envío:</span>
+              <span>0$</span>
+            </li>
+            <li className="total">
+              <strong>Total:</strong>
+              <strong>
+                {total}$ | {(total * ves).toFixed(2)} Bs
+              </strong>
+            </li>
+          </ul>
         </section>
       </main>
       {errorPage && <p>{errorPage.mesagge}</p>}

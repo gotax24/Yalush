@@ -1,11 +1,19 @@
 /* Cart.css */
-
 .container-car {
-  padding: 1rem;
-  max-width: 1000px;
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* lado izq y der */
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 2500px;
   margin: 0 auto;
 }
 
+/* RESPONSIVE - para móviles: stack vertical */
+@media (max-width: 768px) {
+  .container-car {
+    grid-template-columns: 1fr;
+  }
+}
 .container-products-cart {
   border-radius: 12px;
   padding: 3rem;
@@ -117,4 +125,17 @@
   color: red;
   text-align: center;
   margin-top: 1rem;
+}
+.container-car {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.checkout-wrapper {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }

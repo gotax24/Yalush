@@ -41,6 +41,11 @@ const Cart = () => {
 
   if (loading) return <Loading />;
 
+  cart?.reduce((acumulador, product) => {
+    totalUsd = acumulador + product.price * product.quantity;
+    return totalUsd;
+  }, 0);
+
   return (
     <>
       <main className="container-car">
@@ -101,19 +106,13 @@ const Cart = () => {
           {cart?.length > 0 && (
             <div className="container-total-cart">
               <h1>Total de productos: {cart?.length}</h1>
-              <h2 className="title-total-cart">Total de la compra</h2>
-              <p className="total-cart">
-                $
-                {cart?.reduce((acumulador, product) => {
-                  totalUsd = acumulador + product.price * product.quantity;
-                  return totalUsd;
-                }, 0)}
-              </p>
             </div>
           )}
         </div>
 
-        <Checkout total={totalUsd} />
+        <div className="checkout-wrapper">
+          <Checkout total={totalUsd} />
+        </div>
       </main>
       {errorCart && <p className="error-cart">{error.mesagge}</p>}
       {error && <p className="error-cart">{error.mesagge}</p>}
