@@ -1,7 +1,6 @@
 const CardInput = ({
   formData,
   functionChange,
-  errors,
   placeholder,
   maxLength,
   name,
@@ -21,7 +20,6 @@ const CardInput = ({
         maxLength={maxLength}
         onChange={functionChange}
       />
-      {errors && <span className="error">{errors}</span>}
     </>
   );
 };

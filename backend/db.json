@@ -45,15 +45,7 @@
           "image": "img-products/virgen.webp"
         }
       ],
-      "cart": [
-        {
-          "productId": 2,
-          "nameProduct": "ojo turco crochet",
-          "price": 1,
-          "image": "img-products/ojo.webp",
-          "quantity": 4
-        }
-      ],
+      "cart": [],
       "id": 3
     },
     {
@@ -410,52 +402,5 @@
       "review": []
     }
   ],
-  "sales": [
-    {
-      "id": 1,
-      "userId": 3,
-      "products": [
-        {
-          "productId": 2,
-          "nameProduct": "ojo turco crochet",
-          "price": 1,
-          "quantity": 4
-        },
-        {
-          "productId": 3,
-          "nameProduct": "virgen maria crochet",
-          "price": 3,
-          "quantity": 2
-        }
-      ],
-      "total": 10,
-      "date": "2025-05-19T15:20:00Z",
-      "paymentStatus": "paid",
-      "email": "ernestobracho70@gmail.com"
-    },
-    {
-      "userId": 3,
-      "products": [
-        {
-          "productId": 2,
-          "nameProduct": "ojo turco crochet",
-          "price": 1,
-          "image": "img-products/ojo.webp",
-          "quantity": 4
-        },
-        {
-          "productId": 3,
-          "nameProduct": "virgen maria crochet",
-          "price": 3,
-          "image": "img-products/virgen.webp",
-          "quantity": 2
-        }
-      ],
-      "date": "2025-06-05",
-      "typePayment": "creditCard",
-      "paymentStatus": "paid",
-      "email": "ernestobracho70@gmail.com",
-      "id": 2
-    }
-  ]
+  "sales": []
 }

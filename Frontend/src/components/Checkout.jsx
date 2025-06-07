@@ -4,7 +4,7 @@ import axios from "axios";
 import CreditCardForm from "./CreditCartForm";
 import "../css/Checkout.css";
 
-const Checkout = ({ total }) => {
+const Checkout = ({ total, setCart }) => {
   const [loadingPage, setLoadingPage] = useState(false);
   const [errorPage, setErrorPage] = useState(null);
   const [method, setMethod] = useState("creditCard");
@@ -20,7 +20,6 @@ const Checkout = ({ total }) => {
       )
       .then((responseCurrencyExchangeInquiry) => {
         setVes(responseCurrencyExchangeInquiry.data.price);
-        console.log(responseCurrencyExchangeInquiry.data.price);
       })
       .catch((e) => {
         console.error(e);
@@ -45,7 +44,9 @@ const Checkout = ({ total }) => {
           <button onClick={() => setMethod("zelle")}>Zelle</button>
         </section>
         <section>
-          {method === "creditCard" && <CreditCardForm total={total} />}
+          {method === "creditCard" && (
+            <CreditCardForm total={total} setCart={setCart} />
+          )}
 
           {method === "paypal" && (
             <>

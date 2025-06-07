@@ -14,7 +14,7 @@ import masterCard from "../assets/masterCard.svg";
 import americanExpress from "../assets/americanExpress.svg";
 import "../css/CreditCardForm.css";
 
-const CreditCardForm = ({ total }) => {
+const CreditCardForm = ({ total, setCart }) => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
   const [cardType, setCardType] = useState();
@@ -77,6 +77,7 @@ const CreditCardForm = ({ total }) => {
 
     // Validar antes de enviar
     if (!validateForm()) {
+      setLoading(false);
       return;
     }
 
@@ -95,11 +96,11 @@ const CreditCardForm = ({ total }) => {
       console.log(response.data);
 
       // Limpiar carrito al completar compra
+      setCart([]);
       setUserContext({
         ...userContext,
         cart: [],
       });
-
       //se envia al usuario la pagina de sucess
       navigate("/success");
     } catch (error) {
@@ -172,7 +173,6 @@ const CreditCardForm = ({ total }) => {
           <CardInput
             formData={formData.cardNumber}
             id={"serialCardNumber"}
-            errors={errors.cardNumber}
             className={"input-field"}
             type={"text"}
             name={"cardNumber"}
@@ -184,6 +184,9 @@ const CreditCardForm = ({ total }) => {
             <img className="img-credit" src={cardType} alt="Tipo de tarjeta" />
           )}
         </div>
+        {errors.cardNumber && (
+          <span className="error">{errors.cardNumber}</span>
+        )}
       </label>
 
       <div className="split">
@@ -198,8 +201,10 @@ const CreditCardForm = ({ total }) => {
             formData={formData.expiryDate}
             maxLength={5}
             functionChange={handleExpiryDateChange}
-            errors={errors.expiryDate}
           />
+          {errors.expiryDate && (
+            <span className="error">{errors.expiryDate}</span>
+          )}
         </label>
 
         <label htmlFor="cvv" className="label">
