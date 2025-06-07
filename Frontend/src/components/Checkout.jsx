@@ -49,19 +49,7 @@ const Checkout = ({ total, setCart }) => {
           )}
 
           {method === "paypal" && (
-            <>
-              <p className="email-shop">Nuestro correo: ejemplo@ejemplo.com</p>
-              <form className="form-paypal">
-                <label htmlFor="paypalEmail">PayPal Correo</label>
-                <input
-                  type="email"
-                  id="paypalEmail"
-                  name="paypalEmail"
-                  placeholder="email@example.com"
-                  required
-                />
-              </form>
-            </>
+          ""
           )}
 
           {method === "pagoMovil" && (

@@ -164,7 +164,7 @@ const CreditCardForm = ({ total, setCart }) => {
             }
           }}
         />
-        {errors.cardName && <span className="error">{errors.cardName}</span>}
+        {errors.cardName && <span style={{ color: "#a11919" }}>{errors.cardName}</span>}
       </label>
 
       <label htmlFor="serialCardNumber" className="label">
@@ -185,7 +185,7 @@ const CreditCardForm = ({ total, setCart }) => {
           )}
         </div>
         {errors.cardNumber && (
-          <span className="error">{errors.cardNumber}</span>
+          <span style={{ color: "#a11919" }}>{errors.cardNumber}</span>
         )}
       </label>
 
@@ -203,7 +203,7 @@ const CreditCardForm = ({ total, setCart }) => {
             functionChange={handleExpiryDateChange}
           />
           {errors.expiryDate && (
-            <span className="error">{errors.expiryDate}</span>
+            <span style={{ color: "#a11919" }}>{errors.expiryDate}</span>
           )}
         </label>
 
@@ -225,7 +225,7 @@ const CreditCardForm = ({ total, setCart }) => {
               }
             }}
           />
-          {errors.cvv && <span className="error">{errors.cvv}</span>}
+          {errors.cvv && <span style={{ color: "#a11919" }}>{errors.cvv}</span>}
         </label>
       </div>
 
@@ -233,7 +233,7 @@ const CreditCardForm = ({ total, setCart }) => {
         {loading ? "Procesando..." : "Pagar con tarjeta de crédito"}
       </button>
 
-      {errors.submit && <p className="error">{errors.submit}</p>}
+      {errors.submit && <p style={{ color: "#a11919" }}>{errors.submit}</p>}
     </form>
   );
 };
