@@ -43,9 +43,24 @@
           "description": "Producto artesanal hecho a mano.",
           "price": 3,
           "image": "img-products/virgen.webp"
+        },
+        {
+          "productId": 7,
+          "nameProduct": "Cerezas",
+          "description": "Regala estas lindas cerezas que combina con todo",
+          "price": 3,
+          "image": "img-products/cerezas.webp"
         }
       ],
-      "cart": [],
+      "cart": [
+        {
+          "productId": 7,
+          "nameProduct": "Cerezas",
+          "price": 3,
+          "image": "img-products/cerezas.webp",
+          "quantity": 1
+        }
+      ],
       "id": 3
     },
     {
@@ -198,7 +213,7 @@
       "image": "img-products/cerezas.webp",
       "description": "Regala estas lindas cerezas que combina con todo",
       "category": "keychains",
-      "stock": 10,
+      "stock": 9,
       "review": []
     },
     {
@@ -402,5 +417,7 @@
       "review": []
     }
   ],
-  "sales": []
+  "sales": [
+    
+  ]
 }

@@ -114,6 +114,7 @@ const AddFormComments = ({
                 maxLength={250}
                 className="input-comment"
                 placeholder="Escriba su opinion del producto"
+                spellCheck="true"
                 onChange={(e) =>
                   HandleInputChange("comment", e.target.value, setReview)
                 }

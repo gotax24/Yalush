@@ -1,19 +1,68 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Loading from "./Loading";
 import axios from "axios";
+import { dateNow } from "../helper/dateNow";
+import { Context } from "../context/UserContext";
+import { useNavigate } from "react-router-dom";
 
-const PaypalForm = () => {
+const PaypalForm = ({ setCart, total }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [emailPaypal, setEmailPaypal] = useState("");
+  const [copy, setCopy] = useState(false);
+  const { userContext, setUserContext } = useContext(Context);
+  const today = dateNow();
+  const navigate = useNavigate();
+  const regexEmail =
+    /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+  const copyEmail = "ejemplo@ejemplo.com";
   const SERVER = import.meta.env.VITE_SERVER_URL;
 
-  const submitSales = () => {
+  const handleCopy = () => {
+    navigator.clipboard.writeText(copyEmail);
+    setCopy(true);
+    setTimeout(() => setCopy(false), 5000);
+  };
+
+  const submitSales = (e) => {
+    e.preventDefault();
     setLoading(true);
     setError(null);
 
-    const newSales = {};
+    if (!regexEmail.test(emailPaypal)) {
+      setLoading(false);
+      setError("Correo invalido");
+      return;
+    }
 
-    axios.post(`${SERVER}/sales`, newSales);
+    const newSales = {
+      userId: userContext.id,
+      products: userContext.cart,
+      total: total,
+      date: today,
+      typePayment: "Paypal",
+      paymentStatus: "paid",
+      email: userContext.email,
+      emailPaypal: emailPaypal,
+    };
+
+    axios
+      .post(`${SERVER}/sales`, newSales)
+      .then((res) => {
+        console.log(res.data);
+        setCart([]);
+        setUserContext({
+          ...userContext,
+          cart: [],
+        });
+        setLoading(false);
+        navigate("/success");
+      })
+      .catch((e) => {
+        console.error(e.message);
+        setError(e.message);
+        setLoading(false);
+      });
   };
 
   if (loading) return <Loading />;
@@ -21,21 +70,28 @@ const PaypalForm = () => {
   return (
     <>
       <p className="email-shop">Nuestro correo: ejemplo@ejemplo.com</p>
+      <button onClick={handleCopy}>
+        {copy ? "¡Copiado!" : "Copiar correo"}
+      </button>
       <form className="form-paypal">
-        <label htmlFor="paypalEmail">PayPal Correo</label>
-        <input
-          type="email"
-          id="paypalEmail"
-          name="paypalEmail"
-          placeholder="email@example.com"
-          required
-        />
+        <label htmlFor="paypalEmail" className="label-paypal">
+          PayPal Correo:
+          <input
+            type="email"
+            id="paypalEmail"
+            name="paypalEmail"
+            placeholder="email@example.com"
+            className="input-paypal"
+            onChange={(e) => setEmailPaypal(e.target.value)}
+            required
+          />
+        </label>
 
-        <button onClick={() => submitSales}>
+        <button className="button-paypal" onClick={submitSales}>
           {loading ? "Pagando.." : "Pagar con Paypal"}
         </button>
 
-        {error && <span className="error">{error}</span>}
+        {error && <span className="error-paypal">{error}</span>}
       </form>
     </>
   );

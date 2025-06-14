@@ -84,7 +84,7 @@ const CreditCardForm = ({ total, setCart }) => {
     const newSales = {
       userId: userContext.id,
       products: userContext.cart,
-      total: userContext.total,
+      total: total,
       date: today,
       typePayment: "creditCard",
       paymentStatus: "paid",

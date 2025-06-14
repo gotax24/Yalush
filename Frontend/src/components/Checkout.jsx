@@ -3,6 +3,7 @@ import Loading from "./Loading";
 import axios from "axios";
 import CreditCardForm from "./CreditCartForm";
 import "../css/Checkout.css";
+import PaypalForm from "./PaypalForm";
 
 const Checkout = ({ total, setCart }) => {
   const [loadingPage, setLoadingPage] = useState(false);
@@ -49,7 +50,7 @@ const Checkout = ({ total, setCart }) => {
           )}
 
           {method === "paypal" && (
-          ""
+            <PaypalForm setCart={setCart} total={total} />
           )}
 
           {method === "pagoMovil" && (
