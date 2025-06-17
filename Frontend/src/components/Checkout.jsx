@@ -4,12 +4,14 @@ import axios from "axios";
 import CreditCardForm from "./CreditCartForm";
 import "../css/Checkout.css";
 import PaypalForm from "./PaypalForm";
+import PagoMovil from "./PagoMovil";
 
 const Checkout = ({ total, setCart }) => {
   const [loadingPage, setLoadingPage] = useState(false);
   const [errorPage, setErrorPage] = useState(null);
   const [method, setMethod] = useState("creditCard");
   const [ves, setVes] = useState(0);
+  const [userPay, setUserPay] = useState({});
 
   useEffect(() => {
     setLoadingPage(true);
@@ -54,47 +56,7 @@ const Checkout = ({ total, setCart }) => {
           )}
 
           {method === "pagoMovil" && (
-            <>
-              <div className="container-ves">
-                <p className="tasa-bank">Nuestra tasa es: {ves}Bs</p>
-                <p className="title-pagoMovil">Nuestros pago movil</p>
-              </div>
-              <div className="info-mercantil">
-                <img
-                  className="Logo-Banco"
-                  src="https://mir-s3-cdn-cf.behance.net/projects/404/ae31f383523705.Y3JvcCw4MDgsNjMyLDAsMA.png"
-                  alt="Logo de Mercantil"
-                />
-                <p className="info-bank">Banco Mercantil</p>
-                <p className="info-bank">J-00000000000</p>
-                <p className="info-bank">Tel: 04241111111</p>
-              </div>
-              <div className="container-total">
-                <p className="total-usd">Monto total en bs = {ves * total}Bs</p>
-              </div>
-              <div className="container-report">
-                <select name="" id="">
-                  <option value="0424">0424</option>
-                  <option value="0414">0414</option>
-                  <option value="0412">0412</option>
-                  <option value="0426">0426</option>
-                  <option value="0416">0416</option>
-                </select>
-                <input
-                  type="number"
-                  placeholder="1234567"
-                  maxLength={7}
-                  minLength={7}
-                  required
-                  className="cell-phone"
-                />
-                <input
-                  type="number"
-                  placeholder="Numero de referencia"
-                  className="number-ref"
-                />
-              </div>
-            </>
+            <PagoMovil total={total} setCart={setCart} />
           )}
 
           {method === "zelle" && (
@@ -109,6 +71,10 @@ const Checkout = ({ total, setCart }) => {
         </section>
         <section className="section-pay">
           <ul className="payment-summary">
+            <li>
+              <span>Tasa Bancaria(BCV):</span>
+              <span>{ves}Bs</span>
+            </li>
             <li>
               <span>Subtotal (USD):</span>
               <span>{total}$</span>

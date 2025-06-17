@@ -4,25 +4,20 @@ import axios from "axios";
 import { dateNow } from "../helper/dateNow";
 import { Context } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { useCopy } from "../hooks/useCopy";
+import "../css/PaypalForm.css";
 
 const PaypalForm = ({ setCart, total }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [emailPaypal, setEmailPaypal] = useState("");
-  const [copy, setCopy] = useState(false);
   const { userContext, setUserContext } = useContext(Context);
+  const { copied, copy } = useCopy();
   const today = dateNow();
   const navigate = useNavigate();
   const regexEmail =
     /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-  const copyEmail = "ejemplo@ejemplo.com";
   const SERVER = import.meta.env.VITE_SERVER_URL;
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(copyEmail);
-    setCopy(true);
-    setTimeout(() => setCopy(false), 5000);
-  };
 
   const submitSales = (e) => {
     e.preventDefault();
@@ -70,8 +65,8 @@ const PaypalForm = ({ setCart, total }) => {
   return (
     <>
       <p className="email-shop">Nuestro correo: ejemplo@ejemplo.com</p>
-      <button onClick={handleCopy}>
-        {copy ? "¡Copiado!" : "Copiar correo"}
+      <button onClick={() => copy("ejemplo@ejemplo.com")}>
+        {copied ? "¡Copiado!" : "Copiar correo"}
       </button>
       <form className="form-paypal">
         <label htmlFor="paypalEmail" className="label-paypal">
