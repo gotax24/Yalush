@@ -3,6 +3,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../context/UserContext";
 import { dateNow } from "../helper/dateNow";
+import HandleInputChange from "../helper/HandleInputChange";
 
 const PagoMovil = ({ total, setCart }) => {
   const [loading, setLoading] = useState(false);
@@ -11,11 +12,64 @@ const PagoMovil = ({ total, setCart }) => {
   const today = dateNow();
   const SERVER = import.meta.env.VITE_SERVER_URL;
   const navigate = useNavigate();
+  const [userPay, setUserPay] = useState({ cellphone: "", refNumber: "" });
+  const [phoneParts, setPhoneParts] = useState({ code: "", phone: "" });
 
+  const handlePhoneParts = (e) => {
+    const { name, value } = e.target;
+
+    // Validar solo dígitos
+    if (name === "phone" && !/^\d*$/.test(value)) return;
+
+    // Si son más de 7 dígitos, no hacer nada
+    if (name === "phone" && value.length > 7 || value.length < 7) {
+      setError("Solo se permiten 7 dígitos");
+      return;
+    }
+
+    setError(null); // Limpiar error al corregir
+
+    const newPhoneParts = {
+      ...phoneParts,
+      [name]: value,
+    };
+
+    setPhoneParts(newPhoneParts);
+
+    // Combinar número completo solo cuando hay ambos
+    if (newPhoneParts.code && newPhoneParts.phone.length === 7) {
+      const phoneFullNumber = `${newPhoneParts.code}${newPhoneParts.phone}`;
+      setUserPay((prev) => ({
+        ...prev,
+        cellphone: phoneFullNumber,
+      }));
+    }
+  };
   const submitSales = (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
+
+    if (
+      userPay.cellphone.length !== 11 ||
+      !/^\d{11}$/.test(userPay.cellphone)
+    ) {
+      setError("El número de teléfono debe tener 11 dígitos.");
+      setLoading(false);
+      return;
+    }
+
+    if (
+      !userPay.refNumber ||
+      userPay.refNumber.length < 6 ||
+      !/^\d+$/.test(userPay.refNumber)
+    ) {
+      setError("El número de referencia debe tener al menos 6 dígitos.");
+      setLoading(false);
+      return;
+    }
+
+    console.log(userPay);
 
     const newSales = {
       userId: userContext.id,
@@ -23,6 +77,8 @@ const PagoMovil = ({ total, setCart }) => {
       total: total,
       date: today,
       typePayment: "PagoMovil",
+      cellphone: userPay.cellphone,
+      refNumber: userPay.refNumber,
       paymentStatus: "paid",
       email: userContext.email,
     };
@@ -61,9 +117,16 @@ const PagoMovil = ({ total, setCart }) => {
         </section>
 
         <label>
-          Numero de telefono: 
-          <select name="code" required>
-            <option value="">Seleccione</option>
+          Numero de telefono:
+          <select
+            name="code"
+            required
+            defaultValue={""}
+            onChange={handlePhoneParts}
+          >
+            <option value="" disabled>
+              Seleccione
+            </option>
             <option value="0424">0424</option>
             <option value="0414">0414</option>
             <option value="0412">0412</option>
@@ -71,23 +134,27 @@ const PagoMovil = ({ total, setCart }) => {
             <option value="0416">0416</option>
           </select>
           <input
-            type="text"
+            type="number"
             name="phone"
             placeholder="1234567"
-            pattern="\d{7}"
+            maxLength={7}
             required
             className="cell-phone"
+            onChange={handlePhoneParts}
           />
         </label>
 
         <label>
           Número de referencia:
           <input
-            type="text"
+            type="number"
             name="refNumber"
             placeholder="Número de referencia"
             required
             className="number-ref"
+            onChange={(e) =>
+              HandleInputChange("refNumber", Number(e.target.value), setUserPay)
+            }
           />
         </label>
 

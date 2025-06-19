@@ -11,7 +11,6 @@ const Checkout = ({ total, setCart }) => {
   const [errorPage, setErrorPage] = useState(null);
   const [method, setMethod] = useState("creditCard");
   const [ves, setVes] = useState(0);
-  const [userPay, setUserPay] = useState({});
 
   useEffect(() => {
     setLoadingPage(true);

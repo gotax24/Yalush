@@ -418,6 +418,25 @@
     }
   ],
   "sales": [
-    
+    {
+      "userId": 3,
+      "products": [
+        {
+          "productId": 7,
+          "nameProduct": "Cerezas",
+          "price": 3,
+          "image": "img-products/cerezas.webp",
+          "quantity": 1
+        }
+      ],
+      "total": 3,
+      "date": "2025-06-19",
+      "typePayment": "PagoMovil",
+      "cellphone": "04244554651",
+      "refNumber": 2123132123,
+      "paymentStatus": "paid",
+      "email": "ernestobracho70@gmail.com",
+      "id": 1
+    }
   ]
 }
