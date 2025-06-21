@@ -1,38 +1,17 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useDailyDollarRate } from "../hooks/useDollarToday";
 import Loading from "./Loading";
-import axios from "axios";
 import CreditCardForm from "./CreditCartForm";
-import "../css/Checkout.css";
 import PaypalForm from "./PaypalForm";
 import PagoMovil from "./PagoMovil";
+import ZelleForm from "./ZelleForm";
+import "../css/Checkout.css";
 
 const Checkout = ({ total, setCart }) => {
-  const [loadingPage, setLoadingPage] = useState(false);
-  const [errorPage, setErrorPage] = useState(null);
   const [method, setMethod] = useState("creditCard");
-  const [ves, setVes] = useState(0);
+  const { ves, loading: loadingVes, error: errorVes } = useDailyDollarRate();
 
-  useEffect(() => {
-    setLoadingPage(true);
-    setErrorPage(null);
-
-    axios
-      .get(
-        `https://pydolarve.org/api/v2/dollar?page=bcv&monitor=mercantil_banco&format_date=default&rounded_price=true'`
-      )
-      .then((responseCurrencyExchangeInquiry) => {
-        setVes(responseCurrencyExchangeInquiry.data.price);
-      })
-      .catch((e) => {
-        console.error(e);
-        setErrorPage(e.mesagge);
-      })
-      .finally(() => {
-        setLoadingPage(false);
-      });
-  }, [total]);
-
-  if (loadingPage) return <Loading />;
+  if (loadingVes) return <Loading />;
 
   return (
     <>
@@ -58,15 +37,7 @@ const Checkout = ({ total, setCart }) => {
             <PagoMovil total={total} setCart={setCart} />
           )}
 
-          {method === "zelle" && (
-            <>
-              <div className="container-main">
-                <p>Nuestro correo: ejemplo@ejemplo.com</p>
-                <input type="text" placeholder="Titular de la cuenta" />
-                <input type="text" placeholder="Referencia del zelle" />
-              </div>
-            </>
-          )}
+          {method === "zelle" && <ZelleForm total={total} setCart={setCart} />}
         </section>
         <section className="section-pay">
           <ul className="payment-summary">
@@ -94,8 +65,8 @@ const Checkout = ({ total, setCart }) => {
             </li>
           </ul>
         </section>
+        {errorVes && <p>{errorVes}</p>}
       </main>
-      {errorPage && <p>{errorPage.mesagge}</p>}
     </>
   );
 };

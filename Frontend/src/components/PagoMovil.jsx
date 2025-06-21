@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Context } from "../context/UserContext";
 import { dateNow } from "../helper/dateNow";
 import HandleInputChange from "../helper/HandleInputChange";
+import "../css/PagoMovil.css";
 
 const PagoMovil = ({ total, setCart }) => {
   const [loading, setLoading] = useState(false);

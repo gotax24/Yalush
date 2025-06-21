@@ -1,18 +1,26 @@
 import { Context } from "../context/UserContext";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import "../css/Success.css";
 
 const Success = () => {
   const { userContext } = useContext(Context);
   const name = userContext?.name || "Usuario";
+  const navigate = useNavigate();
 
   return (
-    <>
-      <div>
-        <h1>¡Pago exitoso!</h1>
-        <h2>Muchas gracias por su compra {name}</h2>
-        <p>Se envio un correo a su email con la confirmacion de su compra</p>
+    <div className="success-container">
+      <div className="success-card">
+        <h1 className="title-success">¡Pago exitoso!</h1>
+        <h2 className="sub-title-success">Gracias por tu compra, {name} 🎉</h2>
+        <p className="p-success">
+          Hemos enviado un correo de confirmación a tu dirección registrada.
+        </p>
+        <button className="button-success" onClick={() => navigate("/")}>
+          Volver al inicio
+        </button>
       </div>
-    </>
+    </div>
   );
 };
 

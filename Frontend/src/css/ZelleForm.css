@@ -1,0 +1,70 @@
+.conatiner-zelle {
+  background-color: #f5efff;
+  max-width: 460px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.example-email {
+  font-weight: 600;
+  color: #2e073f;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.button-copy-zelle {
+  align-self: flex-start;
+  background-color: #ad49e1;
+  color: #fff;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button-copy-zelle:hover {
+  background-color: #7a1cac;
+}
+
+.input-zelle {
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #cdc1ff;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input-zelle:focus {
+  border-color: #a294f9;
+}
+
+.button-zelle {
+  background-color: #ad49e1;
+  padding: 0.75rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  border: none;
+  transition: background-color 0.3s;
+}
+
+.button-zelle:hover {
+  background-color: #7a1cac;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+  text-align: center;
+}
