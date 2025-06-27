@@ -1,5 +1,5 @@
 import { Context } from "../context/UserContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/Success.css";
 
@@ -7,6 +7,14 @@ const Success = () => {
   const { userContext } = useContext(Context);
   const name = userContext?.name || "Usuario";
   const navigate = useNavigate();
+
+ useEffect(() => {
+    const timeout = setTimeout(() => {
+      navigate("/");
+    }, 3000);
+    return () => clearTimeout(timeout); // Limpia el timeout si el componente se desmonta
+  }, [navigate]);
+
 
   return (
     <div className="success-container">

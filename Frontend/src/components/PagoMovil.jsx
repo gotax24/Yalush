@@ -46,6 +46,7 @@ const PagoMovil = ({ total, setCart }) => {
       }));
     }
   };
+  
   const submitSales = (e) => {
     e.preventDefault();
     setLoading(true);
