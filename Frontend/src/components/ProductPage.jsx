@@ -5,13 +5,12 @@ import { useContext } from "react";
 import { Context } from "../context/UserContext";
 import Loading from "./Loading.jsx";
 import axios from "axios";
-import FirstLetterUpper from "../helper/FirstLetterUpper.js";
-import Translator from "../helper/Translator.js";
+import FirstLetterUpper from "../helpers/FirstLetterUpper.js";
+import Translator from "../helpers/Translator.js";
 import Comments from "./Comments.jsx";
 import AddFormComments from "./AddFormComments.jsx";
 import Modal from "./Modal.jsx";
 import "../css/ProductPage.css";
-import FavButtonAddFavoriteFavorite from "./ButtonAddFavorite.jsx";
 import ButtonAddFavorite from "./ButtonAddFavorite.jsx";
 import ButtonAddCart from "./ButtonAddCart.jsx";
 

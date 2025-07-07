@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from "react";
 import { Context } from "../context/UserContext";
 import { Link } from "react-router-dom";
-import FirstLetterUpper from "../helper/FirstLetterUpper.js";
+import FirstLetterUpper from "../helpers/FirstLetterUpper.js";
 import sadPerson from "../assets/sadPerson.svg";
 import { motion, AnimatePresence } from "framer-motion";
 import Loading from "./Loading.jsx";
-import { deleteProduct } from "../helper/DeleteProduct.js";
+import { deleteProduct } from "../helpers/DeleteProduct.js";
 import "../css/Fav.css";
 
 const FavPage = () => {

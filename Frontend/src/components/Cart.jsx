@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "../context/UserContext.jsx";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import FirstLetterUpper from "../helper/FirstLetterUpper.js";
+import FirstLetterUpper from "../helpers/FirstLetterUpper.js";
 import sadPerson from "../assets/sadPerson.svg";
 import Loading from "./Loading.jsx";
 import "../css/Cart.css";

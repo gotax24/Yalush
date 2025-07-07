@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import iconComment from "../assets/iconComment.svg";
-import HandleInputChange from "../helper/HandleInputChange";
+import HandleInputChange from "../helpers/HandleInputChange";
 import "../css/AddCommentForm.css";
 
 const AddFormComments = ({

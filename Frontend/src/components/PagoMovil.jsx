@@ -2,8 +2,8 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../context/UserContext";
-import { dateNow } from "../helper/dateNow";
-import HandleInputChange from "../helper/HandleInputChange";
+import { dateNow } from "../helpers/dateNow";
+import HandleInputChange from "../helpers/HandleInputChange";
 import "../css/PagoMovil.css";
 
 const PagoMovil = ({ total, setCart }) => {

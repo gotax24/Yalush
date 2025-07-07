@@ -1,14 +1,14 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../context/UserContext";
-import { dateNow } from "../helper/dateNow.js";
+import { dateNow } from "../helpers/dateNow.js";
 import { formatCardNumber } from "../utils/formatCardNumber.js";
 import { formatExpiryDate } from "../utils/formatExpiryDate.js";
 import { luhnCheck } from "../utils/Lunhn.js";
 import { isValidExpiryDate } from "../utils/isValidDateCard.js";
 import CardInput from "./CardInputs.jsx";
 import axios from "axios";
-import HandleInputChange from "../helper/HandleInputChange.js";
+import HandleInputChange from "../helpers/HandleInputChange.js";
 import visa from "../assets/visa.svg";
 import masterCard from "../assets/masterCard.svg";
 import americanExpress from "../assets/americanExpress.svg";

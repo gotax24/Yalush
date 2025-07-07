@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import FirstLetterUpper from "../helper/FirstLetterUpper.js";
-import  Translator  from "../helper/Translator.js";
+import FirstLetterUpper from "../helpers/FirstLetterUpper.js";
+import  Translator  from "../helpers/Translator.js";
 import "../css/Product.css";
 
 const Product = ({ id, name, image, price, category }) => {

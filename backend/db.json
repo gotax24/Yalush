@@ -54,14 +54,15 @@
       ],
       "cart": [
         {
-          "productId": 7,
-          "nameProduct": "Cerezas",
-          "price": 3,
-          "image": "img-products/cerezas.webp",
-          "quantity": 1
+          "productId": 1,
+          "nameProduct": "spiderman Crochet",
+          "price": 4,
+          "image": "img-products/spiderman.webp",
+          "quantity": 2
         }
       ],
-      "id": 3
+      "id": 3,
+      "favotites": []
     },
     {
       "clerkId": "user_2v6XdA1oElIDhFiDcpIYmJ5hK7Y",
@@ -120,7 +121,7 @@
       "image": "img-products/spiderman.webp",
       "description": "Bonito Spiderman Crochet hecho a mano con hilo de algodón, ideal para regalar a los niños o decorar la habitación.",
       "category": "keychains",
-      "stock": 20,
+      "stock": 13,
       "review": [
         {
           "userId": 4,
@@ -437,6 +438,64 @@
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
       "id": 1
+    },
+    {
+      "userId": 3,
+      "products": [
+        {
+          "productId": 1,
+          "nameProduct": "spiderman Crochet",
+          "price": 4,
+          "image": "img-products/spiderman.webp",
+          "quantity": 2
+        }
+      ],
+      "total": 8,
+      "date": "2025-07-07",
+      "typePayment": "Paypal",
+      "paymentStatus": "paid",
+      "email": "ernestobracho70@gmail.com",
+      "emailPaypal": "ejemplo@ejemplo.com",
+      "id": 2
+    },
+    {
+      "userId": 3,
+      "products": [
+        {
+          "productId": 1,
+          "nameProduct": "spiderman Crochet",
+          "price": 4,
+          "image": "img-products/spiderman.webp",
+          "quantity": 2
+        }
+      ],
+      "total": 8,
+      "date": "2025-07-07",
+      "typePayment": "Paypal",
+      "paymentStatus": "paid",
+      "email": "ernestobracho70@gmail.com",
+      "emailPaypal": "ejemplo@ejemplo.com",
+      "id": 3
+    },
+    {
+      "userId": 3,
+      "products": [
+        {
+          "productId": 1,
+          "nameProduct": "spiderman Crochet",
+          "price": 4,
+          "image": "img-products/spiderman.webp",
+          "quantity": 2
+        }
+      ],
+      "total": 8,
+      "date": "2025-07-07",
+      "typePayment": "PagoMovil",
+      "cellphone": "ernesto",
+      "refNumber": "dsahjdaks",
+      "paymentStatus": "paid",
+      "email": "ernestobracho70@gmail.com",
+      "id": 4
     }
   ]
 }

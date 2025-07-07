@@ -1,10 +1,10 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../context/UserContext";
-import { dateNow } from "../helper/dateNow";
+import { dateNow } from "../helpers/dateNow";
 import { useCopy } from "../hooks/useCopy";
 import axios from "axios";
-import HandleInputChange from "../helper/HandleInputChange";
+import HandleInputChange from "../helpers/HandleInputChange";
 import "../css/ZelleForm.css";
 
 const ZelleForm = ({ total, setCart }) => {

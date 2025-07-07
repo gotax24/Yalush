@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import Loading from "./Loading";
 import axios from "axios";
-import { dateNow } from "../helper/dateNow";
+import { dateNow } from "../helpers/dateNow";
 import { Context } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
 import { useCopy } from "../hooks/useCopy";
