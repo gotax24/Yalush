@@ -26,7 +26,7 @@ const CreditCardForm = ({ total, setCart }) => {
     amount: total,
   });
 
-  const { userContext, setUserContext } = useContext(Context);
+  const { userContext } = useContext(Context);
   const SERVER = import.meta.env.VITE_SERVER_URL;
   const today = dateNow();
   const navigate = useNavigate();
@@ -97,10 +97,6 @@ const CreditCardForm = ({ total, setCart }) => {
 
       // Limpiar carrito al completar compra
       setCart([]);
-      setUserContext({
-        ...userContext,
-        cart: [],
-      });
       //se envia al usuario la pagina de sucess
       navigate("/success");
     } catch (error) {

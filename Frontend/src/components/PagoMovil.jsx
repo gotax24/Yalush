@@ -9,7 +9,7 @@ import "../css/PagoMovil.css";
 const PagoMovil = ({ total, setCart }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const { userContext, setUserContext } = useContext(Context);
+  const { userContext } = useContext(Context);
   const today = dateNow();
   const SERVER = import.meta.env.VITE_SERVER_URL;
   const navigate = useNavigate();
@@ -90,10 +90,6 @@ const PagoMovil = ({ total, setCart }) => {
       .then((res) => {
         console.log(res.data);
         setCart([]);
-        setUserContext({
-          ...userContext,
-          cart: [],
-        });
         setLoading(false);
         navigate("/success");
       })

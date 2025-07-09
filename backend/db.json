@@ -54,11 +54,25 @@
       ],
       "cart": [
         {
+          "productId": 3,
+          "nameProduct": "virgen maria crochet",
+          "price": 3,
+          "image": "img-products/virgen.webp",
+          "quantity": 1
+        },
+        {
           "productId": 1,
           "nameProduct": "spiderman Crochet",
           "price": 4,
           "image": "img-products/spiderman.webp",
-          "quantity": 2
+          "quantity": 1
+        },
+        {
+          "productId": 7,
+          "nameProduct": "Cerezas",
+          "price": 3,
+          "image": "img-products/cerezas.webp",
+          "quantity": 1
         }
       ],
       "id": 3,
@@ -121,7 +135,7 @@
       "image": "img-products/spiderman.webp",
       "description": "Bonito Spiderman Crochet hecho a mano con hilo de algodón, ideal para regalar a los niños o decorar la habitación.",
       "category": "keychains",
-      "stock": 13,
+      "stock": 12,
       "review": [
         {
           "userId": 4,
@@ -168,7 +182,7 @@
       "image": "img-products/virgen.webp",
       "description": "Producto artesanal hecho a mano.",
       "category": "keychains",
-      "stock": 3,
+      "stock": 2,
       "review": [
         {
           "userId": 4,
@@ -214,7 +228,7 @@
       "image": "img-products/cerezas.webp",
       "description": "Regala estas lindas cerezas que combina con todo",
       "category": "keychains",
-      "stock": 9,
+      "stock": 8,
       "review": []
     },
     {
@@ -496,6 +510,248 @@
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
       "id": 4
+    },
+    {
+      "userId": 3,
+      "products": [
+        {
+          "productId": 1,
+          "nameProduct": "spiderman Crochet",
+          "price": 4,
+          "image": "img-products/spiderman.webp",
+          "quantity": 2
+        }
+      ],
+      "total": 8,
+      "date": "2025-07-07",
+      "typePayment": "Paypal",
+      "paymentStatus": "paid",
+      "email": "ernestobracho70@gmail.com",
+      "emailPaypal": "ejemplo@ejemplo.com",
+      "id": 5
+    },
+    {
+      "userId": 3,
+      "products": [
+        {
+          "productId": 1,
+          "nameProduct": "spiderman Crochet",
+          "price": 4,
+          "image": "img-products/spiderman.webp",
+          "quantity": 2
+        }
+      ],
+      "total": 8,
+      "date": "2025-07-07",
+      "typePayment": "Paypal",
+      "paymentStatus": "paid",
+      "email": "ernestobracho70@gmail.com",
+      "emailPaypal": "ejemplo@ejemplo.com",
+      "id": 6
+    },
+    {
+      "userId": 3,
+      "products": [],
+      "total": 0,
+      "date": "2025-07-07",
+      "typePayment": "Paypal",
+      "paymentStatus": "paid",
+      "email": "ernestobracho70@gmail.com",
+      "emailPaypal": "ejbr@yalush.com",
+      "id": 7
+    },
+    {
+      "userId": 3,
+      "products": [
+        {
+          "productId": 1,
+          "nameProduct": "spiderman Crochet",
+          "price": 4,
+          "image": "img-products/spiderman.webp",
+          "quantity": 2
+        }
+      ],
+      "total": 8,
+      "date": "2025-07-07",
+      "typePayment": "Paypal",
+      "paymentStatus": "paid",
+      "email": "ernestobracho70@gmail.com",
+      "emailPaypal": "ejbr@yalush.com",
+      "id": 8
+    },
+    {
+      "userId": 3,
+      "products": [
+        {
+          "productId": 1,
+          "nameProduct": "spiderman Crochet",
+          "price": 4,
+          "image": "img-products/spiderman.webp",
+          "quantity": 2
+        }
+      ],
+      "total": 8,
+      "date": "2025-07-07",
+      "typePayment": "PagoMovil",
+      "cellphone": "Ernesto",
+      "refNumber": "asffasdf",
+      "paymentStatus": "paid",
+      "email": "ernestobracho70@gmail.com",
+      "id": 9
+    },
+    {
+      "userId": 3,
+      "products": [
+        {
+          "productId": 1,
+          "nameProduct": "spiderman Crochet",
+          "price": 4,
+          "image": "img-products/spiderman.webp",
+          "quantity": 2
+        }
+      ],
+      "total": 8,
+      "date": "2025-07-09",
+      "typePayment": "Paypal",
+      "paymentStatus": "paid",
+      "email": "ernestobracho70@gmail.com",
+      "emailPaypal": "ejbr@yalush.com",
+      "id": 10
+    },
+    {
+      "userId": 3,
+      "products": [
+        {
+          "productId": 1,
+          "nameProduct": "spiderman Crochet",
+          "price": 4,
+          "image": "img-products/spiderman.webp",
+          "quantity": 2
+        }
+      ],
+      "total": 8,
+      "date": "2025-07-09",
+      "typePayment": "Paypal",
+      "paymentStatus": "paid",
+      "email": "ernestobracho70@gmail.com",
+      "emailPaypal": "ejbr@yalush.com",
+      "id": 11
+    },
+    {
+      "userId": 3,
+      "products": [
+        {
+          "productId": 1,
+          "nameProduct": "spiderman Crochet",
+          "price": 4,
+          "image": "img-products/spiderman.webp",
+          "quantity": 2
+        }
+      ],
+      "total": 8,
+      "date": "2025-07-09",
+      "typePayment": "Paypal",
+      "paymentStatus": "paid",
+      "email": "ernestobracho70@gmail.com",
+      "emailPaypal": "ejemplo@ejemplo.com",
+      "id": 12
+    },
+    {
+      "userId": 3,
+      "products": [
+        {
+          "productId": 1,
+          "nameProduct": "spiderman Crochet",
+          "price": 4,
+          "image": "img-products/spiderman.webp",
+          "quantity": 2
+        }
+      ],
+      "total": 8,
+      "date": "2025-07-09",
+      "typePayment": "Paypal",
+      "paymentStatus": "paid",
+      "email": "ernestobracho70@gmail.com",
+      "emailPaypal": "ejemplo@ejemplo.com",
+      "id": 13
+    },
+    {
+      "userId": 3,
+      "products": [
+        {
+          "productId": 1,
+          "nameProduct": "spiderman Crochet",
+          "price": 4,
+          "image": "img-products/spiderman.webp",
+          "quantity": 2
+        },
+        {
+          "productId": 3,
+          "nameProduct": "virgen maria crochet",
+          "price": 3,
+          "image": "img-products/virgen.webp",
+          "quantity": 1
+        }
+      ],
+      "total": 3,
+      "date": "2025-07-09",
+      "typePayment": "Paypal",
+      "paymentStatus": "paid",
+      "email": "ernestobracho70@gmail.com",
+      "emailPaypal": "ejemplo@ejemplo.com",
+      "id": 14
+    },
+    {
+      "userId": 3,
+      "products": [
+        {
+          "productId": 3,
+          "nameProduct": "virgen maria crochet",
+          "price": 3,
+          "image": "img-products/virgen.webp",
+          "quantity": 1
+        }
+      ],
+      "total": 3,
+      "date": "2025-07-09",
+      "typePayment": "Paypal",
+      "paymentStatus": "paid",
+      "email": "ernestobracho70@gmail.com",
+      "emailPaypal": "ejemplo@ejemplo.com",
+      "id": 15
+    },
+    {
+      "userId": 3,
+      "products": [
+        {
+          "productId": 3,
+          "nameProduct": "virgen maria crochet",
+          "price": 3,
+          "image": "img-products/virgen.webp",
+          "quantity": 1
+        },
+        {
+          "productId": 1,
+          "nameProduct": "spiderman Crochet",
+          "price": 4,
+          "image": "img-products/spiderman.webp",
+          "quantity": 1
+        },
+        {
+          "productId": 7,
+          "nameProduct": "Cerezas",
+          "price": 3,
+          "image": "img-products/cerezas.webp",
+          "quantity": 1
+        }
+      ],
+      "total": 10,
+      "date": "2025-07-09",
+      "typePayment": "Paypal",
+      "paymentStatus": "paid",
+      "email": "ernestobracho70@gmail.com",
+      "emailPaypal": "ejemplo@ejemplo.com",
+      "id": 16
     }
   ]
 }

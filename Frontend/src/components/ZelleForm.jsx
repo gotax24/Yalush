@@ -11,7 +11,7 @@ const ZelleForm = ({ total, setCart }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [userPay, setUserPay] = useState({ owner: "", refNumber: "" });
-  const { userContext, setUserContext } = useContext(Context);
+  const { userContext } = useContext(Context);
   const { copied, copy } = useCopy();
   const today = dateNow();
   const SERVER = import.meta.env.VITE_SERVER_URL;
@@ -45,10 +45,6 @@ const ZelleForm = ({ total, setCart }) => {
       .then((res) => {
         console.log(res.data);
         setCart([]);
-        setUserContext({
-          ...userContext,
-          cart: [],
-        });
         setLoading(false);
         navigate("/success");
       })

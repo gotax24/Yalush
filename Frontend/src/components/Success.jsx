@@ -1,41 +1,66 @@
 import { useContext, useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../context/UserContext";
-import { sendPurchaseEmail } from "../helpers/sendEmail";
+import { sendPurchaseEmail } from "../helpers/SendPurchaseEmail.js";
 import Loading from "../components/Loading.jsx";
 import "../css/Success.css";
 
 const Success = () => {
   const { userContext, setUserContext } = useContext(Context);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true); // ⬅️ Empieza en "cargando"
-  const hasSentEmail = useRef(false); // ⬅️ Bandera para evitar múltiples envíos
+  const [loading, setLoading] = useState(true);
+  const emailSent = useRef(false); // 🔒 Evita múltiples envíos
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Solo continuamos si userContext está cargado
-    if (!userContext) return;
+    // <-- AGREGA ESTE CONSOLE.LOG PARA DEPURAR
+    console.log("Revisando useEffect:", {
+      contextExists: !!userContext,
+      cart: userContext?.cart,
+      cartLength: userContext?.cart?.length,
+      emailAlreadySent: emailSent.current,
+    });
 
-    // Ocultamos el loading cuando el contexto ya está disponible
-    setLoading(false);
+    // Cuando el contexto esté listo, quitamos el "loading"
+    if (userContext) {
+      setLoading(false);
+    }
 
-    // Enviamos el correo solo si hay un carrito válido y no se ha enviado aún
+    // Enviar solo si hay carrito y no se ha enviado aún
     if (
+      userContext &&
       userContext.cart &&
       userContext.cart.length > 0 &&
-      !hasSentEmail.current
+      !emailSent.current
     ) {
-      hasSentEmail.current = true;
+      // ...el resto de tu código sigue igual...
+    }
+  }, [userContext, setUserContext]);
+
+  useEffect(() => {
+    // Cuando el contexto esté listo, quitamos el "loading"
+    if (userContext) {
+      setLoading(false);
+    }
+
+    // Enviar solo si hay carrito y no se ha enviado aún
+    if (
+      userContext &&
+      userContext.cart &&
+      userContext.cart.length > 0 &&
+      !emailSent.current
+    ) {
+      emailSent.current = true; // 🛑 Evita nuevos intentos
 
       const total = userContext.cart.reduce(
-        (accumulator, product) =>
-          accumulator + product.price * product.quantity,
+        (acc, product) => acc + product.price * product.quantity,
         0
       );
 
       sendPurchaseEmail(userContext, total)
         .then((response) => {
           console.log("SUCCESS! Email sent.", response.status, response.text);
+          // Vaciamos el carrito para que no se reenvíe si recarga la página
           setUserContext({
             ...userContext,
             cart: [],

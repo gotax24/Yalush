@@ -11,7 +11,7 @@ const PaypalForm = ({ setCart, total }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [emailPaypal, setEmailPaypal] = useState("");
-  const { userContext, setUserContext } = useContext(Context);
+  const { userContext } = useContext(Context);
   const { copied, copy } = useCopy();
   const today = dateNow();
   const navigate = useNavigate();
@@ -46,10 +46,6 @@ const PaypalForm = ({ setCart, total }) => {
       .then((res) => {
         console.log(res.data);
         setCart([]);
-        setUserContext({
-          ...userContext,
-          cart: [],
-        });
         setLoading(false);
         navigate("/success");
       })
