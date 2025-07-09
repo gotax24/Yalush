@@ -2,6 +2,7 @@ import { useContext, useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../context/UserContext";
 import { sendPurchaseEmail } from "../helpers/SendPurchaseEmail.js";
+import axios from "axios";
 import Loading from "../components/Loading.jsx";
 import "../css/Success.css";
 
@@ -9,18 +10,10 @@ const Success = () => {
   const { userContext, setUserContext } = useContext(Context);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  const emailSent = useRef(false); // 🔒 Evita múltiples envíos
+  const emailSent = useRef(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // <-- AGREGA ESTE CONSOLE.LOG PARA DEPURAR
-    console.log("Revisando useEffect:", {
-      contextExists: !!userContext,
-      cart: userContext?.cart,
-      cartLength: userContext?.cart?.length,
-      emailAlreadySent: emailSent.current,
-    });
-
     // Cuando el contexto esté listo, quitamos el "loading"
     if (userContext) {
       setLoading(false);
@@ -33,24 +26,7 @@ const Success = () => {
       userContext.cart.length > 0 &&
       !emailSent.current
     ) {
-      // ...el resto de tu código sigue igual...
-    }
-  }, [userContext, setUserContext]);
-
-  useEffect(() => {
-    // Cuando el contexto esté listo, quitamos el "loading"
-    if (userContext) {
-      setLoading(false);
-    }
-
-    // Enviar solo si hay carrito y no se ha enviado aún
-    if (
-      userContext &&
-      userContext.cart &&
-      userContext.cart.length > 0 &&
-      !emailSent.current
-    ) {
-      emailSent.current = true; // 🛑 Evita nuevos intentos
+      emailSent.current = true;
 
       const total = userContext.cart.reduce(
         (acc, product) => acc + product.price * product.quantity,
@@ -59,15 +35,30 @@ const Success = () => {
 
       sendPurchaseEmail(userContext, total)
         .then((response) => {
-          console.log("SUCCESS! Email sent.", response.status, response.text);
-          // Vaciamos el carrito para que no se reenvíe si recarga la página
-          setUserContext({
-            ...userContext,
-            cart: [],
-          });
+          // Vacía el carrito en el backend (json-server)
+          console.log("Correo enviado exitosamente:", response);
+          axios
+            .patch(
+              `${import.meta.env.VITE_SERVER_URL}/users/${userContext.id}`,
+              { cart: [] }
+            )
+            .then(() => {
+              console.log("Carrito vaciado en el backend");
+              // Actualiza el contexto del usuario para reflejar el carrito vacío
+              setUserContext({
+                ...userContext,
+                cart: [],
+              });
+            })
+            .catch((err) => {
+              console.error("Error vaciando carrito en backend", err);
+              setUserContext({
+                ...userContext,
+                cart: [],
+              });
+            });
         })
         .catch((error) => {
-          console.error("FAILED to send email...", error);
           setError("El correo no se pudo enviar: " + error.message);
         });
     }

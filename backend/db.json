@@ -52,29 +52,7 @@
           "image": "img-products/cerezas.webp"
         }
       ],
-      "cart": [
-        {
-          "productId": 3,
-          "nameProduct": "virgen maria crochet",
-          "price": 3,
-          "image": "img-products/virgen.webp",
-          "quantity": 1
-        },
-        {
-          "productId": 1,
-          "nameProduct": "spiderman Crochet",
-          "price": 4,
-          "image": "img-products/spiderman.webp",
-          "quantity": 1
-        },
-        {
-          "productId": 7,
-          "nameProduct": "Cerezas",
-          "price": 3,
-          "image": "img-products/cerezas.webp",
-          "quantity": 1
-        }
-      ],
+      "cart": [],
       "id": 3,
       "favotites": []
     },
@@ -752,6 +730,39 @@
       "email": "ernestobracho70@gmail.com",
       "emailPaypal": "ejemplo@ejemplo.com",
       "id": 16
+    },
+    {
+      "userId": 3,
+      "products": [
+        {
+          "productId": 3,
+          "nameProduct": "virgen maria crochet",
+          "price": 3,
+          "image": "img-products/virgen.webp",
+          "quantity": 1
+        },
+        {
+          "productId": 1,
+          "nameProduct": "spiderman Crochet",
+          "price": 4,
+          "image": "img-products/spiderman.webp",
+          "quantity": 1
+        },
+        {
+          "productId": 7,
+          "nameProduct": "Cerezas",
+          "price": 3,
+          "image": "img-products/cerezas.webp",
+          "quantity": 1
+        }
+      ],
+      "total": 10,
+      "date": "2025-07-09",
+      "typePayment": "Paypal",
+      "paymentStatus": "paid",
+      "email": "ernestobracho70@gmail.com",
+      "emailPaypal": "ejemplo@ejemplo.com",
+      "id": 17
     }
   ]
 }
