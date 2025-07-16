@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../context/UserContext";
-import { sendPurchaseEmail } from "../helpers/SendPurchaseEmail.js";
+import { SendEmailConfirm } from "../helpers/SendEmailConfirm.js";
 import axios from "axios";
 import Loading from "../components/Loading.jsx";
 import "../css/Success.css";
@@ -33,7 +33,7 @@ const Success = () => {
         0
       );
 
-      sendPurchaseEmail(userContext, total)
+      SendEmailConfirm(userContext, total)
         .then((response) => {
           // Vacía el carrito en el backend (json-server)
           console.log("Correo enviado exitosamente:", response);

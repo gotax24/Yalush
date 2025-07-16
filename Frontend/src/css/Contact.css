@@ -1,4 +1,5 @@
 .contact-container {
+  padding-top: 10px;
   width: 100%;
   min-height: 100vh;
   display: flex;
@@ -77,4 +78,13 @@
   margin-top: 1.5rem;
   color: #7a1cac;
   font-size: 0.97rem;
+}
+
+.message-finals {
+  padding-top: 10px;
+  color: #3a0850;
+}
+
+.p-errors{
+  color: rgb(136, 8, 8);
 }

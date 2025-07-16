@@ -52,7 +52,15 @@
           "image": "img-products/cerezas.webp"
         }
       ],
-      "cart": [],
+      "cart": [
+        {
+          "productId": 1,
+          "nameProduct": "spiderman Crochet",
+          "price": 4,
+          "image": "img-products/spiderman.webp",
+          "quantity": 1
+        }
+      ],
       "id": 3,
       "favotites": []
     },
@@ -113,7 +121,7 @@
       "image": "img-products/spiderman.webp",
       "description": "Bonito Spiderman Crochet hecho a mano con hilo de algodón, ideal para regalar a los niños o decorar la habitación.",
       "category": "keychains",
-      "stock": 12,
+      "stock": 11,
       "review": [
         {
           "userId": 4,
@@ -763,6 +771,14 @@
       "email": "ernestobracho70@gmail.com",
       "emailPaypal": "ejemplo@ejemplo.com",
       "id": 17
+    }
+  ],
+  "clientMessage": [
+    {
+      "name": "hola",
+      "lastName": "dasdasd@fgkds.com",
+      "message": "djafsjkdaas",
+      "id": 1
     }
   ]
 }
