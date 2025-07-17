@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Context } from "../context/UserContext";
+import { Context } from "../context/UserContext.jsx";
 import { SendEmailConfirm } from "../helpers/SendEmailConfirm.js";
 import axios from "axios";
-import Loading from "../components/Loading.jsx";
+import Loading from "./Loading.jsx";
 import "../css/Success.css";
 
 const Success = () => {

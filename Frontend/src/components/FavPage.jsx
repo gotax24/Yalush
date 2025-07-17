@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import { Context } from "../context/UserContext";
+import { Context } from "../context/UserContext.jsx";
 import { Link } from "react-router-dom";
 import FirstLetterUpper from "../helpers/FirstLetterUpper.js";
 import sadPerson from "../assets/sadPerson.svg";

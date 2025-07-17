@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useClerk } from "@clerk/clerk-react";
 import { useContext } from "react";
-import { Context } from "../context/UserContext";
+import { Context } from "../context/UserContext.jsx";
 import Loading from "./Loading.jsx";
 import axios from "axios";
 import FirstLetterUpper from "../helpers/FirstLetterUpper.js";

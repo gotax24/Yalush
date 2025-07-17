@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Context } from "../context/UserContext";
+import { Context } from "../context/UserContext.jsx";
 import { dateNow } from "../helpers/dateNow.js";
 import { formatCardNumber } from "../utils/formatCardNumber.js";
 import { formatExpiryDate } from "../utils/formatExpiryDate.js";

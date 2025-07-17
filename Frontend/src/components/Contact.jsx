@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm } from "../../node_modules/react-hook-form/dist";
 import { SendEmailContact } from "../helpers/SendEmailContact";
 import axios from "axios";
 import Loading from "./Loading";
