@@ -12,6 +12,8 @@ import FavPage from "./components/FavPage.jsx";
 import Cart from "./components/Cart.jsx";
 import Success from "./components/Success.jsx";
 import Contact from "./components/Contact.jsx";
+import AdminPanel from "./components/AdminPanel.jsx";
+import AdminRoute from "./components/AdminRoute.jsx";
 import "./index.css";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -33,6 +35,9 @@ createRoot(document.getElementById("root")).render(
             <Route path="favorite" element={<FavPage />} />
             <Route path="/success" element={<Success />} />
             <Route path="/contactos" element={<Contact />} />
+          </Route>
+          <Route element={<AdminRoute />}>
+            <Route path="/admin" element={<AdminPanel />} />
           </Route>
           <Route path="*" element={<Page404 />} />
         </Routes>
