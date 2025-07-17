@@ -82,3 +82,29 @@ select:focus {
   font-size: 0.9rem;
   text-align: center;
 }
+
+.info-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.info-row .info-bank {
+  margin: 0;
+}
+
+.info-row button {
+  padding: 0.3rem 0.7rem;
+  font-size: 0.7rem;
+  border-radius: 6px;
+  border: none;
+  background: #ad49e1;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.info-row button:hover {
+  background: #7a1cac;
+}

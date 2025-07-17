@@ -1,77 +1,59 @@
 import axios from "axios";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import { Context } from "../context/UserContext";
 import { dateNow } from "../helpers/dateNow";
-import HandleInputChange from "../helpers/HandleInputChange";
 import "../css/PagoMovil.css";
 
-const PagoMovil = ({ total, setCart }) => {
+const phoneCodes = ["0424", "0414", "0412", "0422", "0426", "0416"];
+
+const PagoMovil = ({ total }) => {
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const { userContext } = useContext(Context);
+  const [copied, setCopied] = useState({
+    banco: false,
+    rif: false,
+    telefono: false,
+  });
   const today = dateNow();
   const SERVER = import.meta.env.VITE_SERVER_URL;
   const navigate = useNavigate();
-  const [userPay, setUserPay] = useState({ cellphone: "", refNumber: "" });
-  const [phoneParts, setPhoneParts] = useState({ code: "", phone: "" });
 
-  const handlePhoneParts = (e) => {
-    const { name, value } = e.target;
+  const {
+    register,
+    handleSubmit,
+    setError,
+    reset,
+    formState: { errors },
+  } = useForm({ mode: "onBlur" });
 
-    // Validar solo dígitos
-    if (name === "phone" && !/^\d*$/.test(value)) return;
-
-    // Si son más de 7 dígitos, no hacer nada
-    if (name === "phone" && value.length > 7 || value.length < 7) {
-      setError("Solo se permiten 7 dígitos");
-      return;
-    }
-
-    setError(null); // Limpiar error al corregir
-
-    const newPhoneParts = {
-      ...phoneParts,
-      [name]: value,
-    };
-
-    setPhoneParts(newPhoneParts);
-
-    // Combinar número completo solo cuando hay ambos
-    if (newPhoneParts.code && newPhoneParts.phone.length === 7) {
-      const phoneFullNumber = `${newPhoneParts.code}${newPhoneParts.phone}`;
-      setUserPay((prev) => ({
+  const copy = (type, value) => {
+    navigator.clipboard.writeText(value);
+    setCopied((prev) => ({
+      ...prev,
+      [type]: true,
+    }));
+    setTimeout(() => {
+      setCopied((prev) => ({
         ...prev,
-        cellphone: phoneFullNumber,
+        [type]: false,
       }));
-    }
+    }, 1200);
   };
-  
-  const submitSales = (e) => {
-    e.preventDefault();
+
+  const submitSales = async (data) => {
     setLoading(true);
-    setError(null);
 
-    if (
-      userPay.cellphone.length !== 11 ||
-      !/^\d{11}$/.test(userPay.cellphone)
-    ) {
-      setError("El número de teléfono debe tener 11 dígitos.");
+    const cellphone = `${data.code}${data.phone}`;
+    if (cellphone.length !== 11 || !/^\d{11}$/.test(cellphone)) {
+      setError("phone", {
+        type: "manual",
+        message: "El número debe tener 11 dígitos.",
+      });
       setLoading(false);
       return;
     }
-
-    if (
-      !userPay.refNumber ||
-      userPay.refNumber.length < 6 ||
-      !/^\d+$/.test(userPay.refNumber)
-    ) {
-      setError("El número de referencia debe tener al menos 6 dígitos.");
-      setLoading(false);
-      return;
-    }
-
-    console.log(userPay);
 
     const newSales = {
       userId: userContext.id,
@@ -79,90 +61,103 @@ const PagoMovil = ({ total, setCart }) => {
       total: total,
       date: today,
       typePayment: "PagoMovil",
-      cellphone: userPay.cellphone,
-      refNumber: userPay.refNumber,
+      cellphone,
+      refNumber: data.refNumber,
       paymentStatus: "paid",
       email: userContext.email,
     };
 
-    axios
-      .post(`${SERVER}/sales`, newSales)
-      .then((res) => {
-        console.log(res.data);
-        setCart([]);
-        setLoading(false);
-        navigate("/success");
-      })
-      .catch((e) => {
-        console.error(e.message);
-        setError(e.message);
-        setLoading(false);
-      });
+    try {
+      await axios.post(`${SERVER}/sales`, newSales);
+      setLoading(false);
+      reset();
+      navigate("/success");
+    } catch (e) {
+      setError("refNumber", { type: "manual", message: e.message });
+      setLoading(false);
+    }
   };
 
   return (
-    <>
-      <form className="container-report" onSubmit={submitSales}>
-        <section className="info-mercantil">
-          <img
-            className="Logo-Banco"
-            src="https://mir-s3-cdn-cf.behance.net/projects/404/ae31f383523705.Y3JvcCw4MDgsNjMyLDAsMA.png"
-            alt="Logo de Mercantil"
-          />
+    <form className="container-report" onSubmit={handleSubmit(submitSales)}>
+      <section className="info-mercantil">
+        <img
+          className="Logo-Banco"
+          src="https://mir-s3-cdn-cf.behance.net/projects/404/ae31f383523705.Y3JvcCw4MDgsNjMyLDAsMA.png"
+          alt="Logo de Mercantil"
+        />
+        <div className="info-row">
           <p className="info-bank">Banco Mercantil</p>
+          <button type="button" onClick={() => copy("banco", "mercantil")}>
+            {copied.banco ? "¡Copiado!" : "Copiar banco"}
+          </button>
+        </div>
+        <div className="info-row">
           <p className="info-bank">J-00000000000</p>
+          <button type="button" onClick={() => copy("rif", "J-00000000000")}>
+            {copied.rif ? "¡Copiado!" : "Copiar RIF"}
+          </button>
+        </div>
+        <div className="info-row">
           <p className="info-bank">Tel: 04241111111</p>
-        </section>
+          <button type="button" onClick={() => copy("telefono", "04241111111")}>
+            {copied.telefono ? "¡Copiado!" : "Copiar teléfono"}
+          </button>
+        </div>
+      </section>
 
-        <label>
-          Numero de telefono:
+      <label>
+        Número de teléfono:
+        <div style={{ display: "flex", gap: "10px" }}>
           <select
-            name="code"
-            required
-            defaultValue={""}
-            onChange={handlePhoneParts}
+            {...register("code", { required: "Seleccione el código" })}
+            defaultValue=""
           >
             <option value="" disabled>
               Seleccione
             </option>
-            <option value="0424">0424</option>
-            <option value="0414">0414</option>
-            <option value="0412">0412</option>
-            <option value="0426">0426</option>
-            <option value="0416">0416</option>
+            {phoneCodes.map((c) => (
+              <option key={c} value={c}>
+                {c}
+              </option>
+            ))}
           </select>
           <input
-            type="number"
-            name="phone"
-            placeholder="1234567"
+            type="text"
             maxLength={7}
-            required
+            placeholder="1234567"
+            {...register("phone", {
+              required: "El número es requerido",
+              pattern: { value: /^\d{7}$/, message: "Debe tener 7 dígitos" },
+            })}
             className="cell-phone"
-            onChange={handlePhoneParts}
           />
-        </label>
+        </div>
+        {errors.code && <p className="error">{errors.code.message}</p>}
+        {errors.phone && <p className="error">{errors.phone.message}</p>}
+      </label>
 
-        <label>
-          Número de referencia:
-          <input
-            type="number"
-            name="refNumber"
-            placeholder="Número de referencia"
-            required
-            className="number-ref"
-            onChange={(e) =>
-              HandleInputChange("refNumber", Number(e.target.value), setUserPay)
-            }
-          />
-        </label>
+      <label>
+        Número de referencia:
+        <input
+          type="text"
+          placeholder="Número de referencia"
+          className="number-ref"
+          {...register("refNumber", {
+            required: "El número de referencia es requerido",
+            minLength: { value: 6, message: "Mínimo 6 dígitos" },
+            pattern: { value: /^\d+$/, message: "Solo se permiten números" },
+          })}
+        />
+        {errors.refNumber && (
+          <p className="error">{errors.refNumber.message}</p>
+        )}
+      </label>
 
-        <button className="button-paypal" type="submit">
-          {loading ? "Enviando..." : "Reportar pago"}
-        </button>
-
-        {error && <p className="error">{error}</p>}
-      </form>
-    </>
+      <button className="button-paypal" type="submit" disabled={loading}>
+        {loading ? "Enviando..." : "Reportar pago"}
+      </button>
+    </form>
   );
 };
 

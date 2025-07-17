@@ -68,7 +68,6 @@ const ProfilePage = () => {
           Email: {user.emailAddresses[0].emailAddress}
         </p>
       </div>
-      <div>{/**Aqui se pone la lista de favortios */}</div>
     </>
   );
 };

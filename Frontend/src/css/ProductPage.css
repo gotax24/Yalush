@@ -1,6 +1,5 @@
-/* Layout principal: imagen a la izquierda, info a la derecha */
 .container-product {
-  margin-top: 80px; /* o ajusta según el alto del menú */
+  margin-top: 80px;
 }
 
 .product-content {
@@ -165,8 +164,6 @@
   margin-right: 10px;
 }
 
-/* Añade estos estilos a tu archivo CSS de ProductPage */
-
 .product-actions {
   display: flex;
   align-items: center;
@@ -178,11 +175,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  width: 220px;
+  height: 50px;
+  border-radius: 12px;
   border: 1px solid #e0e0e0;
-
   cursor: pointer;
   transition: all 0.2s ease;
 }

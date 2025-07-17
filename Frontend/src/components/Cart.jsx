@@ -111,7 +111,7 @@ const Cart = () => {
         </div>
 
         <div className="checkout-wrapper">
-          <Checkout total={totalUsd} setCart={setCart}/>
+          <Checkout total={totalUsd} setCart={setCart} />
         </div>
       </main>
       {errorCart && <p className="error-cart">{error.mesagge}</p>}

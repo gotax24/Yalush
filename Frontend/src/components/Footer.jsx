@@ -1,4 +1,3 @@
-import React from 'react';
 import '../css/Footer.css';
 
 const Footer = () => (
@@ -20,10 +19,10 @@ const Footer = () => (
       {/* Separador visual */}
       <span className="footer-separator">|</span>
       {/* Tus redes personales */}
-      <a href="https://github.com/tuusuario" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+      <a href="https://github.com/gotax24/" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
         <i className="fab fa-github"></i>
       </a>
-      <a href="https://linkedin.com/in/tuusuario" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+      <a href="https://linkedin.com/in/yaldriani" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
         <i className="fab fa-linkedin"></i>
       </a>
     </div>

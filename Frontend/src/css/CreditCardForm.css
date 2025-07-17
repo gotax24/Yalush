@@ -57,11 +57,13 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 100%;
   gap: 15px;
+  align-items: flex-end; /* Alinea los campos abajo */
 }
 .form .split label {
-  width: 130px;
+  width: 100%;
+  min-width: 130px;
+  flex: 1;
 }
 .form .checkout-btn {
   margin-top: 20px;
@@ -98,16 +100,20 @@
   position: relative;
   display: flex;
   align-items: center;
+  gap: 10px; /* Espacio entre input e imagen */
 }
 
 .input-with-icon input {
-  padding-right: 60px;
+  padding-right: 0; /* Elimina el padding extra */
+  flex: 1;
 }
 
 .img-credit {
-  position: absolute;
-  right: 10px;
+  position: static; /* Ya no es absolute */
   width: 40px;
   height: auto;
-  pointer-events: none;
+  margin-left: 10px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
 }

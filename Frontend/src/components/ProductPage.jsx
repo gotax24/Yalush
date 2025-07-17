@@ -23,11 +23,11 @@ const ProductPage = () => {
   const [error, setError] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [userPage, setUserPage] = useState(null);
-  const [quantity, setQuantity] = useState(1); // Inicializado en 1 para mejor UX
+  const [quantity, setQuantity] = useState(1);
   const [cartUser, setCartUser] = useState([]);
   const [favoriteUser, setFavoriteUser] = useState([]);
 
-  const { userContext } = useContext(Context);
+  const { userContext, setUserContext } = useContext(Context);
   const { isSignedIn, user } = useClerk();
 
   const openModal = () => setIsOpen(true);
@@ -164,6 +164,8 @@ const ProductPage = () => {
                   idUser={userPage.id}
                   favorite={favoriteUser}
                   setFavorite={setFavoriteUser}
+                  setUserContext={setUserContext}
+                  userContext={userContext}
                 />
                 <ButtonAddCart
                   quantity={quantity}

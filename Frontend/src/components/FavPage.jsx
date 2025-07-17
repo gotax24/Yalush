@@ -12,7 +12,6 @@ const FavPage = () => {
   const { userContext, error, loading } = useContext(Context);
   const [fav, setFav] = useState([]);
   const [errorFav, setErrorFav] = useState();
-  const SERVER = import.meta.env.VITE_SERVER_URL;
 
   useEffect(() => {
     if (userContext?.favorite) {

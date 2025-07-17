@@ -1,91 +1,57 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
+import { useForm } from "react-hook-form"; // No necesitas importar nada más de aquí
 import { useNavigate } from "react-router-dom";
 import { Context } from "../context/UserContext.jsx";
 import { dateNow } from "../helpers/dateNow.js";
-import { formatCardNumber } from "../utils/formatCardNumber.js";
-import { formatExpiryDate } from "../utils/formatExpiryDate.js";
 import { luhnCheck } from "../utils/Lunhn.js";
 import { isValidExpiryDate } from "../utils/isValidDateCard.js";
-import CardInput from "./CardInputs.jsx";
 import axios from "axios";
-import HandleInputChange from "../helpers/HandleInputChange.js";
 import visa from "../assets/visa.svg";
 import masterCard from "../assets/masterCard.svg";
 import americanExpress from "../assets/americanExpress.svg";
 import "../css/CreditCardForm.css";
 
-const CreditCardForm = ({ total, setCart }) => {
-  const [errors, setErrors] = useState({});
+const CreditCardForm = ({ total }) => {
   const [loading, setLoading] = useState(false);
-  const [cardType, setCardType] = useState();
-  const [formData, setFormData] = useState({
-    cardName: "",
-    cardNumber: "",
-    expiryDate: "",
-    cvv: "",
-    amount: total,
+  const [cardType, setCardType] = useState(null);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+    watch, //Importamos 'watch' para observar cambios
+    setValue, //Para formatear los inputs
+  } = useForm({
+    mode: "onBlur", //Valida cuando el usuario sale del campo, mejor UX
   });
 
   const { userContext } = useContext(Context);
   const SERVER = import.meta.env.VITE_SERVER_URL;
-  const today = dateNow();
   const navigate = useNavigate();
 
-  const validateForm = () => {
-    const newErrors = {};
-
-    // Validar nombre
-    if (!formData.cardName.trim()) {
-      newErrors.cardName = "El nombre es requerido";
-    } else if (formData.cardName.trim().length < 3) {
-      // Corregí la lógica
-      newErrors.cardName = "El nombre debe tener más de 2 letras";
+  // Usamos watch para detectar el tipo de tarjeta
+  const cardNumberValue = watch("cardNumber");
+  useEffect(() => {
+    if (cardNumberValue) {
+      const cleanNumber = cardNumberValue.replace(/\s/g, "");
+      if (cleanNumber.startsWith("4")) setCardType(visa);
+      else if (cleanNumber.startsWith("5") || cleanNumber.startsWith("2"))
+        setCardType(masterCard);
+      else if (cleanNumber.startsWith("3")) setCardType(americanExpress);
+      else setCardType(null);
     }
+  }, [cardNumberValue]);
 
-    // Validar número de tarjeta
-    const cardNumberClean = formData.cardNumber.replace(/\s/g, "");
-    if (!cardNumberClean) {
-      newErrors.cardNumber = "Número de tarjeta requerido";
-    } else if (cardNumberClean.length < 13 || cardNumberClean.length > 19) {
-      newErrors.cardNumber = "Número de tarjeta inválido";
-    } else if (!luhnCheck(cardNumberClean)) {
-      newErrors.cardNumber = "Número de tarjeta inválido";
-    }
-
-    // Validar fecha de expiración
-    if (!formData.expiryDate) {
-      newErrors.expiryDate = "La fecha de expiración es requerida";
-    } else if (!isValidExpiryDate(formData.expiryDate)) {
-      newErrors.expiryDate = "Fecha de expiración inválida o vencida";
-    }
-
-    // Validar CVV
-    if (!formData.cvv) {
-      newErrors.cvv = "El CVV es requerido";
-    } else if (formData.cvv.length < 3) {
-      newErrors.cvv = "CVV inválido";
-    }
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const submitSales = async (e) => {
-    e.preventDefault();
+  // 3. La función submit es ahora mucho más simple
+  const submitSales = async (data) => {
     setLoading(true);
-    setErrors({});
-
-    // Validar antes de enviar
-    if (!validateForm()) {
-      setLoading(false);
-      return;
-    }
 
     const newSales = {
       userId: userContext.id,
       products: userContext.cart,
       total: total,
-      date: today,
+      date: dateNow(),
       typePayment: "creditCard",
       paymentStatus: "paid",
       email: userContext.email,
@@ -94,142 +60,124 @@ const CreditCardForm = ({ total, setCart }) => {
     try {
       const response = await axios.post(`${SERVER}/sales`, newSales);
       console.log(response.data);
+      console.log("Venta registrada correctamente", data);
 
-      // Limpiar carrito al completar compra
-      setCart([]);
-      //se envia al usuario la pagina de sucess
+      reset();
       navigate("/success");
     } catch (error) {
       console.error(error);
-      setErrors({
-        submit: error.response?.data?.message || "Error al procesar el pago",
-      });
+    } finally {
       setLoading(false);
     }
   };
 
-  // Función para manejar cambios con validación en tiempo real
-  const handleCardNumberChange = (e) => {
-    const value = e.target.value;
-    const formattedValue = formatCardNumber(value);
-    HandleInputChange("cardNumber", formattedValue, setFormData);
-    setCardType(getCardType(e.target.value));
-
-    // Limpiar error si existe
-    if (errors.cardNumber) {
-      setErrors((prev) => ({ ...prev, cardNumber: null }));
-    }
-  };
-
-  const handleExpiryDateChange = (e) => {
-    const value = e.target.value;
-    const formattedValue = formatExpiryDate(value);
-    HandleInputChange("expiryDate", formattedValue, setFormData);
-
-    // Limpiar error si existe
-    if (errors.expiryDate) {
-      setErrors((prev) => ({ ...prev, expiryDate: null }));
-    }
-  };
-
-  const getCardType = (number) => {
-    const cleanNumber = number.replace(/\s/g, "");
-    if (cleanNumber.startsWith("4")) return visa;
-    if (cleanNumber.startsWith("5") || cleanNumber.startsWith("2"))
-      return masterCard;
-    if (cleanNumber.startsWith("3")) return americanExpress;
-
-    return null;
-  };
-
   return (
-    <form className="form" onSubmit={submitSales}>
-      <label htmlFor="cardName" className="label">
+    // 4. handleSubmit se encarga de la validación antes de llamar a submitSales
+    <form className="form" onSubmit={handleSubmit(submitSales)}>
+      {/* --- CAMPO NOMBRE --- */}
+      <label className="label">
         <span className="title">Nombre completo en la tarjeta</span>
         <input
-          id="cardName"
           className="input-field"
           type="text"
-          name="cardName"
           placeholder="Ingresa tu nombre completo"
-          value={formData.cardName}
-          onChange={(e) => {
-            HandleInputChange("cardName", e.target.value, setFormData);
-            if (errors.cardName) {
-              setErrors((prev) => ({ ...prev, cardName: null }));
-            }
-          }}
+          {...register("cardName", {
+            required: "El nombre es requerido",
+            minLength: {
+              value: 3,
+              message: "El nombre debe tener más de 2 letras",
+            },
+            pattern: {
+              value: /^[A-Za-z\s]+$/,
+              message: "El nombre solo puede contener letras",
+            },
+          })}
         />
-        {errors.cardName && <span style={{ color: "#a11919" }}>{errors.cardName}</span>}
+        {errors.cardName && (
+          <span style={{ color: "#a11919" }}>{errors.cardName.message}</span>
+        )}
       </label>
 
-      <label htmlFor="serialCardNumber" className="label">
+      {/* --- CAMPO NÚMERO DE TARJETA --- */}
+      <label className="label">
         <span className="title">Número de tarjeta</span>
         <div className="input-with-icon">
-          <CardInput
-            formData={formData.cardNumber}
-            id={"serialCardNumber"}
-            className={"input-field"}
-            type={"text"}
-            name={"cardNumber"}
-            placeholder={"0000 0000 0000 000"}
+          <input
+            type="text"
+            placeholder="0000 0000 0000 0000"
             maxLength={19}
-            functionChange={handleCardNumberChange}
+            {...register("cardNumber", {
+              required: "El número de tarjeta es requerido",
+              validate: (value) =>
+                luhnCheck(value.replace(/\s/g, "")) ||
+                "Número de tarjeta inválido",
+              onChange: (e) => {
+                const { value } = e.target;
+                e.target.value = value
+                  .replace(/\D/g, "")
+                  .replace(/(\d{4})(?=\d)/g, "$1 ");
+                setValue("cardNumber", e.target.value);
+              },
+            })}
           />
           {cardType && (
             <img className="img-credit" src={cardType} alt="Tipo de tarjeta" />
           )}
         </div>
         {errors.cardNumber && (
-          <span style={{ color: "#a11919" }}>{errors.cardNumber}</span>
+          <span style={{ color: "#a11919" }}>{errors.cardNumber.message}</span>
         )}
       </label>
 
       <div className="split">
-        <label htmlFor="ExDate" className="label">
+        {/* --- CAMPO FECHA DE VENCIMIENTO --- */}
+        <label className="label">
           <span className="title">Fecha de vencimiento</span>
-          <CardInput
-            id={"Exdate"}
-            className={"input-field"}
-            type={"text"}
-            name={"expiryDate"}
-            placeholder={"MM/AA"}
-            formData={formData.expiryDate}
+          <input
+            type="text"
+            placeholder="MM/AA"
             maxLength={5}
-            functionChange={handleExpiryDateChange}
+            {...register("expiryDate", {
+              required: "La fecha es requerida",
+              validate: (value) =>
+                isValidExpiryDate(value) || "Fecha inválida o vencida",
+              onChange: (e) => {
+                const { value } = e.target;
+                e.target.value = value
+                  .replace(/\D/g, "")
+                  .replace(/(\d{2})(?=\d)/g, "$1/");
+                setValue("expiryDate", e.target.value);
+              },
+            })}
           />
           {errors.expiryDate && (
-            <span style={{ color: "#a11919" }}>{errors.expiryDate}</span>
+            <span style={{ color: "#a11919" }}>
+              {errors.expiryDate.message}
+            </span>
           )}
         </label>
 
-        <label htmlFor="cvv" className="label">
+        {/* --- CAMPO CVV --- */}
+        <label className="label">
           <span className="title">CVV</span>
           <input
-            id="cvv"
-            className="input-field"
             type="text"
-            name="cvv"
             placeholder="123"
-            value={formData.cvv}
             maxLength="4"
-            onChange={(e) => {
-              const value = e.target.value.replace(/\D/g, "").substring(0, 4);
-              HandleInputChange("cvv", value, setFormData);
-              if (errors.cvv) {
-                setErrors((prev) => ({ ...prev, cvv: null }));
-              }
-            }}
+            {...register("cvv", {
+              required: "El CVV es requerido",
+              pattern: { value: /^[0-9]{3,4}$/, message: "CVV inválido" },
+            })}
           />
-          {errors.cvv && <span style={{ color: "#a11919" }}>{errors.cvv}</span>}
+          {errors.cvv && (
+            <span style={{ color: "#a11919" }}>{errors.cvv.message}</span>
+          )}
         </label>
       </div>
 
       <button className="checkout-btn" type="submit" disabled={loading}>
-        {loading ? "Procesando..." : "Pagar con tarjeta de crédito"}
+        {loading ? "Procesando..." : "Pagar con tarjeta"}
       </button>
-
-      {errors.submit && <p style={{ color: "#a11919" }}>{errors.submit}</p>}
     </form>
   );
 };

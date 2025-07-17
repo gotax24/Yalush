@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import axios from "axios";
 import iconComment from "../assets/iconComment.svg";
-import HandleInputChange from "../helpers/HandleInputChange";
 import "../css/AddCommentForm.css";
 
 const AddFormComments = ({
@@ -11,74 +10,35 @@ const AddFormComments = ({
   currentReviews,
   updateProductReviews,
 }) => {
-  const [review, setReview] = useState({
-    userId: userId,
-    rating: "",
-    comment: "",
-  });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting }, // <-- Obtenemos 'isSubmitting' y 'errors'
+    setError, // <-- Obtenemos setError para errores del servidor
+  } = useForm();
 
   const SERVER = import.meta.env.VITE_SERVER_URL;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setLoading(true);
+  // La función ahora es async/await para un código más limpio
+  const onSubmit = async (data) => {
+    // 1. Añadimos el userId a los datos del formulario
+    const newReview = { ...data, rating: Number(data.rating), userId: userId };
 
-    if (!review.userId || !review.rating || !review.comment) {
-      setError("Todos los campos son obligatorios.");
-      setLoading(false);
-      return;
+    const reviewsArray = Array.isArray(currentReviews) ? currentReviews : [];
+    const updatedReviews = [...reviewsArray, newReview];
+
+    try {
+      await axios.patch(`${SERVER}/products/${productId}`, { review: updatedReviews });
+      updateProductReviews(updatedReviews);
+      closeModal();
+    } catch (e) {
+      console.error(e);
+      // Opcional: manejar errores del servidor y mostrarlos
+      setError("root.serverError", {
+        type: "manual",
+        message: "No se pudo agregar el comentario. Inténtalo de nuevo.",
+      });
     }
-
-    if (verifyRating(review.rating)) {
-      const reviewsArray = Array.isArray(currentReviews) ? currentReviews : [];
-      const updatedReviews = [...reviewsArray, review];
-
-      axios
-        .patch(`${SERVER}/products/${productId}`, { review: updatedReviews })
-        .then((response) => {
-          const data = response.data;
-          console.log(data);
-
-          updateProductReviews(updatedReviews);
-
-          setLoading(false);
-          closeModal();
-        })
-        .catch((e) => {
-          console.error(e);
-          setError(e.message);
-          setLoading(false);
-        });
-    }
-  };
-
-  useEffect(() => {
-    setReview((prevUser) => ({
-      ...prevUser,
-      userId: userId,
-    }));
-  }, [userId]);
-
-  const verifyRating = (value) => {
-    if (value.length > 1) {
-      setError("Solo se permite un solo número del 1 al 5.");
-      return false;
-    }
-
-    if (isNaN(value)) {
-      setError("Debe ser un número válido.");
-      return false;
-    }
-
-    if (value < 1 || value > 5) {
-      setError("El número debe estar entre 1 y 5.");
-      return false;
-    }
-
-    setError("");
-    return true;
   };
 
   return (
@@ -89,45 +49,44 @@ const AddFormComments = ({
           <h1 className="title-addForm">Agregar un comentario</h1>
         </div>
         <div className="content-form">
-          <form>
+          <p className="subtitle-addForm">
+            Tu opinión es importante para nosotros. ¡Déjanos tu comentario!
+          </p>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <label className="labels-form">
-              Puntacion del producto:
+              Puntuación del producto:
               <input
                 type="number"
-                max={5}
-                min={1}
-                placeholder="Numero del 1 al 5"
+                placeholder="Número del 1 al 5"
                 className="input-number"
-                onChange={(e) => {
-                  const value = Math.max(
-                    1,
-                    Math.min(5, Number(e.target.value))
-                  );
-                  HandleInputChange("rating", value, setReview);
-                  verifyRating(Number(e.target.value));
-                }}
+                {...register("rating", {
+                  required: "La puntuación es requerida",
+                  min: { value: 1, message: "La puntuación debe ser entre 1 y 5" },
+                  max: { value: 5, message: "La puntuación debe ser entre 1 y 5" },
+                })}
               />
+              {errors.rating && <p className="error-p">{errors.rating.message}</p>}
             </label>
             <label className="labels-form">
               Comentario:
               <textarea
-                maxLength={250}
                 className="input-comment"
-                placeholder="Escriba su opinion del producto"
-                spellCheck="true"
-                onChange={(e) =>
-                  HandleInputChange("comment", e.target.value, setReview)
-                }
+                placeholder="Escriba su opinión del producto"
+                {...register("comment", {
+                  required: "El comentario es requerido",
+                  minLength: { value: 10, message: "Mínimo 10 caracteres" },
+                  maxLength: { value: 250, message: "Máximo 250 caracteres" },
+                })}
               />
+              {errors.comment && <p className="error-p">{errors.comment.message}</p>}
             </label>
+            <button type="submit" className="button-comment" disabled={isSubmitting}>
+              {isSubmitting ? "Confirmando..." : "Confirmar comentario"}
+            </button>
+            {errors.root?.serverError && <p className="error-p">{errors.root.serverError.message}</p>}
           </form>
         </div>
-        <button className="button-comment" onClick={handleSubmit}>
-          {loading ? "Confirmando comentario..." : "Confirmar comentario"}
-        </button>
       </div>
-
-      {error && <p className="error-p">{error}</p>}
     </>
   );
 };

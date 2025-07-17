@@ -30,9 +30,13 @@ const Carousel = ({ images }) => {
           transition={{ duration: 0.5 }}
         >
           <div className="carousel-overlay">
-            <h2 >On look! it's crochet <br /> O'clock</h2>
-        
-            <Link to="/products" className="carousel-link">Descubre mas</Link>
+            <h2>
+              On look! it's crochet <br /> O'clock
+            </h2>
+
+            <Link to="/products" className="carousel-link">
+              Descubre mas
+            </Link>
           </div>
           <img
             src={images[currentIndex].src}
