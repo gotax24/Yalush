@@ -22,9 +22,9 @@ const Contact = () => {
 
     try {
       await SendEmailContact(data);
+      console.log("Mensaje enviado al correo");
 
       await axios.post(`${SERVER}/clientMessage`, data);
-      
       setMessageClient("¡Mensaje enviado con éxito! Te responderemos pronto.");
       reset();
     } catch (error) {

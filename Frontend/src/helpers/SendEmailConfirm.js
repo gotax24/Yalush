@@ -1,92 +1,38 @@
-import { useContext, useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import { Context } from "../context/UserContext";
-import { SendEmailConfirm } from "../helpers/SendEmailConfirm.js";
-import axios from "axios";
-import Loading from "../components/Loading.jsx";
-import "../css/Success.css";
+import emailjs from "@emailjs/browser";
+import { generateOrderId } from "./GenerateOrderId";
 
-const Success = () => {
-  const { userContext, setUserContext } = useContext(Context);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const emailSent = useRef(false);
-  const navigate = useNavigate();
+export const SendEmailConfirm = (user, total) => {
+  if (!user || !user.cart || user.cart.length === 0) {
+    throw new Error("El usuario no tiene un carrito válido o está vacío.");
+  }
 
-  useEffect(() => {
-    const handlePurchaseConfirmation = async () => {
-      if (!userContext?.cart?.length || emailSent.current) {
-        setLoading(false);
-        return;
-      }
+  if (typeof total !== "number" || isNaN(total) || total <= 0) {
+    throw new Error("El total debe ser un número válido y mayor que cero.");
+  }
 
-      emailSent.current = true;
+  // ✅ Adaptar cada item al formato que EmailJS espera
+  const formattedCart = user.cart.map((item) => ({
+    name: item.title, // EmailJS: {{name}}
+    price: item.price.toFixed(2), // EmailJS: {{price}}
+    units: item.quantity, // EmailJS: {{units}}
+    image_url: item.image || "", // EmailJS: {{image_url}}
+  }));
 
-      try {
-        const total = userContext.cart.reduce(
-          (acc, product) => acc + product.price * product.quantity,
-          0
-        );
+  const templateParams = {
+    name: user.name,
+    email: user.email,
+    order_id: generateOrderId(),
+    orders: formattedCart, // 👈 Aquí va el array transformado
+    cost: {
+      shipping: 0,
+      total: total.toFixed(2),
+    },
+  };
 
-        await SendEmailConfirm(userContext, total);
-        console.log("Correo enviado exitosamente");
-
-        await axios.patch(
-          `${import.meta.env.VITE_SERVER_URL}/users/${userContext.id}`,
-          { cart: [] }
-        );
-        console.log("Carrito vaciado en el backend");
-
-        setUserContext((currentUser) => ({
-          ...currentUser,
-          cart: [],
-        }));
-      } catch (err) {
-        console.error("Ocurrió un error en el proceso de confirmación:", err);
-        setError(
-          "Hubo un problema al procesar tu confirmación: " + err.message
-        );
-
-        setUserContext((currentUser) => ({
-          ...currentUser,
-          cart: [],
-        }));
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (userContext) {
-      handlePurchaseConfirmation();
-    }
-  }, [userContext, setUserContext]);
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      navigate("/");
-    }, 5000);
-    return () => clearTimeout(timeout);
-  }, [navigate]);
-
-  if (loading) return <Loading />;
-
-  const name = userContext?.name || "Usuario";
-
-  return (
-    <div className="success-container">
-      <div className="success-card">
-        <h1 className="title-success">¡Pago exitoso!</h1>
-        <h2 className="sub-title-success">Gracias por tu compra, {name} 🎉</h2>
-        <p className="p-success">
-          Hemos enviado un correo de confirmación a tu dirección registrada.
-        </p>
-        <button className="button-success" onClick={() => navigate("/")}>
-          Volver al inicio
-        </button>
-      </div>
-      {error && <p className="error-message">{error}</p>}
-    </div>
+  return emailjs.send(
+    import.meta.env.VITE_EMAILJS_SERVICE_ID,
+    import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+    templateParams,
+    import.meta.env.VITE_EMAILJS_PUBLIC_KEY
   );
 };
-
-export default Success;

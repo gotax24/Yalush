@@ -1,4 +1,3 @@
-// Esta función ya está correcta para usarla con await
 import emailjs from "@emailjs/browser";
 
 export const SendEmailContact = (user) => {
