@@ -30,7 +30,6 @@ createRoot(document.getElementById("root")).render(
               <Route path=":id" element={<ProductPage />} />
             </Route>
             <Route path="cart" element={<Cart />} />
-            <Route path="admin" element={"admin"} />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="favorite" element={<FavPage />} />
             <Route path="/success" element={<Success />} />
