@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { dateNow } from "../helpers/dateNow";
 import { useEffect, useState } from "react";
+import useLastId from "../hooks/useLastId.jsx";
+
 
 const category = ["pillows", "bags", "keychains", "swimwear", "dress", "other"];
 
 const AddProductForm = ({ closeModal }) => {
-  const [lastId, setLastId] = useState(0);
+  const { lastId } = useLastId();
 
   const {
     register,
@@ -17,15 +18,8 @@ const AddProductForm = ({ closeModal }) => {
   } = useForm();
 
   const SERVER = import.meta.env.VITE_SERVER_URL;
-
-  useEffect(() => {
-    axios.get(`${SERVER}/products`).then((res) => {
-      // Busca el último id numérico
-      const ids = res.data.map((p) => Number(p.id)).filter(Boolean);
-      setLastId(ids.length ? Math.max(...ids) : 0);
-    });
-  }, [SERVER]);
-
+  const newDate = new Date()
+  
   const onSubmit = async (data) => {
     const prefix = "YAL-";
     const cat = data.category
@@ -37,8 +31,9 @@ const AddProductForm = ({ closeModal }) => {
     const newProduct = {
       ...data,
       sku,
-      dateAdded: dateNow(),
+      dateAdded: newDate.toISOString(),
       reviews: [],
+      id: nextNum,
     };
 
     try {
