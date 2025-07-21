@@ -2,13 +2,12 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
 import useLastId from "../hooks/useLastId.jsx";
-
+import SkuGenerator from "../helpers/SkuGenerator.js";
 
 const category = ["pillows", "bags", "keychains", "swimwear", "dress", "other"];
 
 const AddProductForm = ({ closeModal }) => {
   const { lastId } = useLastId();
-
   const {
     register,
     handleSubmit,
@@ -18,16 +17,11 @@ const AddProductForm = ({ closeModal }) => {
   } = useForm();
 
   const SERVER = import.meta.env.VITE_SERVER_URL;
-  const newDate = new Date()
-  
-  const onSubmit = async (data) => {
-    const prefix = "YAL-";
-    const cat = data.category
-      ? data.category.substring(0, 3).toUpperCase()
-      : "XXX";
-    const nextNum = lastId + 1;
-    const sku = `${prefix}${cat}-${nextNum}`;
+  const newDate = new Date();
 
+  const onSubmit = async (data) => {
+    const nextNum = lastId + 1;
+    const sku = SkuGenerator(data, lastId);
     const newProduct = {
       ...data,
       sku,
