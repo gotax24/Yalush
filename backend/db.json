@@ -130,16 +130,36 @@
       "description": "Bonito Spiderman Crochet hecho a mano con hilo de algodón, ideal para regalar a los niños o decorar la habitación.",
       "category": "keychains",
       "stock": 9,
-      "cost": 1.50,
+      "cost": 1.5,
       "sku": "YAL-KCH-01",
       "supplier": "Hilos La Tejedora C.A.",
       "dateAdded": "2025-05-10T14:00:00Z",
       "review": [
-        { "userId": 4, "rating": 5, "comment": "Wao es muy lindo se lo regale a mi novio" },
-        { "userId": 3, "rating": 4, "comment": "Me encanta esta muy original" },
-        { "userId": 2, "rating": 5, "comment": "Me gusta ojala mi novia me regale uno de venom" },
-        { "userId": 3, "rating": 5, "comment": "Me encanta " },
-        { "rating": 3, "comment": "Me gusta pero me gustaria mas de venom", "userId": "1" }
+        {
+          "userId": 4,
+          "rating": 5,
+          "comment": "Wao es muy lindo se lo regale a mi novio"
+        },
+        {
+          "userId": 3,
+          "rating": 4,
+          "comment": "Me encanta esta muy original"
+        },
+        {
+          "userId": 2,
+          "rating": 5,
+          "comment": "Me gusta ojala mi novia me regale uno de venom"
+        },
+        {
+          "userId": 3,
+          "rating": 5,
+          "comment": "Me encanta "
+        },
+        {
+          "rating": 3,
+          "comment": "Me gusta pero me gustaria mas de venom",
+          "userId": "1"
+        }
       ]
     },
     {
@@ -150,12 +170,16 @@
       "description": "Atrae buenas vibras y aleja la negatividad",
       "category": "keychains",
       "stock": 20,
-      "cost": 0.40,
+      "cost": 0.4,
       "sku": "YAL-KCH-02",
       "supplier": "Mercería El Hilo Dorado",
       "dateAdded": "2025-05-12T11:20:00Z",
       "review": [
-        { "userId": 2, "rating": 5, "comment": "Bellisimo llavero ademas lo compre y conseguí trabajo" }
+        {
+          "userId": 2,
+          "rating": 5,
+          "comment": "Bellisimo llavero ademas lo compre y conseguí trabajo"
+        }
       ]
     },
     {
@@ -171,7 +195,11 @@
       "supplier": "Hilos La Tejedora C.A.",
       "dateAdded": "2025-05-15T18:00:00Z",
       "review": [
-        { "userId": 4, "rating": 3, "comment": "La imagen esta mal editada contraten a un diseñador ajajaj" }
+        {
+          "userId": 4,
+          "rating": 3,
+          "comment": "La imagen esta mal editada contraten a un diseñador ajajaj"
+        }
       ]
     },
     {
@@ -182,7 +210,7 @@
       "description": "Bolso crochet hecho a mano.",
       "category": "bags",
       "stock": 10,
-      "cost": 10.00,
+      "cost": 10,
       "sku": "YAL-BAG-04",
       "supplier": "Telas y Lanas S.A.",
       "dateAdded": "2025-06-01T09:00:00Z",
@@ -196,7 +224,7 @@
       "description": "Comparte con tu favorita el otro llavero",
       "category": "keychains",
       "stock": 9,
-      "cost": 1.10,
+      "cost": 1.1,
       "sku": "YAL-KCH-05",
       "supplier": "Mercería El Hilo Dorado",
       "dateAdded": "2025-06-02T15:10:00Z",
@@ -210,7 +238,7 @@
       "description": "Variedad de llaveros para que elijas tu favorito",
       "category": "keychains",
       "stock": 10,
-      "cost": 1.50,
+      "cost": 1.5,
       "sku": "YAL-KCH-06",
       "supplier": "Proveedor Local",
       "dateAdded": "2025-06-05T10:00:00Z",
@@ -224,7 +252,7 @@
       "description": "Regala estas lindas cerezas que combina con todo",
       "category": "keychains",
       "stock": 8,
-      "cost": 1.00,
+      "cost": 1,
       "sku": "YAL-KCH-07",
       "supplier": "Hilos La Tejedora C.A.",
       "dateAdded": "2025-06-08T12:45:00Z",
@@ -238,7 +266,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "other",
       "stock": 10,
-      "cost": 4.50,
+      "cost": 4.5,
       "sku": "YAL-OTH-08",
       "supplier": "Proveedor Local",
       "dateAdded": "2025-06-10T16:00:00Z",
@@ -252,7 +280,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "dress",
       "stock": 10,
-      "cost": 45.00,
+      "cost": 45,
       "sku": "YAL-DRS-09",
       "supplier": "Telas y Lanas S.A.",
       "dateAdded": "2025-06-11T11:00:00Z",
@@ -266,7 +294,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "pillows",
       "stock": 10,
-      "cost": 0.50,
+      "cost": 0.5,
       "sku": "YAL-PLW-10",
       "supplier": "Proveedor Local",
       "dateAdded": "2025-06-12T13:00:00Z",
@@ -280,7 +308,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "dress",
       "stock": 10,
-      "cost": 4.00,
+      "cost": 4,
       "sku": "YAL-DRS-11",
       "supplier": "Telas y Lanas S.A.",
       "dateAdded": "2025-06-15T14:30:00Z",
@@ -294,7 +322,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "swimwear",
       "stock": 0,
-      "cost": 35.50,
+      "cost": 35.5,
       "sku": "YAL-SWM-12",
       "supplier": "Telas y Lanas S.A.",
       "dateAdded": "2025-06-20T10:00:00Z",
@@ -308,7 +336,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "cost": 6.00,
+      "cost": 6,
       "sku": "YAL-CRT-13",
       "supplier": "Proveedor Local",
       "dateAdded": "2025-06-21T11:00:00Z",
@@ -322,7 +350,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "cost": 4.00,
+      "cost": 4,
       "sku": "YAL-CRT-14",
       "supplier": "Proveedor Local",
       "dateAdded": "2025-06-22T12:00:00Z",
@@ -336,7 +364,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "cost": 40.00,
+      "cost": 40,
       "sku": "YAL-CRT-15",
       "supplier": "Proveedor Local",
       "dateAdded": "2025-06-23T13:00:00Z",
@@ -350,7 +378,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "cost": 0.40,
+      "cost": 0.4,
       "sku": "YAL-CRT-16",
       "supplier": "Proveedor Local",
       "dateAdded": "2025-06-24T14:00:00Z",
@@ -364,7 +392,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "cost": 3.50,
+      "cost": 3.5,
       "sku": "YAL-CRT-17",
       "supplier": "Proveedor Local",
       "dateAdded": "2025-06-25T15:00:00Z",
@@ -378,7 +406,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "cost": 38.00,
+      "cost": 38,
       "sku": "YAL-CRT-18",
       "supplier": "Proveedor Local",
       "dateAdded": "2025-06-26T16:00:00Z",
@@ -406,7 +434,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "cost": 4.20,
+      "cost": 4.2,
       "sku": "YAL-CRT-20",
       "supplier": "Proveedor Local",
       "dateAdded": "2025-06-28T18:00:00Z",
@@ -420,7 +448,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "cost": 41.50,
+      "cost": 41.5,
       "sku": "YAL-CRT-21",
       "supplier": "Proveedor Local",
       "dateAdded": "2025-06-29T19:00:00Z",
@@ -448,7 +476,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "cost": 3.90,
+      "cost": 3.9,
       "sku": "YAL-CRT-23",
       "supplier": "Proveedor Local",
       "dateAdded": "2025-07-02T11:00:00Z",
@@ -462,7 +490,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "cost": 6.10,
+      "cost": 6.1,
       "sku": "YAL-CRT-24",
       "supplier": "Proveedor Local",
       "dateAdded": "2025-07-03T12:00:00Z",
@@ -476,7 +504,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "cost": 5.00,
+      "cost": 5,
       "sku": "YAL-CRT-25",
       "supplier": "Proveedor Local",
       "dateAdded": "2025-07-04T13:00:00Z",
@@ -490,7 +518,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "cost": 4.00,
+      "cost": 4,
       "sku": "YAL-CRT-26",
       "supplier": "Proveedor Local",
       "dateAdded": "2025-07-05T14:00:00Z",
@@ -504,7 +532,7 @@
       "description": "Producto artesanal hecho a mano.",
       "category": "crochet",
       "stock": 0,
-      "cost": 42.00,
+      "cost": 42,
       "sku": "YAL-CRT-27",
       "supplier": "Proveedor Local",
       "dateAdded": "2025-07-06T15:00:00Z",

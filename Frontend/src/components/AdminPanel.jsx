@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Modal from "./Modal";
 import AddProductForm from "./AddProductForm";
 import EditProductForm from "./EditProductForm";
 import DeleteProductForm from "./DeleteProductForm";
