@@ -1,8 +1,8 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
 import useLastId from "../hooks/useLastId.jsx";
 import SkuGenerator from "../helpers/SkuGenerator.js";
+import "../css/AddProductForm.css";
 
 const category = ["pillows", "bags", "keychains", "swimwear", "dress", "other"];
 
@@ -22,6 +22,7 @@ const AddProductForm = ({ closeModal }) => {
   const onSubmit = async (data) => {
     const nextNum = lastId + 1;
     const sku = SkuGenerator(data, lastId);
+    
     const newProduct = {
       ...data,
       sku,
@@ -58,8 +59,8 @@ const AddProductForm = ({ closeModal }) => {
                 {...register("name", {
                   required: "El nombre esta vacio",
                   minLength: {
-                    value: 10,
-                    message: "El nombre debe tener mas de 10 careceteres",
+                    value: 5,
+                    message: "El nombre debe tener mas de 5 careceteres",
                   },
                   maxLength: {
                     value: 50,
@@ -103,12 +104,12 @@ const AddProductForm = ({ closeModal }) => {
               )}
             </label>
             <label className="label-form-add">
-              Imagen (nombre del archivo en /public/img-products)
+              Imagen (opcional)
               <input
                 type="text"
                 placeholder="Ejemplo: spiderman.webp"
                 {...register("image", {
-                  required: "La imagen está vacía",
+                  
                   pattern: {
                     value: /^[\w-]+\.(jpg|jpeg|png|webp)$/i,
                     message: "Nombre de archivo inválido",
@@ -242,7 +243,7 @@ const AddProductForm = ({ closeModal }) => {
             {errors.root && (
               <span style={{ color: "#a11919" }}>{errors.root.message}</span>
             )}
-            <button type="submit" disabled={isSubmitting}>
+            <button className="btn-add-product" type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Agregando..." : "Agregar Producto"}
             </button>
           </form>

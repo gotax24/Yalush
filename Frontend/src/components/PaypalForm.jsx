@@ -1,5 +1,4 @@
-import { useContext, useState } from "react";
-import Loading from "./Loading";
+import { useContext } from "react";
 import axios from "axios";
 import { dateNow } from "../helpers/dateNow";
 import { Context } from "../context/UserContext";
@@ -9,7 +8,6 @@ import { useForm } from "react-hook-form";
 import "../css/PaypalForm.css";
 
 const PaypalForm = ({ total }) => {
-  const [loading, setLoading] = useState(false);
   const { userContext } = useContext(Context);
   const { copied, copy } = useCopy();
   const today = dateNow();
@@ -18,16 +16,15 @@ const PaypalForm = ({ total }) => {
     register,
     handleSubmit,
     setError,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     mode: "onBlur",
   });
   const SERVER = import.meta.env.VITE_SERVER_URL;
   const regexEmail =
     /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-  
+
   const submitSales = (data) => {
-    setLoading(true);
     setError(null);
 
     const newSales = {
@@ -45,7 +42,7 @@ const PaypalForm = ({ total }) => {
       .post(`${SERVER}/sales`, newSales)
       .then((res) => {
         console.log(res.data);
-        setLoading(false);
+
         navigate("/success");
       })
       .catch((e) => {
@@ -54,11 +51,8 @@ const PaypalForm = ({ total }) => {
           type: "manual",
           message: "Error al procesar el pago. Inténtalo de nuevo.",
         });
-        setLoading(false);
       });
   };
-
-  if (loading) return <Loading />;
 
   return (
     <>
@@ -88,11 +82,13 @@ const PaypalForm = ({ total }) => {
           )}
         </label>
 
-        <button className="button-paypal" onClick={submitSales}>
-          {loading ? "Pagando.." : "Pagar con Paypal"}
+        <button className="button-paypal" disabled={isSubmitting} type="submit">
+          {isSubmitting ? "Pagando.." : "Pagar con Paypal"}
         </button>
         {errors.root?.serverError && (
-          <span className="error-paypal">{errors.root?.serverError.message}</span>
+          <span className="error-paypal">
+            {errors.root?.serverError.message}
+          </span>
         )}
       </form>
     </>

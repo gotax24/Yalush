@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../context/UserContext";
 import { dateNow } from "../helpers/dateNow";
@@ -8,14 +8,13 @@ import axios from "axios";
 import "../css/ZelleForm.css";
 
 const ZelleForm = ({ total }) => {
-  const [loading, setLoading] = useState(false);
   const { userContext } = useContext(Context);
   const { copied, copy } = useCopy();
   const {
     register,
     handleSubmit,
     setError,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({
     defaultValues: { owner: "", refNumber: "" },
   });
@@ -24,7 +23,6 @@ const ZelleForm = ({ total }) => {
   const navigate = useNavigate();
 
   const handleNewSales = (data) => {
-    setLoading(true);
     setError(null);
 
     const newSales = {
@@ -43,7 +41,7 @@ const ZelleForm = ({ total }) => {
       .post(`${SERVER}/sales`, newSales)
       .then((res) => {
         console.log(res.data);
-        setLoading(false);
+        console.log("Venta registrada correctamente", data);
         navigate("/success");
       })
       .catch((e) => {
@@ -52,8 +50,6 @@ const ZelleForm = ({ total }) => {
           type: "manual",
           message: "Error al procesar el pago. Inténtalo de nuevo.",
         });
-
-        setLoading(false);
       });
   };
 
@@ -99,8 +95,8 @@ const ZelleForm = ({ total }) => {
         {errors?.refNumber && (
           <span className="p-errors">{errors?.refNumber?.message}</span>
         )}
-        <button className="button-zelle">
-          {loading ? "Resportando pago..." : "Reportar pago"}
+        <button className="button-zelle" disabled={isSubmitting} type="submit">
+          {isSubmitting ? "Reportando pago..." : "Reportar pago"}
         </button>
         {errors.root?.serverError && (
           <p className="error">{errors.root.serverError.message}</p>

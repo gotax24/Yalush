@@ -9,16 +9,14 @@ const Contact = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     reset,
   } = useForm();
-  const [loading, setLoading] = useState(false);
   const [messageClient, setMessageClient] = useState("");
   const SERVER = import.meta.env.VITE_SERVER_URL;
 
   const submit = async (data) => {
     setMessageClient("");
-    setLoading(true);
 
     try {
       await SendEmailContact(data);
@@ -32,11 +30,9 @@ const Contact = () => {
       setMessageClient(
         "Hubo un error al enviar el mensaje. Inténtalo de nuevo."
       );
-    } finally {
-      setLoading(false);
     }
   };
-  if (loading) return <Loading />;
+  if (isSubmitting) return <Loading />;
 
   return (
     <div className="contact-container">
@@ -99,7 +95,7 @@ const Contact = () => {
           {errors?.message && (
             <span className="p-errors">{errors?.message?.message}</span>
           )}
-          <button type="submit" className="contact-btn">
+          <button type="submit" className="contact-btn" disabled={isSubmitting}>
             Enviar mensaje
           </button>
         </form>

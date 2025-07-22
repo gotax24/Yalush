@@ -1,4 +1,4 @@
-export const generateSku = (data, lastId) => {
+ const SkuGenerator = (data, lastId) => {
   // Generate SKU based on category and last ID
   if (!data || !data.category || typeof lastId !== "number") {
     throw new Error("Invalid data or lastId");
@@ -13,3 +13,5 @@ export const generateSku = (data, lastId) => {
 
   return sku;
 };
+
+export default SkuGenerator;

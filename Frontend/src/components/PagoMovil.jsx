@@ -9,7 +9,6 @@ import "../css/PagoMovil.css";
 const phoneCodes = ["0424", "0414", "0412", "0422", "0426", "0416"];
 
 const PagoMovil = ({ total }) => {
-  const [loading, setLoading] = useState(false);
   const { userContext } = useContext(Context);
   const [copied, setCopied] = useState({
     banco: false,
@@ -25,7 +24,7 @@ const PagoMovil = ({ total }) => {
     handleSubmit,
     setError,
     reset,
-    formState: { errors },
+    formState: { errors, isSubmitting },
   } = useForm({ mode: "onBlur" });
 
   const copy = (type, value) => {
@@ -43,15 +42,13 @@ const PagoMovil = ({ total }) => {
   };
 
   const submitSales = async (data) => {
-    setLoading(true);
-
     const cellphone = `${data.code}${data.phone}`;
+
     if (cellphone.length !== 11 || !/^\d{11}$/.test(cellphone)) {
       setError("phone", {
         type: "manual",
         message: "El número debe tener 11 dígitos.",
       });
-      setLoading(false);
       return;
     }
 
@@ -69,12 +66,11 @@ const PagoMovil = ({ total }) => {
 
     try {
       await axios.post(`${SERVER}/sales`, newSales);
-      setLoading(false);
+
       reset();
       navigate("/success");
     } catch (e) {
       setError("refNumber", { type: "manual", message: e.message });
-      setLoading(false);
     }
   };
 
@@ -154,8 +150,8 @@ const PagoMovil = ({ total }) => {
         )}
       </label>
 
-      <button className="button-paypal" type="submit" disabled={loading}>
-        {loading ? "Enviando..." : "Reportar pago"}
+      <button className="button-paypal" type="submit" disabled={isSubmitting}>
+        {isSubmitting ? "Enviando..." : "Reportar pago"}
       </button>
     </form>
   );

@@ -12,19 +12,15 @@ import americanExpress from "../assets/americanExpress.svg";
 import "../css/CreditCardForm.css";
 
 const CreditCardForm = ({ total }) => {
-  const [loading, setLoading] = useState(false);
   const [cardType, setCardType] = useState(null);
-
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    reset,
+    formState: { errors, isSubmitting },
     watch, //Importamos 'watch' para observar cambios
     setValue, //Para formatear los inputs
-  } = useForm({
-    mode: "onBlur", //Valida cuando el usuario sale del campo, mejor UX
-  });
+    setError,
+  } = useForm();
 
   const { userContext } = useContext(Context);
   const SERVER = import.meta.env.VITE_SERVER_URL;
@@ -43,10 +39,7 @@ const CreditCardForm = ({ total }) => {
     }
   }, [cardNumberValue]);
 
-  // 3. La función submit es ahora mucho más simple
   const submitSales = async (data) => {
-    setLoading(true);
-
     const newSales = {
       userId: userContext.id,
       products: userContext.cart,
@@ -62,17 +55,16 @@ const CreditCardForm = ({ total }) => {
       console.log(response.data);
       console.log("Venta registrada correctamente", data);
 
-      reset();
       navigate("/success");
     } catch (error) {
       console.error(error);
-    } finally {
-      setLoading(false);
+      setError("root", {
+        message: "Error al procesar el pago. Inténtalo de nuevo.",
+      });
     }
   };
 
   return (
-    // 4. handleSubmit se encarga de la validación antes de llamar a submitSales
     <form className="form" onSubmit={handleSubmit(submitSales)}>
       {/* --- CAMPO NOMBRE --- */}
       <label className="label">
@@ -175,9 +167,13 @@ const CreditCardForm = ({ total }) => {
         </label>
       </div>
 
-      <button className="checkout-btn" type="submit" disabled={loading}>
-        {loading ? "Procesando..." : "Pagar con tarjeta"}
+      <button className="checkout-btn" type="submit" disabled={isSubmitting}>
+        {isSubmitting ? "Procesando..." : "Pagar con tarjeta"}
       </button>
+
+      {errors.root && (
+        <span style={{ color: "#a11919" }}>{errors.root.message}</span>
+      )}
     </form>
   );
 };
