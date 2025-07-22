@@ -118,21 +118,22 @@
           "quantity": 3
         }
       ],
-      "id": 4
+      "id": "4"
     }
   ],
   "products": [
     {
-      "id": 1,
+      "productId": "1",
       "name": "spiderman Crochet",
       "price": 4,
       "image": "img-products/spiderman.webp",
-      "description": "Bonito Spiderman Crochet hecho a mano con hilo de algodón, ideal para regalar a los niños o decorar la habitación.",
+      "description": "Bonito Spiderman Crochet hecho a mano con hilo de algodón, ideal para regalar a los niños o decorar la habitación o mejor para regalar a su novio fan de spiderman",
       "category": "keychains",
       "stock": 9,
       "cost": 1.5,
+      "supplier": "Hilos La Tejedora CA",
+      "id": "1",
       "sku": "YAL-KCH-01",
-      "supplier": "Hilos La Tejedora C.A.",
       "dateAdded": "2025-05-10T14:00:00Z",
       "review": [
         {
@@ -163,7 +164,7 @@
       ]
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "ojo turco crochet",
       "price": 1,
       "image": "img-products/ojo.webp",
@@ -183,7 +184,7 @@
       ]
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "virgen maria crochet",
       "price": 3,
       "image": "img-products/virgen.webp",
@@ -203,7 +204,7 @@
       ]
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Star",
       "price": 25,
       "image": "img-products/bolsos-estrellas.webp",
@@ -217,7 +218,7 @@
       "review": []
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Luna y estrella",
       "price": 3,
       "image": "img-products/noche.webp",
@@ -231,7 +232,7 @@
       "review": []
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Llaveros cute",
       "price": 4,
       "image": "img-products/llaveros-varios.webp",
@@ -245,7 +246,7 @@
       "review": []
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Cerezas",
       "price": 3,
       "image": "img-products/cerezas.webp",
@@ -259,7 +260,7 @@
       "review": []
     },
     {
-      "id": 8,
+      "id": "8",
       "name": "crochet 8",
       "price": 10,
       "image": "",
@@ -273,8 +274,7 @@
       "review": []
     },
     {
-      "id": 9,
-
+      "id": "9",
       "name": "crochet 9",
       "price": 100,
       "image": "",
@@ -288,7 +288,7 @@
       "review": []
     },
     {
-      "id": 10,
+      "id": "10",
       "name": "crochet 10",
       "price": 1,
       "image": "",
@@ -302,7 +302,7 @@
       "review": []
     },
     {
-      "id": 11,
+      "id": "11",
       "name": "crochet 11",
       "price": 10,
       "image": "",
@@ -316,7 +316,7 @@
       "review": []
     },
     {
-      "id": 12,
+      "id": "12",
       "name": "crochet 12",
       "price": 100,
       "image": "",
@@ -330,7 +330,7 @@
       "review": []
     },
     {
-      "id": 13,
+      "id": "13",
       "name": "spiderman crochet 13",
       "price": 15,
       "image": "",
@@ -344,7 +344,7 @@
       "review": []
     },
     {
-      "id": 14,
+      "id": "14",
       "name": "crochet 14",
       "price": 10,
       "image": "",
@@ -358,7 +358,7 @@
       "review": []
     },
     {
-      "id": 15,
+      "id": "15",
       "name": "crochet 15",
       "price": 100,
       "image": "",
@@ -372,7 +372,7 @@
       "review": []
     },
     {
-      "id": 16,
+      "id": "16",
       "name": "crochet 16",
       "price": 1,
       "image": "",
@@ -386,7 +386,7 @@
       "review": []
     },
     {
-      "id": 17,
+      "id": "17",
       "name": "crochet 17",
       "price": 10,
       "image": "",
@@ -400,7 +400,7 @@
       "review": []
     },
     {
-      "id": 18,
+      "id": "18",
       "name": "crochet 18",
       "price": 100,
       "image": "",
@@ -414,7 +414,7 @@
       "review": []
     },
     {
-      "id": 19,
+      "id": "19",
       "name": "crochet 19",
       "price": 1,
       "image": "",
@@ -428,7 +428,7 @@
       "review": []
     },
     {
-      "id": 20,
+      "id": "20",
       "name": "crochet 20",
       "price": 10,
       "image": "",
@@ -442,7 +442,7 @@
       "review": []
     },
     {
-      "id": 21,
+      "id": "21",
       "name": "crochet 21",
       "price": 100,
       "image": "",
@@ -456,7 +456,7 @@
       "review": []
     },
     {
-      "id": 22,
+      "id": "22",
       "name": "Spiderman crochet 22",
       "price": 15,
       "image": "",
@@ -470,7 +470,7 @@
       "review": []
     },
     {
-      "id": 23,
+      "id": "23",
       "name": "crochet 23",
       "price": 10,
       "image": "",
@@ -484,7 +484,7 @@
       "review": []
     },
     {
-      "id": 24,
+      "id": "24",
       "name": "crochet 24",
       "price": 15,
       "image": "",
@@ -498,7 +498,7 @@
       "review": []
     },
     {
-      "id": 25,
+      "id": "25",
       "name": "crochet 25",
       "price": 12,
       "image": "",
@@ -512,7 +512,7 @@
       "review": []
     },
     {
-      "id": 26,
+      "id": "26",
       "name": "crochet 26",
       "price": 10,
       "image": "",
@@ -526,7 +526,7 @@
       "review": []
     },
     {
-      "id": 27,
+      "id": "27",
       "name": "crochet 27",
       "price": 100,
       "image": "",
@@ -538,20 +538,6 @@
       "supplier": "Proveedor Local",
       "dateAdded": "2025-07-06T15:00:00Z",
       "review": []
-    },
-    {
-      "name": "ernesto el pro",
-      "price": "10",
-      "image": "ernesto.jpg",
-      "description": "jkdfbsajfkasdkashjshasjkd",
-      "category": "dress",
-      "stock": "10",
-      "cost": "5",
-      "supplier": "ernesto",
-      "sku": "YAL-DRE-28",
-      "dateAdded": "2025-07-21T23:16:15.731Z",
-      "reviews": [],
-      "id": 28
     }
   ],
   "sales": [
@@ -573,7 +559,7 @@
       "refNumber": "4asdas5d7as",
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
-      "id": 1
+      "id": "1"
     },
     {
       "userId": 3,
@@ -592,7 +578,7 @@
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
       "emailPaypal": "ejemplo@ejemplo.com",
-      "id": 2
+      "id": "2"
     },
     {
       "userId": 3,
@@ -611,7 +597,7 @@
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
       "emailPaypal": "ejemplo@ejemplo.com",
-      "id": 3
+      "id": "3"
     },
     {
       "userId": 3,
@@ -631,7 +617,7 @@
       "refNumber": "dsahjdaks",
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
-      "id": 4
+      "id": "4"
     },
     {
       "userId": 3,
@@ -650,7 +636,7 @@
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
       "emailPaypal": "ejemplo@ejemplo.com",
-      "id": 5
+      "id": "5"
     },
     {
       "userId": 3,
@@ -669,7 +655,7 @@
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
       "emailPaypal": "ejemplo@ejemplo.com",
-      "id": 6
+      "id": "6"
     },
     {
       "userId": 3,
@@ -680,7 +666,7 @@
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
       "emailPaypal": "ejbr@yalush.com",
-      "id": 7
+      "id": "7"
     },
     {
       "userId": 3,
@@ -699,7 +685,7 @@
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
       "emailPaypal": "ejbr@yalush.com",
-      "id": 8
+      "id": "8"
     },
     {
       "userId": 3,
@@ -719,7 +705,7 @@
       "refNumber": "asffasdf",
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
-      "id": 9
+      "id": "9"
     },
     {
       "userId": 3,
@@ -738,7 +724,7 @@
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
       "emailPaypal": "ejbr@yalush.com",
-      "id": 1
+      "id": "1"
     },
     {
       "userId": 3,
@@ -757,7 +743,7 @@
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
       "emailPaypal": "ejbr@yalush.com",
-      "id": 1
+      "id": "1"
     },
     {
       "userId": 3,
@@ -776,7 +762,7 @@
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
       "emailPaypal": "ejemplo@ejemplo.com",
-      "id": 1
+      "id": "1"
     },
     {
       "userId": 3,
@@ -795,7 +781,7 @@
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
       "emailPaypal": "ejemplo@ejemplo.com",
-      "id": 1
+      "id": "1"
     },
     {
       "userId": 3,
@@ -821,7 +807,7 @@
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
       "emailPaypal": "ejemplo@ejemplo.com",
-      "id": 1
+      "id": "1"
     },
     {
       "userId": 3,
@@ -840,7 +826,7 @@
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
       "emailPaypal": "ejemplo@ejemplo.com",
-      "id": 1
+      "id": "1"
     },
     {
       "userId": 3,
@@ -873,7 +859,7 @@
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
       "emailPaypal": "ejemplo@ejemplo.com",
-      "id": 1
+      "id": "1"
     },
     {
       "userId": 3,
@@ -906,7 +892,7 @@
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
       "emailPaypal": "ejemplo@ejemplo.com",
-      "id": 1
+      "id": "1"
     },
     {
       "userId": 3,
@@ -925,7 +911,7 @@
       "paymentStatus": "paid",
       "email": "ernestobracho70@gmail.com",
       "emailPaypal": "ejbr@yalush.com",
-      "id": 1
+      "id": "1"
     }
   ],
   "clientMessage": [
@@ -933,49 +919,49 @@
       "name": "hola",
       "lastName": "dasdasd@fgkds.com",
       "message": "djafsjkdaas",
-      "id": 1
+      "id": "1"
     },
     {
       "name": "Ernesto",
       "email": "ernestobracho70@gmail.com",
       "message": "Hola necesito a la dueña",
-      "id": 2
+      "id": "2"
     },
     {
       "name": "Ernesto",
       "email": "ernestobracho70@gmail.com",
       "message": "GGasdsadasfdsads",
-      "id": 3
+      "id": "3"
     },
     {
       "name": "hola",
       "email": "ariza.yaldriani@gmail.com",
       "message": "hola bb como estas",
-      "id": 4
+      "id": "4"
     },
     {
       "name": "hola",
       "email": "ernestobracho70@gmail.com",
       "message": "hola bebe como estas\n",
-      "id": 5
+      "id": "5"
     },
     {
       "name": "Ernesto",
       "email": "ernestobracho70@gmail.com",
       "message": "daisfasdjfnkjsdas",
-      "id": 6
+      "id": "6"
     },
     {
       "name": "hola",
       "email": "ernestobracho70@gmail.com",
       "message": "adsafasfsd",
-      "id": 7
+      "id": "7"
     },
     {
       "name": "Ernesto",
       "email": "ariza.yaldriani@gmail.com",
       "message": "Te quiero culiar tu quieres soltarlo",
-      "id": 8
+      "id": "8"
     }
   ]
 }
