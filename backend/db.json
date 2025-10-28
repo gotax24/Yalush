@@ -47,13 +47,6 @@
       "admin": true,
       "favorite": [
         {
-          "productId": 1,
-          "nameProduct": "spiderman Crochet",
-          "description": "Bonito Spiderman Crochet hecho a mano con hilo de algodón, ideal para regalar a los niños o decorar la habitación.",
-          "price": 4,
-          "image": "img-products/spiderman.webp"
-        },
-        {
           "productId": 3,
           "nameProduct": "virgen maria crochet",
           "description": "Producto artesanal hecho a mano.",
@@ -66,6 +59,13 @@
           "description": "Regala estas lindas cerezas que combina con todo",
           "price": 3,
           "image": "img-products/cerezas.webp"
+        },
+        {
+          "productId": "1",
+          "nameProduct": "spiderman Crochet",
+          "description": "Bonito Spiderman Crochet hecho a mano con hilo de algodón, ideal para regalar a los niños o decorar la habitación o mejor para regalar a su novio fan de spiderman",
+          "price": 4,
+          "image": "img-products/spiderman.webp"
         }
       ],
       "cart": [],
@@ -129,7 +129,7 @@
       "image": "img-products/spiderman.webp",
       "description": "Bonito Spiderman Crochet hecho a mano con hilo de algodón, ideal para regalar a los niños o decorar la habitación o mejor para regalar a su novio fan de spiderman",
       "category": "keychains",
-      "stock": 9,
+      "stock": 8,
       "cost": 1.5,
       "supplier": "Hilos La Tejedora CA",
       "id": "1",
@@ -962,6 +962,12 @@
       "email": "ariza.yaldriani@gmail.com",
       "message": "Te quiero culiar tu quieres soltarlo",
       "id": "8"
+    },
+    {
+      "name": "rosa",
+      "email": "ernestobracho70@gmail.com",
+      "message": "holaaa",
+      "id": "K_zdx8m"
     }
   ]
 }
