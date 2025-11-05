@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const checkEmail = require("../utils/checkEmail");
 
-const salesSchema = new mongoose.Schema(
+const saleSchema = new mongoose.Schema(
   {
     userId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -72,4 +72,4 @@ const salesSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Sales", salesSchema);
+module.exports = mongoose.model("Sales", saleSchema);

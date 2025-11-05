@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const checkEmail = require("../utils/checkEmail");
 
-const suppliersSchema = new mongoose.Schema(
+const supplierSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -13,7 +13,7 @@ const suppliersSchema = new mongoose.Schema(
       type: String,
       trim: true,
       validate: {
-        validator: checkEmail(email),
+        validator: checkEmail,
         message: "Correo invalido",
       },
       unique: true,
@@ -29,4 +29,4 @@ const suppliersSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Supplier", suppliersSchema);
+module.exports = mongoose.model("Supplier", supplierSchema);

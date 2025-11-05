@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema(
       unique: true,
       minlength: [10, "El correo debe tener al menos 10 caracteres"],
       valeidate: {
-        validator: checkEmail(email),
+        validator: checkEmail,
         message: "El correo es invalido",
       },
     },
