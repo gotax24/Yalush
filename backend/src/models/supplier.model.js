@@ -12,10 +12,7 @@ const supplierSchema = new mongoose.Schema(
     email: {
       type: String,
       trim: true,
-      validate: {
-        validator: checkEmail,
-        message: "Correo invalido",
-      },
+      match: [/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "Correo invalida"],
       unique: true,
     },
     phone: {

@@ -21,10 +21,7 @@ const userSchema = new mongoose.Schema(
       trim: true,
       unique: true,
       minlength: [10, "El correo debe tener al menos 10 caracteres"],
-      valeidate: {
-        validator: checkEmail,
-        message: "El correo es invalido",
-      },
+      match: [ /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "Correo invalido"]
     },
     admin: {
       type: Boolean,

@@ -14,7 +14,7 @@ const reviewShema = new mongoose.Schema(
     },
     rating: {
       type: Number,
-      min: [1, "El puntuacion debe ser de 1 digitos"],
+      min: [1, "El puntuacion debe ser mayor a 1"],
       max: [5, "La puntuacion maxima es 5"],
       required: [true, "Es necesario la puntuacion"],
     },
