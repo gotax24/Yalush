@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const checkEmail = require("../utils/checkEmail");
+const validator = require("validator")
 
 const supplierSchema = new mongoose.Schema(
   {
@@ -14,6 +14,7 @@ const supplierSchema = new mongoose.Schema(
       trim: true,
       match: [/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "Correo invalida"],
       unique: true,
+      validate: [validator.isEmail, "El correo es invalido"]
     },
     phone: {
       type: String,

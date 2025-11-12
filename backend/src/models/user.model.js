@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const checkEmail = require("../utils/checkEmail");
+const validator = require("validator")
 
 const userSchema = new mongoose.Schema(
   {
@@ -21,7 +21,8 @@ const userSchema = new mongoose.Schema(
       trim: true,
       unique: true,
       minlength: [10, "El correo debe tener al menos 10 caracteres"],
-      match: [ /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "Correo invalido"]
+      match: [ /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "Correo invalido"],
+      validate: [validator.isEmail, "Correo invalido"]
     },
     admin: {
       type: Boolean,
