@@ -5,6 +5,6 @@ exports.createUser = async (request, response) => {
     const user = await User.create(request.body);
     response.status(201).json(user);
   } catch (error) {
-    response.status(400).json({ error: error.message });
+    response.status(500).json({ error: error.message });
   }
 };

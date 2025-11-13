@@ -12,9 +12,9 @@ exports.updateSupplier = async (request, response) => {
     );
 
     if (!supplier)
-      return response.status(404).json({ error: "Usuario no encontrado" });
+      return response.status(404).json({ error: "Proveedor no encontrado" });
 
-    response.status(201).json(supplier);
+    response.status(200).json(supplier);
   } catch (error) {
     response.status(500).json({ error: error.message });
   }

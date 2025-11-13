@@ -2,7 +2,7 @@ const Supplier = require("../../models/supplier.model");
 
 exports.deleteSupplier = async (request, response) => {
   try {
-    const supplier = Supplier.findByIdAndDelete(request.params.id);
+    const supplier = await Supplier.findByIdAndDelete(request.params.id);
 
     if (!supplier)
       return response.status(404).json({ error: "Proveedor no encotrado" });
