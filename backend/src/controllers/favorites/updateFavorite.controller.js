@@ -16,7 +16,7 @@ exports.updateFavorite = async (request, response) => {
         .status(404)
         .json({ error: "No se encontro ningun favorito" });
 
-    response.status(500).json(favorite);
+    response.status(200).json(favorite);
   } catch (error) {
     response.status(500).json({ error: error.message });
   }
