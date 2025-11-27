@@ -1,0 +1,80 @@
+.container-addForm {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 24px;
+  font-family: "Inter", sans-serif;
+}
+
+.header-form {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 5px solid var(--color4);
+}
+
+.header-form img {
+  width: 32px;
+  height: 32px;
+}
+
+.title-addForm {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.labels-form {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.input-number,
+.input-comment {
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.input-number:focus,
+.input-comment:focus {
+  border-color: #a294f9;
+}
+
+.input-comment {
+    min-height: 70px;
+    max-height: 150px;
+    resize: vertical; 
+    overflow-y: auto; 
+    line-height: 1.5; 
+}
+
+.button-comement {
+  margin-top: 12px;
+  background-color: #a294f9;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.button-comement:hover {
+  background-color: #8b7ce6;
+}
+
+.error-p {
+  margin-top: 12px;
+  color: crimson;
+  font-weight: bold;
+}
