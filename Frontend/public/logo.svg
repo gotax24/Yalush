@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
-    <!-- Fondo negro cuadrado -->
-    <rect width="200" height="200" fill="black"/>
-
-    <!-- Letra Y blanca con proporciones ajustadas -->
-    <path d="M60 50 L100 100 L140 50 L120 50 L100 75 L80 50 Z" fill="white"/>
-    <rect x="90" y="75" width="20" height="50" fill="white"/>
-</svg>
