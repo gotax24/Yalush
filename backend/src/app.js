@@ -4,6 +4,7 @@ const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 require("dotenv").config();
 const connectDB = require("./config/db");
+const errorHandler = require("./middlewares/errorHandler");
 
 const app = express();
 
@@ -26,5 +27,6 @@ connectDB();
 app.get("/", (req, res) => {
   res.json({ message: "API Tienda funcionando" });
 });
-
+//De ultimo ya que los middleware se debe de ir de ultimo
+app.use(errorHandler)
 module.exports = app;
