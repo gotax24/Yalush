@@ -119,4 +119,7 @@ userSchema.statics.findByClerkId = (clerkId) => {
   return this.findOne({ clerkId, isActive: true });
 };
 
+//
+userSchema.index({ isActive: 1, role: 1, createdAt: -1 });
+
 module.exports = mongoose.model("User", userSchema);
