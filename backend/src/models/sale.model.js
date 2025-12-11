@@ -62,7 +62,6 @@ const saleSchema = new mongoose.Schema(
         type: String,
         trim: true,
         required: [true, "El correo es obligatorio"],
-        match: [/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/, "Correo invalida"],
         validate: [validator.isEmail, "Correo invalido"]
       },
     },

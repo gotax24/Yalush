@@ -8,16 +8,15 @@ exports.createSupplier = asyncHandler(async (request, response, next) => {
   const { name, email, phone } = request.body;
 
   const existingSupplier = await Supplier.findOne({
-    $or: [{ email: email }, { phone: phone }],
+    $or: [{ email }, { phone }],
   });
 
   if (existingSupplier) {
-    return next(
-      new AppError("Ya existe el proveedor con ese email o telefono", 400)
-    );
+    const field = existingSupplier.email === email ? "email" : "telefono";
+    return next(new AppError(`Ya existe el proveedor con ese ${field}`, 409));
   }
 
-  const supplier = await Supplier.create(request.body);
+  const supplier = await Supplier.create(name, email, phone);
   response.status(201).json({
     success: true,
     message: "Proveedor fue creado exitosamanete",
@@ -26,20 +25,27 @@ exports.createSupplier = asyncHandler(async (request, response, next) => {
 });
 
 exports.getSuppliers = asyncHandler(async (request, response, next) => {
-  const suppliers = await Supplier.find();
+  //filtrar solo proveedores por defecto
+  const { includeInactive } = request.query;
+  const filter = includeInactive === "true" ? {} : { isActive: true };
+
+  const suppliers = await Supplier.find(filter)
+    .select("-__v")
+    .sort({ name: 1 });
+
   response.status(200).json({
     success: true,
+    result: suppliers.length,
     data: suppliers,
   });
 });
 
 exports.getSupplerById = asyncHandler(async (request, response, next) => {
-  if (!request.params.id.match(/^[0-9a-fA-F]{24}$/))
-    return next(new AppError("ID de usuario invalido", 400));
+  const supplier = await Supplier.findById(request.params.id).populate(
+    "productCount"
+  );
 
-  const supplier = await Supplier.findById(request.params.id);
-
-  if (!supplier) return next(new AppError("No se encontro el proveedor", 400));
+  if (!supplier) return next(new AppError("No se encontro el proveedor", 404));
 
   response.status(200).json({
     success: true,
@@ -48,40 +54,72 @@ exports.getSupplerById = asyncHandler(async (request, response, next) => {
 });
 
 exports.updateSupplier = asyncHandler(async (request, response, next) => {
-  const { email } = request.body;
-
-  const allowedFields = ["email", "phone"];
-
+  const allowedFields = ["name", "email", "phone", "address"];
   const filteredBody = getAllowedFields(request.body, allowedFields);
 
   if (Object.keys(filteredBody).length === 0) {
     return next(new AppError("No hay campos para actualizar", 400));
   }
 
-  const existingSupplier = await Supplier.findOne({
-    email: email,
-  });
+  if (filteredBody.email || filteredBody.phone) {
+    const query = {
+      _id: { $ne: request.params.id },
+      $or: [],
+    };
 
-  if (existingSupplier) return next(new AppError("Ese correo ya existe", 400));
+    if (filteredBody.email) query.$or.push({ email: filteredBody.email });
+    if (filteredBody.phone) query.$or.push({ phone: filteredBody.phone });
 
-  const supplier = Supplier.findByIdAndUpdate(request.params.id, request.body, {
-    new: true,
-    runValidators: true,
-  });
+    const duplicate = await Supplier.findOne(query);
 
-  if (!supplier) return next(new AppError("No se encontro el proveedor", 400));
+    if (duplicate) {
+      const field =
+        duplicate.email === filteredBody.email ? "email" : "telefono";
+      return next(new AppError(`Ese ${field} ya existe`, 409));
+    }
+  }
+
+  const supplier = Supplier.findByIdAndUpdate(
+    request.params.id,
+    request.body,
+    {
+      new: true,
+      runValidators: true,
+    }.select("-__v")
+  );
+
+  if (!supplier) return next(new AppError("No se encontro el proveedor", 404));
 
   response.status(200).json({
     success: true,
+    message: "Proveedor actualizado correctamente",
     data: supplier,
   });
 });
 
-exports.deleteSupplier = asyncHandler(async (request, response, next) => {
+exports.softdeleteSupplier = asyncHandler(async (request, response, next) => {
+  const supplier = await Supplier.findByIdAndUpdate(
+    request.params.id,
+    { isActive: false },
+    { new: true }
+  );
+
+  if (!supplier) {
+    return next(new AppError("Proveedor no encontrado", 404));
+  }
+
+  response.status(200).json({
+    success: true,
+    message: "Proveedor desactivado correctamente",
+    data: supplier,
+  });
+});
+
+exports.harddeleteSupplier = asyncHandler(async (request, response, next) => {
   const supplier = await Supplier.findByIdAndDelete(request.params.id);
 
   if (!supplier)
-    return next(new AppError("No fue encontrado el proveedor", 400));
+    return next(new AppError("No fue encontrado el proveedor", 404));
 
   response.status(200).json({
     success: true,
