@@ -1,14 +1,37 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema(
   {
+    email: {
+      type: String,
+      required: [true, "El correo es obligatorio"],
+      trim: true,
+      unique: true,
+      lowercase: true,
+      validate: {
+        validator: validator.isEmail,
+        message: "Formato de correo invalido",
+      },
+      index: true, //optimiza busquedas por email
+    },
     clerkId: {
       type: String,
-      required: [true, "El ID de clerk es obligatorio"],
+      sparse: true,
       unique: true,
       trim: true,
       index: true,
+    },
+    password: {
+      type: String,
+      minlength: [8, "La contraseña debe tener minimo 8 caracteres"],
+      select: false,
+    },
+    authMethod: {
+      type: String,
+      enum: ["clerk", "native"],
+      trim: true,
     },
     firstName: {
       type: String,
@@ -23,18 +46,6 @@ const userSchema = new mongoose.Schema(
       trim: true,
       minlength: [5, "El apellido debe tener al menos 5 caracteres"],
       maxlength: [50, "El apellido no puede exceder 50 caracteres"],
-    },
-    email: {
-      type: String,
-      required: [true, "El correo es obligatorio"],
-      trim: true,
-      unique: true,
-      lowercase: true,
-      validate: {
-        validator: validator.isEmail,
-        message: "Formato de correo invalido",
-      },
-      index: true, //optimiza busquedas por email
     },
     profileImageUrl: {
       type: String,
@@ -71,6 +82,33 @@ const userSchema = new mongoose.Schema(
     toObject: { virtuals: true },
   }
 );
+
+//Un usuario debe tener clerkId o password(Al menos uno)
+userSchema.pre("validate", (next) => {
+  if (!this.clerkId && !this.password) {
+    return next(new AppError("El usuasrio debe tener clerkId o password"));
+  }
+
+  next();
+});
+
+userSchema.pre(
+  "save",
+  asyncHandler(async (next) => {
+    if (!this.isModified("password") || !this.password) return next();
+
+    //Hashear con bcrypt (10 rounds = equilibrio seguridad/velocidad)
+    this.password = await bcrypt.hash(this.password, 10);
+    next();
+  })
+);
+
+userSchema.methods.comparePassword = async (candidatePassword) => {
+  //Si el usuario no tiene password (vino por clerkId) retorna false
+  if (!this.password) return false;
+
+  return await bcrypt.compare(candidatePassword, this.password);
+};
 
 //Para busquedas frecuentes como "usuarios activos + admin"
 userSchema.index({ role: 1, isActive: 1 });
