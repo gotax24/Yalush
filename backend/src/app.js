@@ -5,6 +5,7 @@ const helmet = require("helmet");
 require("dotenv").config();
 const connectDB = require("./config/db");
 const errorHandler = require("./middlewares/errorHandler");
+const authRoutes = require("./routes/auth.routes");
 
 const app = express();
 
@@ -27,6 +28,7 @@ connectDB();
 app.get("/", (req, res) => {
   res.json({ message: "API Tienda funcionando" });
 });
+app.use("/api/auth", authRoutes);
 //De ultimo ya que los middleware se debe de ir de ultimo
-app.use(errorHandler)
+app.use(errorHandler);
 module.exports = app;
