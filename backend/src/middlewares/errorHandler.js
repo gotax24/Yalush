@@ -1,4 +1,4 @@
-const AppError = require("../utils/AppError");
+const AppError = require("../helpers/AppError");
 
 //Maneja errores de validaciones de Mongoose
 const handleValidationError = (err) => {

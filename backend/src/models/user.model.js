@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
+const asyncHandler = require("../helpers/asyncHandler");
 
 const userSchema = new mongoose.Schema(
   {
