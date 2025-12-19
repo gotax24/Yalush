@@ -36,7 +36,7 @@ exports.getSuppliers = asyncHandler(async (request, response, next) => {
   response.status(200).json({
     success: true,
     result: suppliers.length,
-    data: suppliers,
+    data: suppliers
   });
 });
 
@@ -79,7 +79,7 @@ exports.updateSupplier = asyncHandler(async (request, response, next) => {
     }
   }
 
-  const supplier = Supplier.findByIdAndUpdate(
+  const supplier = await Supplier.findByIdAndUpdate(
     request.params.id,
     request.body,
     {
