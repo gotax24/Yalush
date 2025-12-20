@@ -60,7 +60,7 @@ supplierSchema.virtual("productCount", {
 });
 
 //middleware pre-save para normalizar los telefonos
-supplierSchema.pre("save", (next) => {
+supplierSchema.pre("save", function (next) {
   if (this.phone) {
     this.phone = this.phone.replace(/[-\s]/g, "");
   }

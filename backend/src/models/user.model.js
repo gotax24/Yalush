@@ -115,12 +115,12 @@ userSchema.methods.comparePassword = async (candidatePassword) => {
 userSchema.index({ role: 1, isActive: 1 });
 
 //nombre completo sin almacenar duplicado
-userSchema.virtual("fullName").get(() => {
+userSchema.virtual("fullName").get(function () {
   return `${this.firstName} ${this.lastName}`;
 });
 
 //limpia datos antes de guardar
-userSchema.pre("save", (next) => {
+userSchema.pre("save", function (next) {
   //normalizar el email
   if (this.isModified("email")) {
     this.email = this.email.toLowerCase().trim();
@@ -143,18 +143,18 @@ userSchema.pre("save", (next) => {
 });
 
 //verifica si el usuario es admin
-userSchema.methods.isAdmin = () => {
+userSchema.methods.isAdmin = function () {
   return this.role === "admin" || this.role === "superAdmin";
 };
 
 //actualiza la ultima conexion
-userSchema.methods.updateLastLogin = async () => {
+userSchema.methods.updateLastLogin = async function () {
   this.lastLogin = new Date();
   return await this.save();
 };
 
 //busca por clerkId (patron que se usa mucho)
-userSchema.statics.findByClerkId = (clerkId) => {
+userSchema.statics.findByClerkId = function (clerkId) {
   return this.findOne({ clerkId, isActive: true });
 };
 
