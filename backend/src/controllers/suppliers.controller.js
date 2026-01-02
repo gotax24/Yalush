@@ -115,7 +115,7 @@ exports.softdeleteSupplier = asyncHandler(async (request, response, next) => {
   });
 });
 
-exports.harddeleteSupplier = asyncHandler(async (request, response, next) => {
+exports.hardDeleteSupplier = asyncHandler(async (request, response, next) => {
   const supplier = await Supplier.findByIdAndDelete(request.params.id);
 
   if (!supplier)
