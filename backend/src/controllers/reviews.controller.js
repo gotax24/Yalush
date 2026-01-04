@@ -36,10 +36,10 @@ exports.createReview = asyncHandler(async (request, response, next) => {
     userId,
     rating,
     comment,
-    verified: !hasPurchased,
+    verified: !!hasPurchased,
   });
 
-  await review.populate("userID", "firstName lastaName");
+  await review.populate("userId", "firstName lastaName");
 
   response.status(200).json({
     success: true,
@@ -68,7 +68,9 @@ exports.getReviewsByProduct = asyncHandler(async (request, response, next) => {
   };
 
   if (rating) filter.rating = Number(rating);
-  if (verified) filter.verified = verified === "true";
+  if (verified !== undefined) {
+    filter.verified = verified === "true";
+  }
 
   const skip = (page - 1) * limit;
 
@@ -79,7 +81,7 @@ exports.getReviewsByProduct = asyncHandler(async (request, response, next) => {
     .skip(skip)
     .limit(Number(limit));
 
-  const total = await reviews.countDocuments(filter);
+  const total = await Review.countDocuments(filter);
 
   //const reviews = await Review.find({ productId, isActive: true });
 
@@ -144,7 +146,7 @@ exports.softDeleteReview = asyncHandler(async (request, response, next) => {
     return next(new AppError("Review no encontrada", 404));
   }
 
-  const isOwner = request.userId.toString() === request.user._id.toString();
+  const isOwner = review.userId.toString() === request.user._id.toString();
   const isAdmin = request.user.role === "admin";
 
   if (!isOwner && !isAdmin) {
@@ -163,7 +165,7 @@ exports.softDeleteReview = asyncHandler(async (request, response, next) => {
 });
 
 exports.hardDeleteReview = asyncHandler(async (request, response, next) => {
-  if (!request.user.role !== "admin") {
+  if (request.user.role !== "admin") {
     return next(
       new AppError("Solo administradores pueden eliminar permanentemente", 403)
     );

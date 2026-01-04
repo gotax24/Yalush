@@ -16,6 +16,14 @@ const saleSchema = new mongoose.Schema(
           ref: "Product",
           required: [true, "Se necesita el id del producto"],
         },
+        name: {
+          type: String,
+          required: [true, "El nombre del producto es necesario"],
+        },
+        sku: {
+          type: String,
+          required: [true, "El SKU es necesario"],
+        },
         quantity: {
           type: Number,
           min: [1, "Debe tener al menos 1 digito la cantidad"],
@@ -26,9 +34,9 @@ const saleSchema = new mongoose.Schema(
           min: [0.01, "Debe ser mayor a 0"],
           required: [true, "Es necesario el precio del producto"],
         },
-        name: {
-          type: String,
-          required: [true, "El nombre del producto es necesario"],
+        subtotal: {
+          type: Number,
+          required: true,
         },
       },
     ],
@@ -36,6 +44,7 @@ const saleSchema = new mongoose.Schema(
       type: Number,
       required: [true, "Es necesario el total de la venta"],
       min: [0.01, "El total debe ser mayor a 0"],
+      set: (value) => Math.round(value * 100) / 100,
     },
     typePayment: {
       type: String,
@@ -54,8 +63,8 @@ const saleSchema = new mongoose.Schema(
       default: "pending",
       required: [true, "El estatus es necesario"],
       enum: {
-        values: ["paid", "pending", "failed", "refunded"],
-        message: "Estado de pago invalido: {VALUE}",
+        values: ["paid", "pending", "failed", "refunded", "cancelled"],
+        message: "Estado de pago invalido",
       },
       index: true,
     },

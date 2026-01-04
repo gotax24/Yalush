@@ -23,23 +23,13 @@ const reviewShema = new mongoose.Schema(
     comment: {
       type: String,
       minlength: [10, "El comentario debe tener al menos 10 caracteres"],
-      maxlength: [500, "El comentario debe tener al menos 500 caracteres"],
+      maxlength: [500, "El comentario debe tener como maximo 500 caracteres"],
       required: [true, "El comentario es necesario"],
       trim: true,
     },
-    averageRating: {
-      type: Number,
-      default: 0,
-      min: [0, "El rating no puede ser negativo"],
-      max: [5, "La rating maxima es 5"],
-      set: (val) => Math.round(val * 10) / 10,
-    },
-    reviewCount: {
-      type: Number,
-      default: 0,
-    },
+
     //verificar compra
-    verifed: {
+    verified: {
       type: Boolean,
       default: true,
     },
@@ -69,7 +59,7 @@ reviewShema.virtual("user", {
 });
 
 //Metodo estatico para calcular el promedio de rating de un producto
-reviewShema.statics.calcAvergareRating = async function (productId) {
+reviewShema.statics.calcAverageRating = async function (productId) {
   const stats = await this.aggregate([
     {
       $match: { productId: mongoose.Types.ObjectId(productId), isActive: true },
@@ -84,7 +74,7 @@ reviewShema.statics.calcAvergareRating = async function (productId) {
   ]);
 
   if (stats.length > 0) {
-    await moongose.model("Product").findByIdAndUpdate(productId, {
+    await mongoose.model("Product").findByIdAndUpdate(productId, {
       averageRating: Math.round(stats[0].avgRating * 10) / 10, //Redondear a 1 decimal
       reviewCount: stats[0].numReviews,
     });
@@ -97,7 +87,7 @@ reviewShema.statics.calcAvergareRating = async function (productId) {
 
 //middleware: ACtualizar promedio despues de crear/actualizar o elimininar
 reviewShema.post("save", function () {
-  this.constructor.calcAvergareRating(this.productId);
+  this.constructor.calcAverageRating(this.productId);
 });
 
 reviewShema.post("findOneAndUpdate", async function (doc) {
