@@ -16,7 +16,7 @@ exports.createSupplier = asyncHandler(async (request, response, next) => {
     return next(new AppError(`Ya existe el proveedor con ese ${field}`, 409));
   }
 
-  const supplier = await Supplier.create(name, email, phone);
+  const supplier = await Supplier.create({ name, email, phone });
   response.status(201).json({
     success: true,
     message: "Proveedor fue creado exitosamanete",
@@ -36,7 +36,7 @@ exports.getSuppliers = asyncHandler(async (request, response, next) => {
   response.status(200).json({
     success: true,
     result: suppliers.length,
-    data: suppliers
+    data: suppliers,
   });
 });
 
@@ -81,12 +81,12 @@ exports.updateSupplier = asyncHandler(async (request, response, next) => {
 
   const supplier = await Supplier.findByIdAndUpdate(
     request.params.id,
-    request.body,
+    filteredBody,
     {
       new: true,
       runValidators: true,
-    }.select("-__v")
-  );
+    }
+  ).select("-__v");
 
   if (!supplier) return next(new AppError("No se encontro el proveedor", 404));
 
@@ -97,7 +97,7 @@ exports.updateSupplier = asyncHandler(async (request, response, next) => {
   });
 });
 
-exports.softdeleteSupplier = asyncHandler(async (request, response, next) => {
+exports.softDeleteSupplier = asyncHandler(async (request, response, next) => {
   const supplier = await Supplier.findByIdAndUpdate(
     request.params.id,
     { isActive: false },

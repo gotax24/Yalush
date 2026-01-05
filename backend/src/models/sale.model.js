@@ -82,7 +82,7 @@ const saleSchema = new mongoose.Schema(
       refNumber: {
         type: String,
         trim: true,
-        validate: (value) => {
+        validate: function (value) {
           //requerido para pagoMovil y zelle
           if (["pagoMovil", "zelle"].includes(this.typePayment) && !value)
             return false;
@@ -104,15 +104,45 @@ const saleSchema = new mongoose.Schema(
       unique: true,
       required: true,
     },
+    refundReason: {
+      type: String,
+      trim: true,
+    },
+    refundDate: {
+      type: Date,
+    },
+    refundedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
     isActive: {
       type: Boolean,
       default: true,
+      index: true,
+    },
+    notes: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    cancelReason: {
+      type: String,
+      trim: true,
+      default: null,
+    },
+    cancelledAt: {
+      type: Date,
+    },
+    cancelledBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
 //Indice compuesto para reporte
+saleSchema.index({ createdAt: -1, paymentStatus: 1 });
 saleSchema.index({ userId: 1, createdAt: -1 });
 saleSchema.index({ paymentStatus: 1, typePayment: 1 });
 
@@ -121,20 +151,43 @@ saleSchema.virtual("totalItems").get(function () {
   return this.products.reduce((sum, product) => sum + product.quantity, 0);
 });
 
+//middleware para calcular subtotales antes de guardar
+saleSchema.pre("save", function (next) {
+  this.products.forEach((item) => {
+    item.subtotal = Math.round(item.price * item.quantity * 100) / 100;
+  });
+
+  next();
+});
+
+//puede ser cancelada?
+saleSchema.methods.canBeCancelled = function () {
+  return this.paymentStatus === "pending" && this.isActive;
+};
+
+//puede ser rembolsada
+saleSchema.methods.canBeRefunded = function () {
+  const daysSinceSale = (Date.now() - this.createdAt) / (1000 * 60 * 60 * 24);
+  return this.paymentStatus === "paid" && daysSinceSale <= 30;
+};
+
 //antes de guardar realiza el numero de la orden
 saleSchema.pre("save", async function (next) {
   if (!this.orderNumber) {
-    const date = new Date();
-    const year = date.getFullYear().toString().slice(-2);
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const count = await this.constructor.countDocuments();
-    this.orderNumber = `ORD-${year}${month}-${(count + 1)
-      .toString()
-      .padStart(6, "0")}`;
+    this.orderNumber = `ORD-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
   }
 
   next();
 });
+
+//metodo para ventas por rango de fechas
+saleSchema.statics.getSalesByDateRange = function (starDate, endDate) {
+  return this.find({
+    createdAt: { $gte: starDate, $lte: endDate },
+    paymentStatus: "paid",
+    isActive: true,
+  });
+};
 
 //metodo estatico: ventas por usuario
 saleSchema.statics.getTotalByUser = function (userId) {

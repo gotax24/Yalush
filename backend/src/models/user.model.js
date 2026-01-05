@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcrypt");
 const asyncHandler = require("../helpers/asyncHandler");
+const AppError = require("../helpers/AppError");
 
 const userSchema = new mongoose.Schema(
   {
@@ -28,6 +29,9 @@ const userSchema = new mongoose.Schema(
       type: String,
       minlength: [8, "La contraseña debe tener minimo 8 caracteres"],
       select: false,
+      require: function () {
+        return this.authMethod === "native";
+      },
     },
     authMethod: {
       type: String,
@@ -71,6 +75,7 @@ const userSchema = new mongoose.Schema(
     isActive: {
       type: Boolean,
       default: true,
+      index: true,
     },
     lastLogin: {
       type: Date,
@@ -85,7 +90,7 @@ const userSchema = new mongoose.Schema(
 );
 
 //Un usuario debe tener clerkId o password(Al menos uno)
-userSchema.pre("validate", (next) => {
+userSchema.pre("validate", function (next) {
   if (!this.clerkId && !this.password) {
     return next(new AppError("El usuasrio debe tener clerkId o password"));
   }
@@ -93,18 +98,33 @@ userSchema.pre("validate", (next) => {
   next();
 });
 
-userSchema.pre(
-  "save",
-  asyncHandler(async (next) => {
-    if (!this.isModified("password") || !this.password) return next();
+/*
+userSchema.pre(/^find/, function () {
+  this.where({ isActive: true });
+});
+*/
 
-    //Hashear con bcrypt (10 rounds = equilibrio seguridad/velocidad)
-    this.password = await bcrypt.hash(this.password, 10);
-    next();
-  })
-);
+userSchema.pre("validate", function (next) {
+  if (this.authMethod === "native" && !this.password) {
+    return next(new AppError("Usuario nativos requieren contraseñas", 400));
+  }
 
-userSchema.methods.comparePassword = async (candidatePassword) => {
+  if (this.authMethod === "clerk" && !this.clerkId) {
+    return next(new AppError("Usuarios clerk requieren clerkId", 400));
+  }
+
+  next();
+});
+
+userSchema.pre("save", async (next) => {
+  if (!this.isModified("password") || !this.password) return next();
+
+  //Hashear con bcrypt (10 rounds = equilibrio seguridad/velocidad)
+  this.password = await bcrypt.hash(this.password, 10);
+  next();
+});
+
+userSchema.methods.comparePassword = async function (candidatePassword) {
   //Si el usuario no tiene password (vino por clerkId) retorna false
   if (!this.password) return false;
 

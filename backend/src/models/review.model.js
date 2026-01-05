@@ -50,19 +50,14 @@ reviewShema.index({ userId: 1, productId: 1 }, { unique: true });
 
 reviewShema.index({ productId: 1, isActive: 1, createdAt: 1 });
 
-//Obtener el nomber del usuario(sin populate completo)
-reviewShema.virtual("user", {
-  ref: "User",
-  localField: "userId",
-  foreignField: "_id",
-  justOne: true,
-});
-
 //Metodo estatico para calcular el promedio de rating de un producto
 reviewShema.statics.calcAverageRating = async function (productId) {
   const stats = await this.aggregate([
     {
-      $match: { productId: mongoose.Types.ObjectId(productId), isActive: true },
+      $match: {
+        productId: new mongoose.Types.ObjectId(productId),
+        isActive: true,
+      },
     },
     {
       $group: {
@@ -102,4 +97,4 @@ reviewShema.post("findOneAndDelete", async function (doc) {
   }
 });
 
-module.exports = mongoose.model("Reviews", reviewShema);
+module.exports = mongoose.model("Review", reviewShema);

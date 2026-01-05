@@ -4,7 +4,6 @@ const Supplier = require("../models/supplier.model");
 const asyncHandler = require("../helpers/asyncHandler");
 const AppError = require("../helpers/AppError");
 
-//name, price, image, categoryId, stock, cost, supplierId, sku
 exports.createProduct = asyncHandler(async (request, response, next) => {
   const {
     name,
@@ -23,18 +22,9 @@ exports.createProduct = asyncHandler(async (request, response, next) => {
     Product.findOne({ sku: sku.toUpperCase() }),
   ]);
 
-  if (!category) {
-    return next(new AppError("La categoria no existe", 404));
-  }
-
-  if (!supplier) {
-    return next(new AppError("El proveedor no existe", 404));
-  }
-
-  if (existingSku) {
-    return next(new AppError("El SKU ya esta registrado", 409));
-  }
-
+  if (!category) return next(new AppError("La categoria no existe", 404));
+  if (!supplier) return next(new AppError("El proveedor no existe", 404));
+  if (existingSku) return next(new AppError("El SKU ya esta registrado", 409));
   if (price <= cost) {
     return next(
       new AppError("El precio debe ser mayor al costo para tener ganancia", 400)
@@ -44,7 +34,7 @@ exports.createProduct = asyncHandler(async (request, response, next) => {
   const product = await Product.create({
     name,
     price,
-    image: image || null,
+    image,
     stock,
     cost,
     categoryId,
@@ -76,7 +66,7 @@ exports.getProducts = asyncHandler(async (request, response, next) => {
   if (request.query.minPrice || request.query.maxPrice) {
     filter.price = {};
     if (request.query.minPrice) {
-      filter.price.$gte = parseFloat(request.query.minPriced);
+      filter.price.$gte = parseFloat(request.query.minPrice);
     }
     if (request.query.maxPrice) {
       filter.price.$lte = parseFloat(request.query.maxPrice);
@@ -85,7 +75,7 @@ exports.getProducts = asyncHandler(async (request, response, next) => {
 
   //Busqueda por nombre
   if (request.query.search) {
-    filter.name = { $regex: request.query.search, $option: 1 };
+    filter.name = { $regex: request.query.search, $options: "i" };
   }
 
   //filtro por estado de stock
@@ -95,6 +85,9 @@ exports.getProducts = asyncHandler(async (request, response, next) => {
         filter.stock = 0;
         break;
       case "bajo_stock":
+        filter.stock = { $lte: 5, $gt: 0 };
+        break;
+      case "stock_medio":
         filter.stock = { $lte: 20, $gt: 5 };
         break;
       case "stock_alto":
@@ -112,7 +105,7 @@ exports.getProducts = asyncHandler(async (request, response, next) => {
       name_asc: "name",
       name_desc: "-name",
       popular: "-soldCount -averageRating",
-      rating: "-averageRating -reviewCoutn",
+      rating: "-averageRating -reviewCount",
     };
 
     sortBy = sortOptions[request.query.sortBy] || sortBy;
@@ -133,7 +126,7 @@ exports.getProducts = asyncHandler(async (request, response, next) => {
   response.status(200).json({
     success: true,
     results: products.length,
-    totalResult: total,
+    totalResults: total,
     totalPage: Math.ceil(total / limit),
     currentPage: Number(page),
     data: products,
@@ -170,7 +163,7 @@ exports.updateProduct = asyncHandler(async (request, response, next) => {
   const updates = {};
   Object.keys(request.body).forEach((key) => {
     if (allowedFields.includes(key)) {
-      update[key] = request.body[key];
+      updates[key] = request.body[key];
     }
   });
 
@@ -183,7 +176,7 @@ exports.updateProduct = asyncHandler(async (request, response, next) => {
   if (updates.price || updates.cost) {
     const product = await Product.findById(request.params.id).select("+cost");
     const newPrice = updates.price || product.price;
-    const newCost = update.cost || product.cost;
+    const newCost = updates.cost || product.cost;
 
     if (newPrice <= newCost) {
       return next(new AppError("El precio debe ser mayor al costo", 400));
@@ -205,7 +198,7 @@ exports.updateProduct = asyncHandler(async (request, response, next) => {
 });
 
 exports.softDeleteProduct = asyncHandler(async (request, response, next) => {
-  const product = await Product.findOne(request.params.id);
+  const product = await Product.findById(request.params.id);
 
   if (!product) return next(new AppError("No existe el producto", 404));
 

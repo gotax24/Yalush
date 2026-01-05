@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const User = require("../models/user.model");
 const asyncHandler = require("../helpers/asyncHandler");
 const AppError = require("../helpers/AppError");
@@ -20,7 +21,7 @@ exports.createUser = asyncHandler(async (request, response, next) => {
 
   //Validar que existen campos obligatorios
   if (!filteredBody.clerkId || !filteredBody.email) {
-    return next(new AppError("El clerkId y email son obligatorio", 400));
+    return next(new AppError("El clerkId y email son obligatorios", 400));
   }
 
   //Verificar si ya existe se evita duplicado
@@ -48,10 +49,6 @@ exports.getUsers = asyncHandler(async (request, response, next) => {
   const page = getPositiveInt(request.query.page, 1, 100);
   const limit = getPositiveInt(request.query.limit, 10, 100);
   const skip = (page - 1) * limit;
-  
-  if (page < 1) page = 1;
-  if (limit < 1) limit = 1;
-  if (limit > 100) limit = 100;
 
   //flitros para usuarios solo activos
   const filter = { isActive: true };
@@ -101,8 +98,9 @@ exports.getUsers = asyncHandler(async (request, response, next) => {
 
 exports.getUserById = asyncHandler(async (request, response, next) => {
   //validacion formato del id
-  if (!request.params.id.match(/^[0-9a-fA-F]{24}$/))
+  if (!mongoose.Types.ObjectId.isValid(request.params.id)) {
     return next(new AppError("ID de usuario invalido", 400));
+  }
 
   const user = await User.findById(request.params.id);
 
@@ -131,7 +129,7 @@ exports.updateUser = asyncHandler(async (request, response, next) => {
     return next(new AppError("No hay campos para actualizar", 400));
   }
 
-  const user = await User.findByIdAndUpdate(request.params.id, request.body, {
+  const user = await User.findByIdAndUpdate(request.params.id, filteredBody, {
     new: true,
     runValidators: true,
   });

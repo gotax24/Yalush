@@ -120,7 +120,7 @@ productSchema.index({ categoryId: 1, isActive: 1 });
 productSchema.index({ soldCount: -1, averageRating: -1 });
 
 //middleware previene actualizar campos calculados manualmente
-productSchema.pre("findOneAndUpdate", function () {
+productSchema.pre("findOneAndUpdate", function (next) {
   const update = this.getUpdate();
   if (update.profitMargin || update.stockStatus) {
     return next(new Error("No se pueden modificar campos calculados"));
@@ -130,7 +130,10 @@ productSchema.pre("findOneAndUpdate", function () {
 });
 
 //metodo para actualizar el stock de forma segura
-productSchema.methods.updateStock = async function (quantity, type = "subtra") {
+productSchema.methods.updateStock = async function (
+  quantity,
+  type = "subtract"
+) {
   if (type === "subtract") {
     if (this.stock < quantity) {
       throw new Error("Stock insuficiente");
@@ -142,7 +145,7 @@ productSchema.methods.updateStock = async function (quantity, type = "subtra") {
     this.lastRestocked = new Date();
   }
 
-  return await this.save();
+  return await this.save({ session });
 };
 
 productSchema.statics.findLowStock = function (threshold = 5) {

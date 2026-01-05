@@ -4,6 +4,7 @@ const Sale = require("../models/sale.model");
 const AppError = require("../helpers/AppError");
 const asyncHandler = require("../helpers/asyncHandler");
 const getAllowedFields = require("../helpers/getAllowedFields");
+const getPositiveInt = require("../helpers/getPositiveInt");
 
 exports.createReview = asyncHandler(async (request, response, next) => {
   const { productId, rating, comment } = request.body;
@@ -39,7 +40,7 @@ exports.createReview = asyncHandler(async (request, response, next) => {
     verified: !!hasPurchased,
   });
 
-  await review.populate("userId", "firstName lastaName");
+  await review.populate("userId", "firstName lastName");
 
   response.status(200).json({
     success: true,
@@ -50,17 +51,20 @@ exports.createReview = asyncHandler(async (request, response, next) => {
 
 exports.getReviewsByProduct = asyncHandler(async (request, response, next) => {
   const { productId } = request.params;
-
+  const { rating, verified, sortBy = "-createdAt" } = request.query;
+  
+  const page = getPositiveInt(request.query.page, 1, 100);
+  const limit = getPositiveInt(request.query.limit, 10, 50);
+  
   const product = await Product.findById(productId);
   if (!product) return next(new AppError("El productId no se encuentra", 404));
+  
+  const allowedSortFields = ["createdAt", "rating"];
 
-  const {
-    rating,
-    verified,
-    sortBy = "-createdAt",
-    page = 1,
-    limit = 10,
-  } = request.query;
+
+  const sort = allowedSortFields.includes(sortBy.replace("-", ""))
+    ? sortBy
+    : "-createdAt";
 
   const filter = {
     productId,
@@ -77,7 +81,7 @@ exports.getReviewsByProduct = asyncHandler(async (request, response, next) => {
   const reviews = await Review.find(filter)
     .populate("userId", "firstName lastName")
     .select("-__v")
-    .sort(sortBy)
+    .sort(sort)
     .skip(skip)
     .limit(Number(limit));
 
@@ -184,7 +188,7 @@ exports.hardDeleteReview = asyncHandler(async (request, response, next) => {
 exports.markHelpLike = asyncHandler(async (request, response, next) => {
   const review = await Review.findByIdAndUpdate(
     request.params.id,
-    { $inc: { helpLikeCount: 1 } },
+    { $inc: { helpLikeCount: 1 } }, //el usuario puede hacer likes infinitos si recarga la pagina
     { new: true }
   );
 
@@ -206,7 +210,7 @@ exports.getUserReviews = asyncHandler(async (request, response, next) => {
     userId,
     isActive: true,
   })
-    .populate("productId", "name price, image")
+    .populate("productId", "name price image")
     .sort("-createdAt");
 
   response.status(200).json({
